@@ -1,5 +1,6 @@
-﻿@using FeedbackForITStudents.Models
-
+﻿@{
+    Layout = null;
+}
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -15,7 +16,7 @@
     <link href="//fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 
     <!-- CSS Stylesheet -->
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="~/css/style.css" type="text/css" media="all" />
 
     <!-- fontawesome v5-->
     <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
@@ -31,20 +32,28 @@
             <div class="w3l-form-info">
                 <div class="w3l_form">
                     <div class="left_grid_info">
-                        <img src="images/image.svg" alt="" />
+                        <img src="~/images/image.svg" alt="" />
                     </div>
                 </div>
                 <div class="w3_info">
                     <h2>Sign In</h2>
-                    <form action="#" method="post">
+                    <form action="@Url.Action("Login", "Auth")" method="post">
                         <div class="input-group">
                             <span><i class="fas fa-user" aria-hidden="true"></i></span>
-                            <input type="email" placeholder="Email or Username" required="">
+                            <input type="email" placeholder="Email or Username" required="" name="email">
                         </div>
+                        @if (Convert.ToBoolean(Session["user-not-found"]) == true)
+                        {
+                            <p style="color: red">User email not found</p>
+                        }
                         <div class="input-group">
                             <span><i class="fas fa-key" aria-hidden="true"></i></span>
-                            <input type="Password" placeholder="Password" required="">
+                            <input type="Password" placeholder="Password" required="" name="password">
                         </div>
+                        @if (Convert.ToBoolean(Session["password-incorrect"]) == true)
+                        {
+                            <p style="color: red"> Incorrect Password</p>
+                        }
                         <div class="form-row bottom">
                             <div class="form-check">
                                 <input type="checkbox" id="remenber" name="remenber" value="remenber">
@@ -56,7 +65,9 @@
                     </form>
                     <p class="continue"><span>or Sign in with</span></p>
                     <div class="social-login">
-                               @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                        <section id="socialLoginForm">
+                        </section>
+                        @*@Html.ActionLink("Home", "Index", "Home")*@
                         <!--<a href="#google">
                             <div class="google">
                                 <span class="fab fa-google-plus-g" aria-hidden="true"></span> Google
@@ -76,7 +87,6 @@
                                                                                   target="blank">W3layouts</a>
             </p>
         </div>
-        @RenderBody()
         <!-- footer -->
     </div>
 </body>

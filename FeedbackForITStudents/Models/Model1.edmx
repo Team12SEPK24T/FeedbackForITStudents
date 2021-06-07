@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FBFORITSTUDENTSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cauhoi">
+          <Key>
+            <PropertyRef Name="Ma_cau_hoi" />
+          </Key>
+          <Property Name="Ma_cau_hoi" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Noidungcauhoi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ID" Type="varchar" MaxLength="10" />
+          <Property Name="Andanh" Type="bit" Nullable="false" />
+          <Property Name="Thoigian" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Taikhoan">
+          <Key>
+            <PropertyRef Name="Ma_tai_khoan" />
+          </Key>
+          <Property Name="Ma_tai_khoan" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="matkhau" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="hoten" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quyen" Type="int" Nullable="false" />
+          <Property Name="trangthai" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Taikhoansinhvien">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="matkhau" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="hoten" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Lop" Type="varchar" MaxLength="10" />
+          <Property Name="Khoa" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Thongbao">
+          <Key>
+            <PropertyRef Name="Ma_thong_bao" />
+          </Key>
+          <Property Name="Ma_thong_bao" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="thoigian" Type="date" />
+        </EntityType>
+        <EntityType Name="Traloi">
+          <Key>
+            <PropertyRef Name="Ma_Cau_Tra_Loi" />
+          </Key>
+          <Property Name="Ma_Cau_Tra_Loi" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Thoigian" Type="date" />
+          <Property Name="Ma_cau_hoi" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Ma_Tai_khoan" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Noidungcautraloi" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trangchu">
+          <Key>
+            <PropertyRef Name="Ma_Trang_Chu" />
+          </Key>
+          <Property Name="Ma_Trang_Chu" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="varchar" MaxLength="10" />
+          <Property Name="Ma_Tai_khoan" Type="varchar" MaxLength="10" />
+          <Property Name="Ma_Cau_hoi" Type="varchar" MaxLength="10" />
+          <Property Name="Thatim" Type="bit" />
+          <Property Name="Ma_Cau_Tra_Loi" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Cauhoi_Taikhoansinhvien">
+          <End Role="Taikhoansinhvien" Type="Self.Taikhoansinhvien" Multiplicity="0..1" />
+          <End Role="Cauhoi" Type="Self.Cauhoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taikhoansinhvien">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cauhoi">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Traloi_Cauhoi">
+          <End Role="Cauhoi" Type="Self.Cauhoi" Multiplicity="1" />
+          <End Role="Traloi" Type="Self.Traloi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cauhoi">
+              <PropertyRef Name="Ma_cau_hoi" />
+            </Principal>
+            <Dependent Role="Traloi">
+              <PropertyRef Name="Ma_cau_hoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Traloi_Taikhoan">
+          <End Role="Taikhoan" Type="Self.Taikhoan" Multiplicity="1" />
+          <End Role="Traloi" Type="Self.Traloi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taikhoan">
+              <PropertyRef Name="Ma_tai_khoan" />
+            </Principal>
+            <Dependent Role="Traloi">
+              <PropertyRef Name="Ma_Tai_khoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trangchu_Cauhoi">
+          <End Role="Cauhoi" Type="Self.Cauhoi" Multiplicity="0..1" />
+          <End Role="Trangchu" Type="Self.Trangchu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cauhoi">
+              <PropertyRef Name="Ma_cau_hoi" />
+            </Principal>
+            <Dependent Role="Trangchu">
+              <PropertyRef Name="Ma_Cau_hoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trangchu_Taikhoan">
+          <End Role="Taikhoan" Type="Self.Taikhoan" Multiplicity="0..1" />
+          <End Role="Trangchu" Type="Self.Trangchu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taikhoan">
+              <PropertyRef Name="Ma_tai_khoan" />
+            </Principal>
+            <Dependent Role="Trangchu">
+              <PropertyRef Name="Ma_Tai_khoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trangchu_Taikhoansinhvien">
+          <End Role="Taikhoansinhvien" Type="Self.Taikhoansinhvien" Multiplicity="0..1" />
+          <End Role="Trangchu" Type="Self.Trangchu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taikhoansinhvien">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trangchu">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trangchu_Traloi">
+          <End Role="Traloi" Type="Self.Traloi" Multiplicity="0..1" />
+          <End Role="Trangchu" Type="Self.Trangchu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Traloi">
+              <PropertyRef Name="Ma_Cau_Tra_Loi" />
+            </Principal>
+            <Dependent Role="Trangchu">
+              <PropertyRef Name="Ma_Cau_Tra_Loi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FBFORITSTUDENTSModelStoreContainer">
+          <EntitySet Name="Cauhoi" EntityType="Self.Cauhoi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Taikhoan" EntityType="Self.Taikhoan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Taikhoansinhvien" EntityType="Self.Taikhoansinhvien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Thongbao" EntityType="Self.Thongbao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Traloi" EntityType="Self.Traloi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trangchu" EntityType="Self.Trangchu" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cauhoi_Taikhoansinhvien" Association="Self.FK_Cauhoi_Taikhoansinhvien">
+            <End Role="Taikhoansinhvien" EntitySet="Taikhoansinhvien" />
+            <End Role="Cauhoi" EntitySet="Cauhoi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Traloi_Cauhoi" Association="Self.FK_Traloi_Cauhoi">
+            <End Role="Cauhoi" EntitySet="Cauhoi" />
+            <End Role="Traloi" EntitySet="Traloi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Traloi_Taikhoan" Association="Self.FK_Traloi_Taikhoan">
+            <End Role="Taikhoan" EntitySet="Taikhoan" />
+            <End Role="Traloi" EntitySet="Traloi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trangchu_Cauhoi" Association="Self.FK_Trangchu_Cauhoi">
+            <End Role="Cauhoi" EntitySet="Cauhoi" />
+            <End Role="Trangchu" EntitySet="Trangchu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trangchu_Taikhoan" Association="Self.FK_Trangchu_Taikhoan">
+            <End Role="Taikhoan" EntitySet="Taikhoan" />
+            <End Role="Trangchu" EntitySet="Trangchu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trangchu_Taikhoansinhvien" Association="Self.FK_Trangchu_Taikhoansinhvien">
+            <End Role="Taikhoansinhvien" EntitySet="Taikhoansinhvien" />
+            <End Role="Trangchu" EntitySet="Trangchu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trangchu_Traloi" Association="Self.FK_Trangchu_Traloi">
+            <End Role="Traloi" EntitySet="Traloi" />
+            <End Role="Trangchu" EntitySet="Trangchu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FBFORITSTUDENTSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cauhoi">
+          <Key>
+            <PropertyRef Name="Ma_cau_hoi" />
+          </Key>
+          <Property Name="Ma_cau_hoi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Noidungcauhoi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Andanh" Type="Boolean" Nullable="false" />
+          <Property Name="Thoigian" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Taikhoansinhvien" Relationship="Self.FK_Cauhoi_Taikhoansinhvien" FromRole="Cauhoi" ToRole="Taikhoansinhvien" />
+          <NavigationProperty Name="Tralois" Relationship="Self.FK_Traloi_Cauhoi" FromRole="Cauhoi" ToRole="Traloi" />
+          <NavigationProperty Name="Trangchus" Relationship="Self.FK_Trangchu_Cauhoi" FromRole="Cauhoi" ToRole="Trangchu" />
+        </EntityType>
+        <EntityType Name="Taikhoan">
+          <Key>
+            <PropertyRef Name="Ma_tai_khoan" />
+          </Key>
+          <Property Name="Ma_tai_khoan" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="matkhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hoten" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Quyen" Type="Int32" Nullable="false" />
+          <Property Name="trangthai" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tralois" Relationship="Self.FK_Traloi_Taikhoan" FromRole="Taikhoan" ToRole="Traloi" />
+          <NavigationProperty Name="Trangchus" Relationship="Self.FK_Trangchu_Taikhoan" FromRole="Taikhoan" ToRole="Trangchu" />
+        </EntityType>
+        <EntityType Name="Taikhoansinhvien">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="matkhau" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hoten" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lop" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Khoa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cauhois" Relationship="Self.FK_Cauhoi_Taikhoansinhvien" FromRole="Taikhoansinhvien" ToRole="Cauhoi" />
+          <NavigationProperty Name="Trangchus" Relationship="Self.FK_Trangchu_Taikhoansinhvien" FromRole="Taikhoansinhvien" ToRole="Trangchu" />
+        </EntityType>
+        <EntityType Name="Thongbao">
+          <Key>
+            <PropertyRef Name="Ma_thong_bao" />
+          </Key>
+          <Property Name="Ma_thong_bao" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="thoigian" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Traloi">
+          <Key>
+            <PropertyRef Name="Ma_Cau_Tra_Loi" />
+          </Key>
+          <Property Name="Ma_Cau_Tra_Loi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Thoigian" Type="DateTime" Precision="0" />
+          <Property Name="Ma_cau_hoi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ma_Tai_khoan" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Noidungcautraloi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cauhoi" Relationship="Self.FK_Traloi_Cauhoi" FromRole="Traloi" ToRole="Cauhoi" />
+          <NavigationProperty Name="Taikhoan" Relationship="Self.FK_Traloi_Taikhoan" FromRole="Traloi" ToRole="Taikhoan" />
+          <NavigationProperty Name="Trangchus" Relationship="Self.FK_Trangchu_Traloi" FromRole="Traloi" ToRole="Trangchu" />
+        </EntityType>
+        <EntityType Name="Trangchu">
+          <Key>
+            <PropertyRef Name="Ma_Trang_Chu" />
+          </Key>
+          <Property Name="Ma_Trang_Chu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Ma_Tai_khoan" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Ma_Cau_hoi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Thatim" Type="Boolean" />
+          <Property Name="Ma_Cau_Tra_Loi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cauhoi" Relationship="Self.FK_Trangchu_Cauhoi" FromRole="Trangchu" ToRole="Cauhoi" />
+          <NavigationProperty Name="Taikhoan" Relationship="Self.FK_Trangchu_Taikhoan" FromRole="Trangchu" ToRole="Taikhoan" />
+          <NavigationProperty Name="Taikhoansinhvien" Relationship="Self.FK_Trangchu_Taikhoansinhvien" FromRole="Trangchu" ToRole="Taikhoansinhvien" />
+          <NavigationProperty Name="Traloi" Relationship="Self.FK_Trangchu_Traloi" FromRole="Trangchu" ToRole="Traloi" />
+        </EntityType>
+        <Association Name="FK_Cauhoi_Taikhoansinhvien">
+          <End Role="Taikhoansinhvien" Type="Self.Taikhoansinhvien" Multiplicity="0..1" />
+          <End Role="Cauhoi" Type="Self.Cauhoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taikhoansinhvien">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cauhoi">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Traloi_Cauhoi">
+          <End Role="Cauhoi" Type="Self.Cauhoi" Multiplicity="1" />
+          <End Role="Traloi" Type="Self.Traloi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cauhoi">
+              <PropertyRef Name="Ma_cau_hoi" />
+            </Principal>
+            <Dependent Role="Traloi">
+              <PropertyRef Name="Ma_cau_hoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trangchu_Cauhoi">
+          <End Role="Cauhoi" Type="Self.Cauhoi" Multiplicity="0..1" />
+          <End Role="Trangchu" Type="Self.Trangchu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cauhoi">
+              <PropertyRef Name="Ma_cau_hoi" />
+            </Principal>
+            <Dependent Role="Trangchu">
+              <PropertyRef Name="Ma_Cau_hoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Traloi_Taikhoan">
+          <End Role="Taikhoan" Type="Self.Taikhoan" Multiplicity="1" />
+          <End Role="Traloi" Type="Self.Traloi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taikhoan">
+              <PropertyRef Name="Ma_tai_khoan" />
+            </Principal>
+            <Dependent Role="Traloi">
+              <PropertyRef Name="Ma_Tai_khoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trangchu_Taikhoan">
+          <End Role="Taikhoan" Type="Self.Taikhoan" Multiplicity="0..1" />
+          <End Role="Trangchu" Type="Self.Trangchu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taikhoan">
+              <PropertyRef Name="Ma_tai_khoan" />
+            </Principal>
+            <Dependent Role="Trangchu">
+              <PropertyRef Name="Ma_Tai_khoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trangchu_Taikhoansinhvien">
+          <End Role="Taikhoansinhvien" Type="Self.Taikhoansinhvien" Multiplicity="0..1" />
+          <End Role="Trangchu" Type="Self.Trangchu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taikhoansinhvien">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trangchu">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trangchu_Traloi">
+          <End Role="Traloi" Type="Self.Traloi" Multiplicity="0..1" />
+          <End Role="Trangchu" Type="Self.Trangchu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Traloi">
+              <PropertyRef Name="Ma_Cau_Tra_Loi" />
+            </Principal>
+            <Dependent Role="Trangchu">
+              <PropertyRef Name="Ma_Cau_Tra_Loi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FBFORITSTUDENTSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cauhois" EntityType="Self.Cauhoi" />
+          <EntitySet Name="Taikhoans" EntityType="Self.Taikhoan" />
+          <EntitySet Name="Taikhoansinhviens" EntityType="Self.Taikhoansinhvien" />
+          <EntitySet Name="Thongbaos" EntityType="Self.Thongbao" />
+          <EntitySet Name="Tralois" EntityType="Self.Traloi" />
+          <EntitySet Name="Trangchus" EntityType="Self.Trangchu" />
+          <AssociationSet Name="FK_Cauhoi_Taikhoansinhvien" Association="Self.FK_Cauhoi_Taikhoansinhvien">
+            <End Role="Taikhoansinhvien" EntitySet="Taikhoansinhviens" />
+            <End Role="Cauhoi" EntitySet="Cauhois" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Traloi_Cauhoi" Association="Self.FK_Traloi_Cauhoi">
+            <End Role="Cauhoi" EntitySet="Cauhois" />
+            <End Role="Traloi" EntitySet="Tralois" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trangchu_Cauhoi" Association="Self.FK_Trangchu_Cauhoi">
+            <End Role="Cauhoi" EntitySet="Cauhois" />
+            <End Role="Trangchu" EntitySet="Trangchus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Traloi_Taikhoan" Association="Self.FK_Traloi_Taikhoan">
+            <End Role="Taikhoan" EntitySet="Taikhoans" />
+            <End Role="Traloi" EntitySet="Tralois" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trangchu_Taikhoan" Association="Self.FK_Trangchu_Taikhoan">
+            <End Role="Taikhoan" EntitySet="Taikhoans" />
+            <End Role="Trangchu" EntitySet="Trangchus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trangchu_Taikhoansinhvien" Association="Self.FK_Trangchu_Taikhoansinhvien">
+            <End Role="Taikhoansinhvien" EntitySet="Taikhoansinhviens" />
+            <End Role="Trangchu" EntitySet="Trangchus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trangchu_Traloi" Association="Self.FK_Trangchu_Traloi">
+            <End Role="Traloi" EntitySet="Tralois" />
+            <End Role="Trangchu" EntitySet="Trangchus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FBFORITSTUDENTSModelStoreContainer" CdmEntityContainer="FBFORITSTUDENTSEntities">
+          <EntitySetMapping Name="Cauhois">
+            <EntityTypeMapping TypeName="FBFORITSTUDENTSModel.Cauhoi">
+              <MappingFragment StoreEntitySet="Cauhoi">
+                <ScalarProperty Name="Ma_cau_hoi" ColumnName="Ma_cau_hoi" />
+                <ScalarProperty Name="Noidungcauhoi" ColumnName="Noidungcauhoi" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Andanh" ColumnName="Andanh" />
+                <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Taikhoans">
+            <EntityTypeMapping TypeName="FBFORITSTUDENTSModel.Taikhoan">
+              <MappingFragment StoreEntitySet="Taikhoan">
+                <ScalarProperty Name="Ma_tai_khoan" ColumnName="Ma_tai_khoan" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="matkhau" ColumnName="matkhau" />
+                <ScalarProperty Name="hoten" ColumnName="hoten" />
+                <ScalarProperty Name="Quyen" ColumnName="Quyen" />
+                <ScalarProperty Name="trangthai" ColumnName="trangthai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Taikhoansinhviens">
+            <EntityTypeMapping TypeName="FBFORITSTUDENTSModel.Taikhoansinhvien">
+              <MappingFragment StoreEntitySet="Taikhoansinhvien">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="matkhau" ColumnName="matkhau" />
+                <ScalarProperty Name="hoten" ColumnName="hoten" />
+                <ScalarProperty Name="Lop" ColumnName="Lop" />
+                <ScalarProperty Name="Khoa" ColumnName="Khoa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Thongbaos">
+            <EntityTypeMapping TypeName="FBFORITSTUDENTSModel.Thongbao">
+              <MappingFragment StoreEntitySet="Thongbao">
+                <ScalarProperty Name="Ma_thong_bao" ColumnName="Ma_thong_bao" />
+                <ScalarProperty Name="thoigian" ColumnName="thoigian" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tralois">
+            <EntityTypeMapping TypeName="FBFORITSTUDENTSModel.Traloi">
+              <MappingFragment StoreEntitySet="Traloi">
+                <ScalarProperty Name="Ma_Cau_Tra_Loi" ColumnName="Ma_Cau_Tra_Loi" />
+                <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
+                <ScalarProperty Name="Ma_cau_hoi" ColumnName="Ma_cau_hoi" />
+                <ScalarProperty Name="Ma_Tai_khoan" ColumnName="Ma_Tai_khoan" />
+                <ScalarProperty Name="Noidungcautraloi" ColumnName="Noidungcautraloi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trangchus">
+            <EntityTypeMapping TypeName="FBFORITSTUDENTSModel.Trangchu">
+              <MappingFragment StoreEntitySet="Trangchu">
+                <ScalarProperty Name="Ma_Trang_Chu" ColumnName="Ma_Trang_Chu" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Ma_Tai_khoan" ColumnName="Ma_Tai_khoan" />
+                <ScalarProperty Name="Ma_Cau_hoi" ColumnName="Ma_Cau_hoi" />
+                <ScalarProperty Name="Thatim" ColumnName="Thatim" />
+                <ScalarProperty Name="Ma_Cau_Tra_Loi" ColumnName="Ma_Cau_Tra_Loi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
