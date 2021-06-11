@@ -21,6 +21,7 @@ namespace FeedbackForITStudents.Controllers
 
             return View();
         }
+
         [Authorize]
         public ActionResult Contact()
         {
