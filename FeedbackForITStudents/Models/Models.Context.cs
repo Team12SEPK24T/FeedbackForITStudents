@@ -13,10 +13,10 @@ namespace FeedbackForITStudents.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FBFORITSTUDENTSEntities : DbContext
+    public partial class SEP24Team12Entities : DbContext
     {
-        public FBFORITSTUDENTSEntities()
-            : base("name=FBFORITSTUDENTSEntities")
+        public SEP24Team12Entities()
+            : base("name=SEP24Team12Entities")
         {
         }
     
@@ -25,11 +25,12 @@ namespace FeedbackForITStudents.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Cauhoi> Cauhois { get; set; }
-        public virtual DbSet<Taikhoan> Taikhoans { get; set; }
-        public virtual DbSet<Taikhoansinhvien> Taikhoansinhviens { get; set; }
-        public virtual DbSet<Thongbao> Thongbaos { get; set; }
-        public virtual DbSet<Traloi> Tralois { get; set; }
-        public virtual DbSet<Trangchu> Trangchus { get; set; }
+        public virtual DbSet<CAUHOI> CAUHOIs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<TAIKHOAN> TAIKHOANs { get; set; }
+        public virtual DbSet<TAIKHOANSV> TAIKHOANSVs { get; set; }
+        public virtual DbSet<THONGBAO> THONGBAOs { get; set; }
+        public virtual DbSet<TRALOI> TRALOIs { get; set; }
+        public virtual DbSet<TRANGCHU> TRANGCHUs { get; set; }
     }
 }

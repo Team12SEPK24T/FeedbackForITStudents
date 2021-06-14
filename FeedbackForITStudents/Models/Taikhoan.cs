@@ -12,25 +12,25 @@ namespace FeedbackForITStudents.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Taikhoan
+    public partial class TAIKHOAN
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Taikhoan()
+        public TAIKHOAN()
         {
-            this.Tralois = new HashSet<Traloi>();
-            this.Trangchus = new HashSet<Trangchu>();
+            this.TRALOIs = new HashSet<TRALOI>();
+            this.TRANGCHUs = new HashSet<TRANGCHU>();
         }
     
-        public string Ma_tai_khoan { get; set; }
+        public int MaTK { get; set; }
         public string Email { get; set; }
-        public string matkhau { get; set; }
-        public string hoten { get; set; }
+        public string Password { get; set; }
+        public string Hoten { get; set; }
         public int Quyen { get; set; }
-        public bool trangthai { get; set; }
+        public bool Trangthai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Traloi> Tralois { get; set; }
+        public virtual ICollection<TRALOI> TRALOIs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Trangchu> Trangchus { get; set; }
+        public virtual ICollection<TRANGCHU> TRANGCHUs { get; set; }
     }
 }
