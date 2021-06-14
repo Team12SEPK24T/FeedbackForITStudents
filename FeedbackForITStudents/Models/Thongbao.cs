@@ -12,9 +12,9 @@ namespace FeedbackForITStudents.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Thongbao
+    public partial class THONGBAO
     {
-        public string Ma_thong_bao { get; set; }
+        public string MaTB { get; set; }
         public Nullable<System.DateTime> thoigian { get; set; }
     }
 }

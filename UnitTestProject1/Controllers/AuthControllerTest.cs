@@ -11,7 +11,7 @@ namespace FeedbackForITStudents.Test.Controllers
     [TestClass]
     public class AuthControllerTest
     {
-        FBFORITSTUDENTSEntities db = new FBFORITSTUDENTSEntities();
+        SEP24Team12Entities db = new SEP24Team12Entities();
         AuthController controller = new AuthController();
         AdminHomeController adminhome = new AdminHomeController();
 

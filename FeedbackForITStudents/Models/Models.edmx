@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SEP24Team12Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CAUHOI">
+          <Key>
+            <PropertyRef Name="MaCH" />
+          </Key>
+          <Property Name="MaCH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Noidung" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Andanh" Type="bit" Nullable="false" />
+          <Property Name="Thoigian" Type="datetime" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TAIKHOAN">
+          <Key>
+            <PropertyRef Name="MaTK" />
+          </Key>
+          <Property Name="MaTK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Hoten" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quyen" Type="int" Nullable="false" />
+          <Property Name="Trangthai" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAIKHOANSV">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="MaSV" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Hoten" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Lop" Type="varchar" MaxLength="10" />
+          <Property Name="Khoa" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="THONGBAO">
+          <Key>
+            <PropertyRef Name="MaTB" />
+          </Key>
+          <Property Name="MaTB" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="thoigian" Type="date" />
+        </EntityType>
+        <EntityType Name="TRALOI">
+          <Key>
+            <PropertyRef Name="MaCTL" />
+          </Key>
+          <Property Name="MaCTL" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Thoigian" Type="date" />
+          <Property Name="MaCH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaTK" Type="int" />
+          <Property Name="Noidungtraloi" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TRANGCHU">
+          <Key>
+            <PropertyRef Name="MaTC" />
+          </Key>
+          <Property Name="MaTC" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaTK" Type="int" />
+          <Property Name="MaCH" Type="varchar" MaxLength="10" />
+          <Property Name="Thatim" Type="bit" />
+          <Property Name="MaCTL" Type="varchar" MaxLength="10" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_CHTRANGCHU">
+          <End Role="CAUHOI" Type="Self.CAUHOI" Multiplicity="0..1" />
+          <End Role="TRANGCHU" Type="Self.TRANGCHU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUHOI">
+              <PropertyRef Name="MaCH" />
+            </Principal>
+            <Dependent Role="TRANGCHU">
+              <PropertyRef Name="MaCH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTLTRANGCHU">
+          <End Role="TRALOI" Type="Self.TRALOI" Multiplicity="0..1" />
+          <End Role="TRANGCHU" Type="Self.TRANGCHU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRALOI">
+              <PropertyRef Name="MaCTL" />
+            </Principal>
+            <Dependent Role="TRANGCHU">
+              <PropertyRef Name="MaCTL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SVCAUHOI">
+          <End Role="TAIKHOANSV" Type="Self.TAIKHOANSV" Multiplicity="0..1" />
+          <End Role="CAUHOI" Type="Self.CAUHOI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANSV">
+              <PropertyRef Name="Email" />
+            </Principal>
+            <Dependent Role="CAUHOI">
+              <PropertyRef Name="EMAIL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SVTRANGCHU">
+          <End Role="TAIKHOANSV" Type="Self.TAIKHOANSV" Multiplicity="0..1" />
+          <End Role="TRANGCHU" Type="Self.TRANGCHU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANSV">
+              <PropertyRef Name="Email" />
+            </Principal>
+            <Dependent Role="TRANGCHU">
+              <PropertyRef Name="EMAIL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRALOI">
+          <End Role="CAUHOI" Type="Self.CAUHOI" Multiplicity="1" />
+          <End Role="TRALOI" Type="Self.TRALOI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUHOI">
+              <PropertyRef Name="MaCH" />
+            </Principal>
+            <Dependent Role="TRALOI">
+              <PropertyRef Name="MaCH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRALOITK">
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="0..1" />
+          <End Role="TRALOI" Type="Self.TRALOI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="MaTK" />
+            </Principal>
+            <Dependent Role="TRALOI">
+              <PropertyRef Name="MaTK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANGCHUTK">
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="0..1" />
+          <End Role="TRANGCHU" Type="Self.TRANGCHU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="MaTK" />
+            </Principal>
+            <Dependent Role="TRANGCHU">
+              <PropertyRef Name="MaTK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SEP24Team12ModelStoreContainer">
+          <EntitySet Name="CAUHOI" EntityType="Self.CAUHOI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAIKHOANSV" EntityType="Self.TAIKHOANSV" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THONGBAO" EntityType="Self.THONGBAO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRALOI" EntityType="Self.TRALOI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRANGCHU" EntityType="Self.TRANGCHU" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CHTRANGCHU" Association="Self.FK_CHTRANGCHU">
+            <End Role="CAUHOI" EntitySet="CAUHOI" />
+            <End Role="TRANGCHU" EntitySet="TRANGCHU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTLTRANGCHU" Association="Self.FK_CTLTRANGCHU">
+            <End Role="TRALOI" EntitySet="TRALOI" />
+            <End Role="TRANGCHU" EntitySet="TRANGCHU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SVCAUHOI" Association="Self.FK_SVCAUHOI">
+            <End Role="TAIKHOANSV" EntitySet="TAIKHOANSV" />
+            <End Role="CAUHOI" EntitySet="CAUHOI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SVTRANGCHU" Association="Self.FK_SVTRANGCHU">
+            <End Role="TAIKHOANSV" EntitySet="TAIKHOANSV" />
+            <End Role="TRANGCHU" EntitySet="TRANGCHU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRALOI" Association="Self.FK_TRALOI">
+            <End Role="CAUHOI" EntitySet="CAUHOI" />
+            <End Role="TRALOI" EntitySet="TRALOI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRALOITK" Association="Self.FK_TRALOITK">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+            <End Role="TRALOI" EntitySet="TRALOI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANGCHUTK" Association="Self.FK_TRANGCHUTK">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+            <End Role="TRANGCHU" EntitySet="TRANGCHU" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SEP24Team12Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SEP24Team12Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CAUHOIs" EntityType="SEP24Team12Model.CAUHOI" />
+          <EntitySet Name="sysdiagrams" EntityType="SEP24Team12Model.sysdiagram" />
+          <EntitySet Name="TAIKHOANs" EntityType="SEP24Team12Model.TAIKHOAN" />
+          <EntitySet Name="TAIKHOANSVs" EntityType="SEP24Team12Model.TAIKHOANSV" />
+          <EntitySet Name="THONGBAOs" EntityType="SEP24Team12Model.THONGBAO" />
+          <EntitySet Name="TRALOIs" EntityType="SEP24Team12Model.TRALOI" />
+          <EntitySet Name="TRANGCHUs" EntityType="SEP24Team12Model.TRANGCHU" />
+          <AssociationSet Name="FK_CHTRANGCHU" Association="SEP24Team12Model.FK_CHTRANGCHU">
+            <End Role="CAUHOI" EntitySet="CAUHOIs" />
+            <End Role="TRANGCHU" EntitySet="TRANGCHUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SVCAUHOI" Association="SEP24Team12Model.FK_SVCAUHOI">
+            <End Role="TAIKHOANSV" EntitySet="TAIKHOANSVs" />
+            <End Role="CAUHOI" EntitySet="CAUHOIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRALOI" Association="SEP24Team12Model.FK_TRALOI">
+            <End Role="CAUHOI" EntitySet="CAUHOIs" />
+            <End Role="TRALOI" EntitySet="TRALOIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRALOITK" Association="SEP24Team12Model.FK_TRALOITK">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
+            <End Role="TRALOI" EntitySet="TRALOIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANGCHUTK" Association="SEP24Team12Model.FK_TRANGCHUTK">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
+            <End Role="TRANGCHU" EntitySet="TRANGCHUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SVTRANGCHU" Association="SEP24Team12Model.FK_SVTRANGCHU">
+            <End Role="TAIKHOANSV" EntitySet="TAIKHOANSVs" />
+            <End Role="TRANGCHU" EntitySet="TRANGCHUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTLTRANGCHU" Association="SEP24Team12Model.FK_CTLTRANGCHU">
+            <End Role="TRALOI" EntitySet="TRALOIs" />
+            <End Role="TRANGCHU" EntitySet="TRANGCHUs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CAUHOI">
+          <Key>
+            <PropertyRef Name="MaCH" />
+          </Key>
+          <Property Name="MaCH" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Noidung" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Andanh" Type="Boolean" Nullable="false" />
+          <Property Name="Thoigian" Type="DateTime" Precision="3" />
+          <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TRANGCHUs" Relationship="SEP24Team12Model.FK_CHTRANGCHU" FromRole="CAUHOI" ToRole="TRANGCHU" />
+          <NavigationProperty Name="TAIKHOANSV" Relationship="SEP24Team12Model.FK_SVCAUHOI" FromRole="CAUHOI" ToRole="TAIKHOANSV" />
+          <NavigationProperty Name="TRALOIs" Relationship="SEP24Team12Model.FK_TRALOI" FromRole="CAUHOI" ToRole="TRALOI" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TAIKHOAN">
+          <Key>
+            <PropertyRef Name="MaTK" />
+          </Key>
+          <Property Name="MaTK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Hoten" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quyen" Type="Int32" Nullable="false" />
+          <Property Name="Trangthai" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TRALOIs" Relationship="SEP24Team12Model.FK_TRALOITK" FromRole="TAIKHOAN" ToRole="TRALOI" />
+          <NavigationProperty Name="TRANGCHUs" Relationship="SEP24Team12Model.FK_TRANGCHUTK" FromRole="TAIKHOAN" ToRole="TRANGCHU" />
+        </EntityType>
+        <EntityType Name="TAIKHOANSV">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="MaSV" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Hoten" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Lop" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Khoa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CAUHOIs" Relationship="SEP24Team12Model.FK_SVCAUHOI" FromRole="TAIKHOANSV" ToRole="CAUHOI" />
+          <NavigationProperty Name="TRANGCHUs" Relationship="SEP24Team12Model.FK_SVTRANGCHU" FromRole="TAIKHOANSV" ToRole="TRANGCHU" />
+        </EntityType>
+        <EntityType Name="THONGBAO">
+          <Key>
+            <PropertyRef Name="MaTB" />
+          </Key>
+          <Property Name="MaTB" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="thoigian" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="TRALOI">
+          <Key>
+            <PropertyRef Name="MaCTL" />
+          </Key>
+          <Property Name="MaCTL" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Thoigian" Type="DateTime" Precision="0" />
+          <Property Name="MaCH" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MaTK" Type="Int32" />
+          <Property Name="Noidungtraloi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CAUHOI" Relationship="SEP24Team12Model.FK_TRALOI" FromRole="TRALOI" ToRole="CAUHOI" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="SEP24Team12Model.FK_TRALOITK" FromRole="TRALOI" ToRole="TAIKHOAN" />
+          <NavigationProperty Name="TRANGCHUs" Relationship="SEP24Team12Model.FK_CTLTRANGCHU" FromRole="TRALOI" ToRole="TRANGCHU" />
+        </EntityType>
+        <EntityType Name="TRANGCHU">
+          <Key>
+            <PropertyRef Name="MaTC" />
+          </Key>
+          <Property Name="MaTC" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MaTK" Type="Int32" />
+          <Property Name="MaCH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Thatim" Type="Boolean" />
+          <Property Name="MaCTL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CAUHOI" Relationship="SEP24Team12Model.FK_CHTRANGCHU" FromRole="TRANGCHU" ToRole="CAUHOI" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="SEP24Team12Model.FK_TRANGCHUTK" FromRole="TRANGCHU" ToRole="TAIKHOAN" />
+          <NavigationProperty Name="TAIKHOANSV" Relationship="SEP24Team12Model.FK_SVTRANGCHU" FromRole="TRANGCHU" ToRole="TAIKHOANSV" />
+          <NavigationProperty Name="TRALOI" Relationship="SEP24Team12Model.FK_CTLTRANGCHU" FromRole="TRANGCHU" ToRole="TRALOI" />
+        </EntityType>
+        <Association Name="FK_CHTRANGCHU">
+          <End Type="SEP24Team12Model.CAUHOI" Role="CAUHOI" Multiplicity="0..1" />
+          <End Type="SEP24Team12Model.TRANGCHU" Role="TRANGCHU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUHOI">
+              <PropertyRef Name="MaCH" />
+            </Principal>
+            <Dependent Role="TRANGCHU">
+              <PropertyRef Name="MaCH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SVCAUHOI">
+          <End Type="SEP24Team12Model.TAIKHOANSV" Role="TAIKHOANSV" Multiplicity="0..1" />
+          <End Type="SEP24Team12Model.CAUHOI" Role="CAUHOI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANSV">
+              <PropertyRef Name="Email" />
+            </Principal>
+            <Dependent Role="CAUHOI">
+              <PropertyRef Name="EMAIL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRALOI">
+          <End Type="SEP24Team12Model.CAUHOI" Role="CAUHOI" Multiplicity="1" />
+          <End Type="SEP24Team12Model.TRALOI" Role="TRALOI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUHOI">
+              <PropertyRef Name="MaCH" />
+            </Principal>
+            <Dependent Role="TRALOI">
+              <PropertyRef Name="MaCH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRALOITK">
+          <End Type="SEP24Team12Model.TAIKHOAN" Role="TAIKHOAN" Multiplicity="0..1" />
+          <End Type="SEP24Team12Model.TRALOI" Role="TRALOI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="MaTK" />
+            </Principal>
+            <Dependent Role="TRALOI">
+              <PropertyRef Name="MaTK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRANGCHUTK">
+          <End Type="SEP24Team12Model.TAIKHOAN" Role="TAIKHOAN" Multiplicity="0..1" />
+          <End Type="SEP24Team12Model.TRANGCHU" Role="TRANGCHU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="MaTK" />
+            </Principal>
+            <Dependent Role="TRANGCHU">
+              <PropertyRef Name="MaTK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SVTRANGCHU">
+          <End Type="SEP24Team12Model.TAIKHOANSV" Role="TAIKHOANSV" Multiplicity="0..1" />
+          <End Type="SEP24Team12Model.TRANGCHU" Role="TRANGCHU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOANSV">
+              <PropertyRef Name="Email" />
+            </Principal>
+            <Dependent Role="TRANGCHU">
+              <PropertyRef Name="EMAIL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTLTRANGCHU">
+          <End Type="SEP24Team12Model.TRALOI" Role="TRALOI" Multiplicity="0..1" />
+          <End Type="SEP24Team12Model.TRANGCHU" Role="TRANGCHU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRALOI">
+              <PropertyRef Name="MaCTL" />
+            </Principal>
+            <Dependent Role="TRANGCHU">
+              <PropertyRef Name="MaCTL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SEP24Team12ModelStoreContainer" CdmEntityContainer="SEP24Team12Entities">
+          <EntitySetMapping Name="CAUHOIs">
+            <EntityTypeMapping TypeName="SEP24Team12Model.CAUHOI">
+              <MappingFragment StoreEntitySet="CAUHOI">
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
+                <ScalarProperty Name="Andanh" ColumnName="Andanh" />
+                <ScalarProperty Name="Noidung" ColumnName="Noidung" />
+                <ScalarProperty Name="MaCH" ColumnName="MaCH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SEP24Team12Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAIKHOANs">
+            <EntityTypeMapping TypeName="SEP24Team12Model.TAIKHOAN">
+              <MappingFragment StoreEntitySet="TAIKHOAN">
+                <ScalarProperty Name="Trangthai" ColumnName="Trangthai" />
+                <ScalarProperty Name="Quyen" ColumnName="Quyen" />
+                <ScalarProperty Name="Hoten" ColumnName="Hoten" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MaTK" ColumnName="MaTK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAIKHOANSVs">
+            <EntityTypeMapping TypeName="SEP24Team12Model.TAIKHOANSV">
+              <MappingFragment StoreEntitySet="TAIKHOANSV">
+                <ScalarProperty Name="Khoa" ColumnName="Khoa" />
+                <ScalarProperty Name="Lop" ColumnName="Lop" />
+                <ScalarProperty Name="Hoten" ColumnName="Hoten" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MaSV" ColumnName="MaSV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THONGBAOs">
+            <EntityTypeMapping TypeName="SEP24Team12Model.THONGBAO">
+              <MappingFragment StoreEntitySet="THONGBAO">
+                <ScalarProperty Name="thoigian" ColumnName="thoigian" />
+                <ScalarProperty Name="MaTB" ColumnName="MaTB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRALOIs">
+            <EntityTypeMapping TypeName="SEP24Team12Model.TRALOI">
+              <MappingFragment StoreEntitySet="TRALOI">
+                <ScalarProperty Name="Noidungtraloi" ColumnName="Noidungtraloi" />
+                <ScalarProperty Name="MaTK" ColumnName="MaTK" />
+                <ScalarProperty Name="MaCH" ColumnName="MaCH" />
+                <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
+                <ScalarProperty Name="MaCTL" ColumnName="MaCTL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANGCHUs">
+            <EntityTypeMapping TypeName="SEP24Team12Model.TRANGCHU">
+              <MappingFragment StoreEntitySet="TRANGCHU">
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="MaCTL" ColumnName="MaCTL" />
+                <ScalarProperty Name="Thatim" ColumnName="Thatim" />
+                <ScalarProperty Name="MaCH" ColumnName="MaCH" />
+                <ScalarProperty Name="MaTK" ColumnName="MaTK" />
+                <ScalarProperty Name="MaTC" ColumnName="MaTC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

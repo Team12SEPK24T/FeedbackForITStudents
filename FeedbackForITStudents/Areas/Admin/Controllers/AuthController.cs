@@ -9,7 +9,7 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
 {
     public class AuthController : Controller
     {
-        FBFORITSTUDENTSEntities model = new FBFORITSTUDENTSEntities();
+        SEP24Team12Entities model = new SEP24Team12Entities();
         // GET: Admin/Auth
         public ActionResult Login()
         {
@@ -18,13 +18,13 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(string email, string password)
         {
-            var user = model.Taikhoans.FirstOrDefault(u => u.Email.Equals(email));
+            var user = model.TAIKHOANs.FirstOrDefault(u => u.Email.Equals(email));
             if (user != null)
             {
-                if (user.matkhau.Equals(password))
+                if (user.Password.Equals(password))
                 {
-                    Session["user-fullname"] = user.hoten;
-                    Session["user-id"] = user.Ma_tai_khoan;
+                    Session["user-fullname"] = user.Hoten;
+                    Session["user-id"] = user.MaTK;
                     Session["user-role"] = user.Quyen;
                     return RedirectToAction("Index", "AdminHome");
                 }
