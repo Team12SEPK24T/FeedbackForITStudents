@@ -11,7 +11,9 @@ namespace FeedbackForITStudents.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Net.Http;
+    using System.Web.Mvc;
+
     public partial class TAIKHOAN
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

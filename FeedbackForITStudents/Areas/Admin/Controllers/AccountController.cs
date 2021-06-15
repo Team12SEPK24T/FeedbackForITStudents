@@ -15,7 +15,7 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
         // GET: Admin/Account
         public ActionResult Index()
         {
-            var account = model.TAIKHOANs.OrderByDescending(x => x.MaTK).ToList();
+            var account = model.TAIKHOANs.ToList();
             return View(account);
         }
         [HttpGet]
@@ -33,7 +33,7 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
                 account.Email = a.Email;
                 account.Hoten = a.Hoten;
                 account.Password = a.Password;
-                account.Trangthai = a.Trangthai;
+                account.Trangthai = true;
                 account.Quyen = a.Quyen; 
                 model.TAIKHOANs.Add(account);
                 model.SaveChanges();
