@@ -31,6 +31,7 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
                 else
                 {
                     Session["password-incorrect"] = true;
+                    Session["deactive"] = false;
                     return View();
                 }
             }

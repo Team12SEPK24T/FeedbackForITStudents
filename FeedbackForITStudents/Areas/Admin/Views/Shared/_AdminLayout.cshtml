@@ -68,22 +68,22 @@ Author URL: http://w3layouts.com
                             if ((int)Session["user-role"] == 0)
                             {
                                 <li class="nav-item">
-                                        <a class="nav-link" href="@Url.Action("Index", "Account")">Tài khoản |</a>
+                                    <a class="nav-link" href="@Url.Action("Index", "Account")">Tài khoản |</a>
                                 </li>
                             }
                         }
                         <li class="grid">
-                            <a class="nav-link" href="contact.html">Xin chào, @Session["user-fullname"] |</a>
+                            <a class="nav-link" href="@Url.Action("Edit", "Account", new { id = @Session["user-id"]})">Xin chào, @Session["user-fullname"] |</a>
                         </li>
                         <!-- search button -->
                         @*<div class="search-right ml-lg-3">
-            <form action="#search" method="GET" class="search-box position-relative">
-                <button type="submit" class="btn search-btn">
-                    <i class="fa fa-search"
-                       aria-hidden="true"></i>
-                </button>
-            </form>
-        </div>*@
+                                <form action="#search" method="GET" class="search-box position-relative">
+                                    <button type="submit" class="btn search-btn">
+                                        <i class="fa fa-search"
+                                           aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>*@
 
                         <!-- //search button -->
                     </ul>
@@ -530,3 +530,4 @@ Author URL: http://w3layouts.com
 </body>
 
 </html>
+@RenderSection("scripts", required: false)
