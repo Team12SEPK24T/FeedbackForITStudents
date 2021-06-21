@@ -5,20 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4bdc5a750de445528db9528f552af62b" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="SEP24Team12Model.CAUHOI" Width="1.5" PointX="3" PointY="4.75" />
-        <EntityTypeShape EntityType="SEP24Team12Model.sysdiagram" Width="1.5" PointX="0.75" PointY="8.5" />
-        <EntityTypeShape EntityType="SEP24Team12Model.TAIKHOAN" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="SEP24Team12Model.TAIKHOANSV" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="SEP24Team12Model.THONGBAO" Width="1.5" PointX="2.75" PointY="8.5" />
-        <EntityTypeShape EntityType="SEP24Team12Model.TRALOI" Width="1.5" PointX="8.25" PointY="4.75" />
-        <EntityTypeShape EntityType="SEP24Team12Model.TRANGCHU" Width="1.5" PointX="5.25" PointY="4.5" />
-        <AssociationConnector Association="SEP24Team12Model.FK_CHTRANGCHU" />
-        <AssociationConnector Association="SEP24Team12Model.FK_SVCAUHOI" />
-        <AssociationConnector Association="SEP24Team12Model.FK_TRALOI" />
-        <AssociationConnector Association="SEP24Team12Model.FK_TRALOITK" />
+        <EntityTypeShape EntityType="SEP24Team12Model.CAUHOI" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SEP24Team12Model.sysdiagram" Width="1.5" PointX="3.75" PointY="8.625" />
+        <EntityTypeShape EntityType="SEP24Team12Model.TAIKHOAN" Width="1.5" PointX="0.75" PointY="4.625" />
+        <EntityTypeShape EntityType="SEP24Team12Model.TAIKHOANSV" Width="1.5" PointX="1.5" PointY="8.25" />
+        <EntityTypeShape EntityType="SEP24Team12Model.THONGBAO" Width="1.5" PointX="5.75" PointY="8.625" />
+        <EntityTypeShape EntityType="SEP24Team12Model.TRALOI" Width="1.5" PointX="6" PointY="4.625" />
+        <EntityTypeShape EntityType="SEP24Team12Model.TRANGCHU" Width="1.5" PointX="3" PointY="4.625" />
+        <AssociationConnector Association="SEP24Team12Model.FK__CAUHOI__Email__07C12930" />
+        <AssociationConnector Association="SEP24Team12Model.FK__TRALOI__MaCH__0A9D95DB" />
+        <AssociationConnector Association="SEP24Team12Model.FK__TRALOI__MaTK__0B91BA14" />
         <AssociationConnector Association="SEP24Team12Model.FK_TRANGCHUTK" />
         <AssociationConnector Association="SEP24Team12Model.FK_SVTRANGCHU" />
-        <AssociationConnector Association="SEP24Team12Model.FK_CTLTRANGCHU" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

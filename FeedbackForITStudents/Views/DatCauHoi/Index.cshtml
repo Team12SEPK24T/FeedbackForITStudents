@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Đặt câu hỏi";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+
+<div class="inner-banner">
+    <section class="w3l-breadcrumb">
+        <div class="container">
+            <h1 class="inner-text-title font-weight-bold mb-2">Đặt câu hỏi</h1>
+        </div>
+    </section>
+</div>
+<div class="mx-auto pt-lg-4 pt-md-5 pt-4" style="max-width:1000px">
+    <div class="row contact-block">
+        <div class="col-md-12 contact-right mt-md-0 mt-4">
+            <form action="https://sendmail.w3layouts.com/submitForm" method="post" class="signin-form">
+                <div class="input-grids">
+                </div>
+                <div class="form-input">
+                    <textarea name="w3lMessage" id="w3lMessage" placeholder="Type your message here*" required=""></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="custom-control custom-switch" style="float:left">
+        <input type="checkbox" class="custom-control-input" id="customSwitch1">
+        <label class="custom-control-label" for="customSwitch1">Hỏi ẩn danh</label>
+    </div>
+    <button class="btn button-style" style="float:right">Gửi câu hỏi</button>
+</div>
+

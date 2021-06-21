@@ -1,0 +1,72 @@
+﻿@model IEnumerable<FeedbackForITStudents.Models.TRALOI>
+
+@{
+    ViewBag.Title = "Cá nhân";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<div class="row">
+    @foreach (var question in Model)
+    {
+        <div class="media-grid">
+            <div class="media">
+                <a class="comment-img" href="#url"><img src="assets/images/team2.jpg" class="img-responsive" width="100px" alt="placeholder image"></a>
+                <div class="media-body comments-grid-right">
+                    <h5>@question.CAUHOI.Email</h5>
+                    <ul class="p-0 comment">
+                        <li class="">@question.CAUHOI.Thoigian</li>
+                        <li>
+                            <a href="#comment"><i class="fa fa-reply mr-1" aria-hidden="true"></i>Reply</a>
+                        </li>
+                    </ul>
+                    <p>
+                        @question.CAUHOI.Noidung
+                    </p>
+                    <div class="media mt-5 mb-0 px-0 pb-0 media-sub">
+                        <a class="comment-img" href="#url"><img src="assets/images/team3.jpg" class="img-responsive" width="100px" alt="placeholder image"></a>
+                        <div class="media-body comments-grid-right">
+                            <h5>@question.TAIKHOAN.Hoten</h5>
+                            <ul class="p-0 comment">
+                                <li class="">@question.Thoigian</li>
+                                <li>
+                                    <a href="#comment"><i class="fa fa-reply mr-1" aria-hidden="true"></i>Reply</a>
+                                </li>
+                            </ul>
+                            <p>
+                                @question.Noidungtraloi
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="col-md-4 d-flex">
+                <div class="product ftco-animate fadeInUp ftco-animated">
+                    <div class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                        <a href="@Url.Action("Details", "Food", new { id = food.ID })" class=" stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                            <img src="@Url.Content("~"+food.IMAGE_URL)" class="img-fluid" alt="@food.FOOD_NAME">
+                        </a>
+                    </div>
+                    <div class="text text-center">
+                        <span>
+                            @if (food.STATUS)
+                            {
+                                <label class="new">Còn bán</label>
+                            }
+                            else
+                            {
+                                <label class="sale">Hết bán</label>
+                            }
+                        </span>
+                        <span class="category">@food.CATEGORY.CATEGORY_NAME</span>
+                        <a href="@Url.Action("Details", "Food", new { id = food.ID })">
+                            <h2>@food.FOOD_NAME</h2>
+                        </a>
+                        <p class="mb-0"><span class="price">@food.PRICE.ToString("N0")</span> VNĐ</p>
+                    </div>
+                </div>
+            </div>*@
+    }
+</div>
+

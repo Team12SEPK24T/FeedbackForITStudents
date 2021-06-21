@@ -21,9 +21,7 @@ namespace FeedbackForITStudents.Models
         public string MaCTL { get; set; }
         public string EMAIL { get; set; }
     
-        public virtual CAUHOI CAUHOI { get; set; }
         public virtual TAIKHOAN TAIKHOAN { get; set; }
         public virtual TAIKHOANSV TAIKHOANSV { get; set; }
-        public virtual TRALOI TRALOI { get; set; }
     }
 }

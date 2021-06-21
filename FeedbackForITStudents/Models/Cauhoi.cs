@@ -17,18 +17,15 @@ namespace FeedbackForITStudents.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CAUHOI()
         {
-            this.TRANGCHUs = new HashSet<TRANGCHU>();
             this.TRALOIs = new HashSet<TRALOI>();
         }
     
-        public string MaCH { get; set; }
+        public int MaCH { get; set; }
         public string Noidung { get; set; }
         public bool Andanh { get; set; }
-        public Nullable<System.DateTime> Thoigian { get; set; }
-        public string EMAIL { get; set; }
+        public System.DateTime Thoigian { get; set; }
+        public string Email { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TRANGCHU> TRANGCHUs { get; set; }
         public virtual TAIKHOANSV TAIKHOANSV { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRALOI> TRALOIs { get; set; }

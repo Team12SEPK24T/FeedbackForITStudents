@@ -180,6 +180,8 @@
     <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
     <Compile Include="Areas\Admin\Middleware\LoginVerification.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CauHoiCaNhanController.cs" />
+    <Compile Include="Controllers\DatCauHoiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -326,6 +328,8 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Shared\_CustomerLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\CauHoiCaNhan\Index.cshtml" />
+    <Content Include="Views\DatCauHoi\Index.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
