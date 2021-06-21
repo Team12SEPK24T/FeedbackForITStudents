@@ -1,0 +1,101 @@
+﻿@model FeedbackForITStudents.Models.TAIKHOAN
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main style="padding-top: 150px">
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="grid">
+                <div class="text-center mb-sm-5 mb-4">
+                    <h3 class="title-big">Cập Nhật tài khoản @Model.Email</h3>
+                </div>
+                <div class="grid-body">
+                    <div class="item-wrapper">
+                        <div class="row mb-3">
+                            <div class="col-md-8 mx-auto">
+                                @using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "form-update", @class = "form-add" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.MaTK)
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label for="inputType1">Email</label>
+                                        </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "inputType1" } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label for="inputType1">Họ tên</label>
+                                        </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control", @id = "inputType1" } })
+                                            @Html.ValidationMessageFor(model => model.Hoten, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label for="inputType1">Mật khẩu</label>
+                                        </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @id = "inputType4", @type = "password" } })
+                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label>Trạng thái</label>
+                                        </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            <select name="TRANGTHAI" class="custom-select">
+                                                <option value="1">Hoạt động</option>
+                                                <option value="0">Ngừng hoạt động</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row showcase_row_area">
+                                        <div class="col-md-3 showcase_text_area">
+                                            <label>Quyền</label>
+                                        </div>
+                                        <div class="col-md-9 showcase_content_area">
+                                            <select name="Quyen" class="custom-select">
+                                                <option value="0">Quản trị</option>
+                                                <option value="1">BCN Khoa</option>
+                                                <option value="2">Quản lý</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row showcase_row_area mb-3" style="position: absolute;left: 30%; bottom: -30%">
+                                        <div class="col-md-6 showcase_text_area">
+                                            <label>
+                                                <a href="@Url.Action("Index", "Account")">
+                                                    <button id="cancel" type="button" class="btn btn-light" style="width: 190px">Hủy</button>
+                                                </a>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 showcase_content_area">
+                                            <div class="custom-file">
+                                                <input type="submit" class="btn btn-outline-primary" style="width: 200px" value="Cập Nhật" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</main>
