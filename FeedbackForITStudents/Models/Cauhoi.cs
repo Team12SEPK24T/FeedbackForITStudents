@@ -12,25 +12,25 @@ namespace FeedbackForITStudents.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Cauhoi
+    public partial class CAUHOI
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cauhoi()
+        public CAUHOI()
         {
-            this.Tralois = new HashSet<Traloi>();
-            this.Trangchus = new HashSet<Trangchu>();
+            this.TRANGCHUs = new HashSet<TRANGCHU>();
+            this.TRALOIs = new HashSet<TRALOI>();
         }
     
-        public string Ma_cau_hoi { get; set; }
-        public string Noidungcauhoi { get; set; }
-        public string ID { get; set; }
+        public string MaCH { get; set; }
+        public string Noidung { get; set; }
         public bool Andanh { get; set; }
         public Nullable<System.DateTime> Thoigian { get; set; }
+        public string EMAIL { get; set; }
     
-        public virtual Taikhoansinhvien Taikhoansinhvien { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Traloi> Tralois { get; set; }
+        public virtual ICollection<TRANGCHU> TRANGCHUs { get; set; }
+        public virtual TAIKHOANSV TAIKHOANSV { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Trangchu> Trangchus { get; set; }
+        public virtual ICollection<TRALOI> TRALOIs { get; set; }
     }
 }

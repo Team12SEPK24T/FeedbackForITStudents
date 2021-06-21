@@ -1,0 +1,101 @@
+﻿@model IEnumerable<FeedbackForITStudents.Models.TAIKHOAN>
+
+@{
+    ViewBag.Title = "Quản lý tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main style="padding-top: 150px">
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="grid">
+                <div class="text-center mb-sm-5 mb-4">
+                    <h3 class="title-big">Danh sách tài khoản</h3>
+                </div>
+                <a href="@Url.Action("Create", "Account")" style="float: right; margin-right: 40px; padding-bottom: 20px">
+                    <button type="button" class="btn btn-primary">Thêm tài khoản</button>
+                </a>
+
+                <div class="item-wrapper">
+                    <div class="table-responsive">
+                        <table class="table" id="cate-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Password
+                                    </th>
+                                    <th>
+                                        Họ tên
+                                    </th>
+                                    <th>
+                                        Quyền
+                                    </th>
+                                    <th>
+                                        Trạng thái
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.Email.Trim()
+                                        </td>
+                                        <td>
+                                            @item.Password.Trim()
+                                        </td>
+                                        <td>
+                                            @item.Hoten.Trim()
+                                        </td>
+
+                                        <td>@(item.Quyen == 0 ? "Quản trị" : item.Quyen == 1 ? "BCN Khoa" : "Trợ lý")</td>
+                                        <td>
+                                            @if (item.Trangthai)
+                                            {
+                                                <label class="badge badge-success">Hoạt động</label>
+                                            }
+                                            else
+                                            {
+                                                <label class="badge badge-danger">Ngừng hoạt động</label>
+                                            }
+                                        </td>
+                                        <td>
+                                            <form action="@Url.Action("Edit", "Account", new { id = item.MaTK })" style="display:inline" target="_blank">
+                                                    <button type="submit" class="btn action-btn btn-like btn-outline-danger btn-rounded"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="Cập nhật tài khoản">
+                                                        <i class="mdi mdi-lead-pencil"></i>
+                                                    </button>
+                                                </form>
+                                            @*@if (item.Trangthai)
+                                            {
+                                                <button onclick="Deactive(this, @item.MaTK)" class="btn action-btn btn-outline-primary btn-rounded"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Ngưng hoạt động tài khoản">
+                                                    <i class="mdi mdi-account-off"></i>
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button onclick="Active(this, @item.MaTK)" class="btn action-btn btn-outline-danger btn-rounded"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Khởi động tài khoản">
+                                                    <i class="mdi mdi-account-plus"></i>
+                                                </button>
+                                            }*@
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -12,18 +12,12 @@ namespace FeedbackForITStudents.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TRANGCHU
+    public partial class sysdiagram
     {
-        public string MaTC { get; set; }
-        public Nullable<int> MaTK { get; set; }
-        public string MaCH { get; set; }
-        public Nullable<bool> Thatim { get; set; }
-        public string MaCTL { get; set; }
-        public string EMAIL { get; set; }
-    
-        public virtual CAUHOI CAUHOI { get; set; }
-        public virtual TAIKHOAN TAIKHOAN { get; set; }
-        public virtual TAIKHOANSV TAIKHOANSV { get; set; }
-        public virtual TRALOI TRALOI { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
