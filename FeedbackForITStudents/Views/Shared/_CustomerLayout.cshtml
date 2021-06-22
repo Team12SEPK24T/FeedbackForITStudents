@@ -44,16 +44,17 @@ Author URL: http://w3layouts.com
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav ml-lg-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Trang chủ <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="@Url.Action("Index", "Home")">Trang chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">Đặt câu hỏi</a>
+                            <a class="nav-link" href="@Url.Action("Index", "DatCauHoi")">Đặt câu hỏi</a>
                         </li>
                         @*<li class="nav-item">
                                 <a class="nav-link" href="services.html">Services</a>
                             </li>*@
                         <li class="nav-item">
-                            <a class="nav-link" href="@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "CauHoiCaNhan", routeValues: null, htmlAttributes: new { title = "CauHoiCaNhan" })</a>
+                            @*<a href="@Url.Action("Index", "CauHoiCaNhan", new {id = User.Identity.GetUserName()})">*@
+                            <a class="nav-link" href="@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "CauHoiCaNhan")</a>
                         </li>
                         <!-- search button -->
                         <!-- //search button -->
@@ -222,7 +223,7 @@ Author URL: http://w3layouts.com
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-7 column mt-lg-0 mt-4">
-                        
+
                         <div class="columns-2 mt-4">
                             <ul class="social">
                                 <li>

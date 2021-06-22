@@ -32,5 +32,10 @@ namespace FeedbackForITStudents.Models
         public virtual DbSet<THONGBAO> THONGBAOs { get; set; }
         public virtual DbSet<TRALOI> TRALOIs { get; set; }
         public virtual DbSet<TRANGCHU> TRANGCHUs { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }

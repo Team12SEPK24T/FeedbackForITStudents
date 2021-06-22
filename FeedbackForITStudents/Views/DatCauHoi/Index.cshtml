@@ -1,33 +1,49 @@
-﻿
+﻿@model FeedbackForITStudents.Models.CAUHOI
+
 @{
     ViewBag.Title = "Đặt câu hỏi";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
 }
+@if (TempData["Success"] != null)
+{
+    <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+}
+@*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">*@
 
-
-<div class="inner-banner">
-    <section class="w3l-breadcrumb">
-        <div class="container">
-            <h1 class="inner-text-title font-weight-bold mb-2">Đặt câu hỏi</h1>
+@using (Html.BeginForm("Index", "DatCauHoi", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">Đặt câu hỏi</h1>
+            </div>
+        </section>
+    </div>
+    <div class="mx-auto pt-lg-4 pt-md-5 pt-4" style="max-width:1000px">
+        <div class="row contact-block">
+            <div class="col-md-12 contact-right mt-md-0 mt-4">
+                <form action="@Url.Action("CauHoi", "DatCauHoi")" method="post">
+                    <div class="input-grids">
+                    </div>
+                    <div class="form-input">
+                        @Html.TextAreaFor(model => model.Noidung, new { required = "required", htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Noidung, "", new { @class = "text-danger" })
+                        @*<textarea name="w3lMessage" id="w3lMessage" placeholder="Type your message here*" required=""></textarea>*@
+                    </div>
+                    <div class="custom-control custom-switch" style="float:left">
+                        <input type="checkbox" data-toggle="switch" class="custom-control-input" name="Andanh" id="customSwitch1" value="true">
+                        <label class="custom-control-label" for="customSwitch1">Hỏi ẩn danh</label>
+                    </div>
+                </form>
+            </div>
         </div>
-    </section>
-</div>
-<div class="mx-auto pt-lg-4 pt-md-5 pt-4" style="max-width:1000px">
-    <div class="row contact-block">
-        <div class="col-md-12 contact-right mt-md-0 mt-4">
-            <form action="https://sendmail.w3layouts.com/submitForm" method="post" class="signin-form">
-                <div class="input-grids">
-                </div>
-                <div class="form-input">
-                    <textarea name="w3lMessage" id="w3lMessage" placeholder="Type your message here*" required=""></textarea>
-                </div>
-            </form>
+        <div class="form-group">
+            <input type="submit" class="btn button-style " id="sending" style="float:right" value="Gửi câu hỏi"></input>
         </div>
     </div>
-    <div class="custom-control custom-switch" style="float:left">
-        <input type="checkbox" class="custom-control-input" id="customSwitch1">
-        <label class="custom-control-label" for="customSwitch1">Hỏi ẩn danh</label>
-    </div>
-    <button class="btn button-style" style="float:right">Gửi câu hỏi</button>
-</div>
-
+}
+<script>
+    $("#Andanh").bootstrapSwitch();
+</script>
