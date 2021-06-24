@@ -65,30 +65,26 @@
                                             }
                                         </td>
                                         <td>
-                                            @*<form action="@Url.Action("Edit", "Account", new { id = item.MaTK })" style="display:inline" target="_blank">
-                                                <button type="submit" class="btn action-btn btn-like btn-outline-danger btn-rounded"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Cập nhật tài khoản">
-                                                    <i class="mdi mdi-lead-pencil"></i>
-                                                </button>
-                                            </form>*@
                                             @if (item.Trangthai)
                                             {
-                                                <button onclick="Deactive(this, @item.MaTK)" class="btn action-btn btn-outline-primary btn-rounded"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Ngưng hoạt động tài khoản">
-                                                    <i class="mdi mdi-account-off"></i>
-                                                </button>
+                                                
+                <button onclick="Deactive(this, @item.MaTK)" class="btn action-btn btn-outline-primary btn-rounded"
+                        data-toggle="tooltip" data-placement="top"
+                        title="Ngưng hoạt động tài khoản">
+                    <i class="mdi mdi-account-off"></i>
+                </button>
+            }
+            else
+            {
+                <button onclick="Active(this, @item.MaTK)" class="btn action-btn btn-outline-danger btn-rounded"
+                        data-toggle="tooltip" data-placement="top"
+                        title="Khởi động tài khoản">
+                    <i class="mdi mdi-account-plus"></i>
+                </button>
+            
                                             }
-                                            else
-                                            {
-                                                <button onclick="Active(this, @item.MaTK)" class="btn action-btn btn-outline-danger btn-rounded"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Khởi động tài khoản">
-                                                    <i class="mdi mdi-account-plus"></i>
-                                                </button>
-                                            }
-                                        </td>
+                                        </td>                                               
+                                      
                                     </tr>
                                 }
                             </tbody>
@@ -139,6 +135,7 @@
                 dataType: "json",
                 success: function (r) {
                     if (r.success) {
+
                         alert("Khởi động tài khoản thành công");
                         window.location = r.url;
                     } else {

@@ -45,9 +45,7 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
             ViewBag.Action = "Index";
             ViewBag.Controller = "Account";
             return View(account);
-            //ViewBag.Action = "Index";
-            //ViewBag.Controller = "Account";
-            //return View();
+
         }
 
         [HttpPost]

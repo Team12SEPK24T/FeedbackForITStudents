@@ -12,16 +12,13 @@ namespace FeedbackForITStudents.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TRANGCHU
+    public partial class AspNetUserClaim
     {
-        public string MaTC { get; set; }
-        public Nullable<int> MaTK { get; set; }
-        public string MaCH { get; set; }
-        public Nullable<bool> Thatim { get; set; }
-        public string MaCTL { get; set; }
-        public string EMAIL { get; set; }
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
     
-        public virtual TAIKHOAN TAIKHOAN { get; set; }
-        public virtual TAIKHOANSV TAIKHOANSV { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }
