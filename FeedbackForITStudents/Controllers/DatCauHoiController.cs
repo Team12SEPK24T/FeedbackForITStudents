@@ -31,7 +31,7 @@ namespace FeedbackForITStudents.Controllers
                 //item.Thoigian = model.CAUHOIs. 
                 //var thoiGian = model.CAUHOIs.Where(t => t.Thoigian == today).Count();
                 var SLcauhoi = model.CAUHOIs.Where(h => h.MaTKAsp == userIdentity && h.Thoigian == today).Count();
-                if (SLcauhoi > 3)
+                if (SLcauhoi >= 3)
                 {
                     ViewBag.Message = "Ban da het luot dat cau hoi trong hom nay! Vi ban chi dat duoc toi da 3 cau hoi moi ngay.";
                     return View();
