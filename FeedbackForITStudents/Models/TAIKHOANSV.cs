@@ -17,7 +17,6 @@ namespace FeedbackForITStudents.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TAIKHOANSV()
         {
-            this.CAUHOIs = new HashSet<CAUHOI>();
             this.TRANGCHUs = new HashSet<TRANGCHU>();
         }
     
@@ -28,8 +27,6 @@ namespace FeedbackForITStudents.Models
         public string Lop { get; set; }
         public string Khoa { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CAUHOI> CAUHOIs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRANGCHU> TRANGCHUs { get; set; }
     }

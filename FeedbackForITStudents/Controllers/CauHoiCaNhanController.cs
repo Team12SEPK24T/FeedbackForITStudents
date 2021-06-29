@@ -20,9 +20,7 @@ namespace FeedbackForITStudents.Controllers
         //}
         public ActionResult Index()
         {
-            string userId = HttpContext.User.Identity.Name;
-            var traloi = model.TRALOIs.Where(f =>f.CAUHOI.MaTKAsp == userId);
-            return View(traloi);
+            return View();
         }
     }
 }

@@ -12,9 +12,9 @@ namespace FeedbackForITStudents.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CAUHOI
+    public partial class CAUHOIDADUYET
     {
-        public int MaCH { get; set; }
+        public int MaCHD { get; set; }
         public string Noidung { get; set; }
         public bool Andanh { get; set; }
         public System.DateTime Thoigian { get; set; }

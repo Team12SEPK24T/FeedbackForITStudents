@@ -16,12 +16,11 @@ namespace FeedbackForITStudents.Models
     {
         public int MaCTL { get; set; }
         public string Noidungtraloi { get; set; }
-        public int MaCH { get; set; }
         public System.DateTime Thoigian { get; set; }
         public int MaTK { get; set; }
         public int Luottim { get; set; }
+        public Nullable<int> MaCHD { get; set; }
     
-        public virtual CAUHOI CAUHOI { get; set; }
         public virtual TAIKHOAN TAIKHOAN { get; set; }
     }
 }

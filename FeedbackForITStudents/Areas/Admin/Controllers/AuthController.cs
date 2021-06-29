@@ -11,16 +11,24 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
     {
         SEP24Team12Entities model = new SEP24Team12Entities();
         // GET: Admin/Auth
+
         public ActionResult Login()
         {
-            return View();
+                return View();
         }
         [HttpPost]
         public ActionResult Login(string email, string password)
         {
+            Session["password-incorrect"] = false;
+            Session["user-not-found"] = false;
+            Session["deactive"] = false;
             var user = model.TAIKHOANs.FirstOrDefault(u => u.Email.Equals(email));
             if (user != null)
             {
+                if(user.Trangthai == false)
+                {
+                    return View();
+                }
                 if (user.Password.Equals(password))
                 {
                     Session["user-fullname"] = user.Hoten;

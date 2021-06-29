@@ -60,7 +60,7 @@ Author URL: http://w3layouts.com
                                     <a class="nav-link" href="about.html">Xem Câu hỏi</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="services.html">Duyệt câu hỏi</a>
+                                    <a class="nav-link" href="@Url.Action("Index", "DuyetCauHoi")">Duyệt câu hỏi</a>
 
                                 </li>
                             }
@@ -68,7 +68,7 @@ Author URL: http://w3layouts.com
                             if ((int)Session["user-role"] == 0)
                             {
                                 <li class="nav-item">
-                                        <a class="nav-link" href="@Url.Action("Index", "Account")">Tài khoản |</a>
+                                    <a class="nav-link" href="@Url.Action("Index", "Account")">Tài khoản |</a>
                                 </li>
                             }
                         }
@@ -77,13 +77,13 @@ Author URL: http://w3layouts.com
                         </li>
                         <!-- search button -->
                         @*<div class="search-right ml-lg-3">
-            <form action="#search" method="GET" class="search-box position-relative">
-                <button type="submit" class="btn search-btn">
-                    <i class="fa fa-search"
-                       aria-hidden="true"></i>
-                </button>
-            </form>
-        </div>*@
+                                <form action="#search" method="GET" class="search-box position-relative">
+                                    <button type="submit" class="btn search-btn">
+                                        <i class="fa fa-search"
+                                           aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>*@
 
                         <!-- //search button -->
                     </ul>
@@ -530,3 +530,4 @@ Author URL: http://w3layouts.com
 </body>
 
 </html>
+@RenderSection("scripts", required: false)

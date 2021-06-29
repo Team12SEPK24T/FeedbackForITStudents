@@ -39,6 +39,19 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
                 model.SaveChanges();
                 return RedirectToAction("Index");
         }
-           
+
+        [HttpPost]
+        public JsonResult UpdateStatus(int id, bool trangthai, TAIKHOAN updateStatus)
+        {
+            var account = model.TAIKHOANs.FirstOrDefault(f => f.MaTK == id);
+            if (account != null)
+            {
+                account.Trangthai = updateStatus.Trangthai;
+                model.SaveChanges();
+                return Json(true);
+            }
+            return Json(false);
+        }
+
     }
 }

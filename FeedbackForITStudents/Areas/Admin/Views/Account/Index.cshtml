@@ -4,6 +4,11 @@
     ViewBag.Title = "Quản lý tài khoản";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+<link href="~/Scripts/jquery.btnswitch.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.1.1.slim.min.js"></script>
+<script src="~/Scripts/jquery.btnswitch.js"></script>
+
+
 
 <main style="padding-top: 150px">
     <div class="container">
@@ -63,31 +68,36 @@
                                             {
                                                 <label class="badge badge-danger">Ngừng hoạt động</label>
                                             }
+
                                         </td>
                                         <td>
-                                            @*<form action="@Url.Action("Update", "Account", new { id = item.ID })" style="display:inline" target="_blank">
-                                                    <button type="submit" class="btn action-btn btn-like btn-outline-danger btn-rounded"
+                                                @if (item.Trangthai)
+                                                {
+                                                    <button onclick="Deactive(this, @item.MaTK)" class="btn action-btn btn-outline-primary btn-rounded"
                                                             data-toggle="tooltip" data-placement="top"
-                                                            title="Cập nhật tài khoản">
-                                                        <i class="mdi mdi-lead-pencil"></i>
+                                                            title="Ngưng hoạt động tài khoản">
+                                                        <i class="mdi mdi-account-off"></i>
                                                     </button>
-                                                </form>*@
-                                            @if (item.Trangthai)
-                                            {
-                                                <button onclick="Deactive(this, @item.MaTK)" class="btn action-btn btn-outline-primary btn-rounded"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Ngưng hoạt động tài khoản">
-                                                    <i class="mdi mdi-account-off"></i>
-                                                </button>
-                                            }
-                                            else
-                                            {
-                                                <button onclick="Active(this, @item.MaTK)" class="btn action-btn btn-outline-danger btn-rounded"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Khởi động tài khoản">
-                                                    <i class="mdi mdi-account-plus"></i>
-                                                </button>
-                                            }
+                                                }
+                                                else
+                                                {
+                                                    <button onclick="Active(this, @item.MaTK)" class="btn action-btn btn-outline-danger btn-rounded"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="Khởi động tài khoản">
+                                                        <i class="mdi mdi-account-plus"></i>
+                                                    </button>
+                                                }
+
+                                        </td>
+
+                                        <td>
+
+                                            @*<select onchange="active_inactive_user(this, @item.MaTK)" class="custom-select" >
+                                                                                        <option value="">Chọn</option>
+                                                    <option value="0">Ngưng hoạt động</option>
+                                                    <option value="1">Hoạt động</option>
+                                                </select>*@
+
                                         </td>
                                     </tr>
                                 }
@@ -99,3 +109,58 @@
         </div>
     </div>
 </main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        function Deactive(button, id) {
+            //Determine the reference of the Row using the Button.
+            var row = $(button).closest("TR");
+            var name = $("TD", row).eq(2).html();
+            if(confirm("Bạn có chắc chắn muốn ngưng hoạt động tài khoản " + name.trim() + "?")) {
+                //Send the JSON array to Controller using AJAX.
+                $.ajax({
+                    type: "POST",
+                    url: "/Account/UpdateStatus",
+                    data: JSON.stringify({ id: id }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r) {
+                        if (r.success) {
+                            alert("Ngưng hoạt động tài khoản thành công");
+                            window.location = r.url;
+                        } else {
+                            alert("Không thể ngưng hoạt động tài khoản của chính bạn");
+                        }
+                    }
+                });
+            }
+        };
+        function Active(button, id) {
+        //Determine the reference of the Row using the Button.
+        var row = $(button).closest("TR");
+        var name = $("TD", row).eq(2).html();
+        if (confirm("Bạn có chắc chắn muốn khởi động tài khoản " + name.trim() + "?")) {
+            //Send the JSON array to Controller using AJAX.
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("UpdateStatus", "Account")",
+                data: JSON.stringify({ id: id }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    if (r.success) {
+                        alert("Khởi động tài khoản thành công");
+                        window.location = r.url;
+                    } else {
+                    }
+                }
+            });
+        }
+    };
+    </script>
+    <script>
+        
+    </script>
+
+}
