@@ -57,7 +57,7 @@ Author URL: http://w3layouts.com
                             if ((int)Session["user-role"] <= 2)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">Xem Câu hỏi</a>
+                                    <a class="nav-link" href="@Url.Action("Index", "XemCauHoi")">Xem Câu hỏi</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Index", "DuyetCauHoi")">Duyệt câu hỏi</a>

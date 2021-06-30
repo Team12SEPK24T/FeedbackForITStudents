@@ -14,11 +14,6 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
     {
         // GET: Admin/DuyetCauHoi
         SEP24Team12Entities model = new SEP24Team12Entities();
-        private List<CAUHOI> getQuestion()
-        {
-            var listQuestion = model.CAUHOIs.ToList();
-            return listQuestion;
-        }
         public ActionResult Index()
         {
             var cauhoi = model.CAUHOIs.ToList();

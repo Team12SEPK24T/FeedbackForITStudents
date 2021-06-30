@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace FeedbackForITStudents.Controllers
 {
+    [Authorize]
     public class DatCauHoiController : Controller
     {
         SEP24Team12Entities model = new SEP24Team12Entities();
