@@ -12,16 +12,16 @@ namespace FeedbackForITStudents.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TRANGCHU
+    public partial class CAUHOIDADUYET
     {
-        public string MaTC { get; set; }
-        public Nullable<int> MaTK { get; set; }
-        public string MaCH { get; set; }
-        public Nullable<bool> Thatim { get; set; }
-        public string MaCTL { get; set; }
-        public string EMAIL { get; set; }
+        public int MaCHD { get; set; }
+        public string Noidung { get; set; }
+        public bool Andanh { get; set; }
+        public System.DateTime Thoigian { get; set; }
+        public string Email { get; set; }
+        public string MaTKAsp { get; set; }
+        public Nullable<bool> pin { get; set; }
     
-        public virtual TAIKHOAN TAIKHOAN { get; set; }
-        public virtual TAIKHOANSV TAIKHOANSV { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }
