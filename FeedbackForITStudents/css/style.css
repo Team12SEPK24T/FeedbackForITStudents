@@ -2,8 +2,13 @@
 Author: W3layouts
 Author URL: http://w3layouts.com
 --*/
+.btn span.fa {
+    opacity: 0;
+}
 
-
+.btn.active span.fa {
+    opacity: 1;
+}
 /* reset code */
 html {
     scroll-behavior: smooth;

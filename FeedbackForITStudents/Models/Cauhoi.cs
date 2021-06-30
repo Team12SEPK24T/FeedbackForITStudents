@@ -20,6 +20,7 @@ namespace FeedbackForITStudents.Models
         public System.DateTime Thoigian { get; set; }
         public string Email { get; set; }
         public string MaTKAsp { get; set; }
+        public bool pin { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }

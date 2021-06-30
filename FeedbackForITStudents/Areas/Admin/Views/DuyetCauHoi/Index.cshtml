@@ -18,7 +18,7 @@
                 </div>
                 <div class="item-wrapper">
                     <div class="table-responsive">
-                        <table class="table  table-info table-striped" id="cauhoi-table">
+                        <table class="table table-info" id="cauhoi-table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>
@@ -42,41 +42,47 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    using (Html.BeginForm( "Browse", "DuyetCauHoi", new { id = item.MaCH }))
+                                    using (Html.BeginForm("Browse", "DuyetCauHoi", new { id = item.MaCH }))
                                     {
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Noidung)
-                                                </td>
-                                                @*<td>
-                            @Html.DisplayFor(modelItem => item.Andanh)
-                        </td>*@
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Thoigian)
-                                                </td>
-                                                <td>
-                                                    @if (item.Andanh == true)
-                                                    {
-                                                        @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-                                                    }
-                                                    else
-                                                    {
-                                                        <label>Ẩn danh</label>
-                                                    }
-                                                </td>
-                                                <td class="col-lg-2">
-                                                    @*<a href="#" class="btn btn-danger" onclick="ConfirmDelete(@item.MaCH)"><i class="fa fa-trash"></i></a>*@
-                                                        <input type="submit" value="Xóa" class="btn btn-danger" name="delete" 
-                                                               onclick="return confirm('Bạn có chắc chắn muốn xóa câu hỏi này?')" />
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Noidung)
+                                            </td>
+                                            @*<td>
+                                                    @Html.DisplayFor(modelItem => item.Andanh)
+                                                </td>*@
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Thoigian)
+                                            </td>
+                                            <td>
+                                                @if (item.Andanh == true)
+                                                {
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                }
+                                                else
+                                                {
+                                                    <label>Ẩn danh</label>
+                                                }
+                                            </td>
+                                            <td class="col-lg-3">
+
+                                                <div class="btn-group" data-toggle="buttons">
+                                                    <label class="btn btn-outline-warning">
+                                                        <input name="pin" type="checkbox" value="true" />
+                                                        <input type="hidden" value="false" name="pin" />
+                                                        <span class="fa fa-thumb-tack"></span>
+                                                    </label>
+                                                </div>
+                                                <input type="submit" value="Xóa" class="btn btn-danger" name="delete"
+                                                       onclick="return confirm('Bạn có chắc chắn muốn xóa câu hỏi này?')" />
+                                                <input type="submit" value="Duyệt" class="btn btn-success" name="duyet" />
 
 
-                                                        <input type="submit" value="Duyệt" class="btn btn-success" name="duyet" />
-                                                   
-                                                </td>
-                                            </tr>
+                                            </td>
+                                        </tr>
                                     }
                                 }
-                                    </tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -84,3 +90,11 @@
         </div>
 </main>
 }
+<script>
+$(document).on("click", "[type='checkbox']", function(e) {
+        if (this.checked) {
+            $(this).attr("value", "true");
+        } else {
+            $(this).attr("value","false");}
+    });
+</script>

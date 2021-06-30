@@ -25,7 +25,7 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
             return View(cauhoi);
         }
         [HttpPost]
-        public ActionResult Browse(int id)
+        public ActionResult Browse(int id, CAUHOIDADUYET d)
         {
             if (Request["delete"] != null)
             {
@@ -38,7 +38,8 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
             else if (Request["duyet"] != null)
             {
                 CAUHOI cauhoi = model.CAUHOIs.Find(id);
-                var cauhoid = new CAUHOIDADUYET { Noidung = cauhoi.Noidung, Andanh = cauhoi.Andanh, Thoigian = cauhoi.Thoigian, Email = cauhoi.Email, MaTKAsp = cauhoi.MaTKAsp };
+                var cauhoid = new CAUHOIDADUYET { Noidung = cauhoi.Noidung, Andanh = cauhoi.Andanh, Thoigian = cauhoi.Thoigian, Email = cauhoi.Email, MaTKAsp = cauhoi.MaTKAsp};
+                cauhoid.pin = d.pin;
                 model.CAUHOIDADUYETs.Add(cauhoid);
                 model.CAUHOIs.Remove(cauhoi);
                 model.SaveChanges();

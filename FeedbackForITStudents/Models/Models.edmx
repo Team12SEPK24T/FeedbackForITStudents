@@ -76,6 +76,7 @@
           <Property Name="Thoigian" Type="datetime" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="MaTKAsp" Type="nvarchar" MaxLength="128" />
+          <Property Name="pin" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CAUHOIDADUYET">
           <Key>
@@ -87,6 +88,7 @@
           <Property Name="Thoigian" Type="datetime" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="MaTKAsp" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="pin" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -440,6 +442,7 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="MaTKAsp" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team12Model.FK_AspNetUsers_CAUHOI" FromRole="CAUHOI" ToRole="AspNetUser" />
+          <Property Name="pin" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="CAUHOIDADUYET">
           <Key>
@@ -452,6 +455,7 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="MaTKAsp" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team12Model.FK__CAUHOIDAD__MaTKA__3C34F16F" FromRole="CAUHOIDADUYET" ToRole="AspNetUser" />
+          <Property Name="pin" Type="Boolean" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -676,6 +680,7 @@
           <EntitySetMapping Name="CAUHOIs">
             <EntityTypeMapping TypeName="SEP24Team12Model.CAUHOI">
               <MappingFragment StoreEntitySet="CAUHOI">
+                <ScalarProperty Name="pin" ColumnName="pin" />
                 <ScalarProperty Name="MaTKAsp" ColumnName="MaTKAsp" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
@@ -688,6 +693,7 @@
           <EntitySetMapping Name="CAUHOIDADUYETs">
             <EntityTypeMapping TypeName="SEP24Team12Model.CAUHOIDADUYET">
               <MappingFragment StoreEntitySet="CAUHOIDADUYET">
+                <ScalarProperty Name="pin" ColumnName="pin" />
                 <ScalarProperty Name="MaTKAsp" ColumnName="MaTKAsp" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
