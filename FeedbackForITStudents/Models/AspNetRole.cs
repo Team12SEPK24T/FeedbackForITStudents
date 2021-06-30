@@ -12,25 +12,18 @@ namespace FeedbackForITStudents.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Taikhoansinhvien
+    public partial class AspNetRole
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Taikhoansinhvien()
+        public AspNetRole()
         {
-            this.Cauhois = new HashSet<Cauhoi>();
-            this.Trangchus = new HashSet<Trangchu>();
+            this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
-        public string ID { get; set; }
-        public string Email { get; set; }
-        public string matkhau { get; set; }
-        public string hoten { get; set; }
-        public string Lop { get; set; }
-        public string Khoa { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cauhoi> Cauhois { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Trangchu> Trangchus { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }
