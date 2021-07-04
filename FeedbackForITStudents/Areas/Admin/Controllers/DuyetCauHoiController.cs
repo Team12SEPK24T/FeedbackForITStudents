@@ -42,15 +42,5 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
             }
             return View();
         }
-        //[HttpPost]
-        //public ActionResult Create(int id)
-        //{
-        //    CAUHOI cauhoi = model.CAUHOIs.Find(id);
-        //    var cauhoid = new CAUHOIDADUYET { Noidung = cauhoi.Noidung, Andanh = cauhoi.Andanh, Thoigian = cauhoi.Thoigian, Email = cauhoi.Email, MaTKAsp = cauhoi.MaTKAsp};
-        //    model.CAUHOIDADUYETs.Add(cauhoid);
-        //    model.CAUHOIs.Remove(cauhoi);
-        //    model.SaveChanges();    
-        //    return RedirectToAction("index");
-        //}
     }
 }

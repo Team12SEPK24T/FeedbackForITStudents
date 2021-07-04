@@ -19,8 +19,9 @@ namespace FeedbackForITStudents.Models
         public System.DateTime Thoigian { get; set; }
         public int MaTK { get; set; }
         public int Luottim { get; set; }
-        public Nullable<int> MaCHD { get; set; }
+        public int MaCHD { get; set; }
     
         public virtual TAIKHOAN TAIKHOAN { get; set; }
+        public virtual CAUHOIDADUYET CAUHOIDADUYET { get; set; }
     }
 }

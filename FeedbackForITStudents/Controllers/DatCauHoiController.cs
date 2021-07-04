@@ -29,8 +29,6 @@ namespace FeedbackForITStudents.Controllers
             
             foreach (var item in allCauhoi)
             {
-                //item.Thoigian = model.CAUHOIs. 
-                //var thoiGian = model.CAUHOIs.Where(t => t.Thoigian == today).Count();
                 var SLcauhoi = model.CAUHOIs.Where(h => h.MaTKAsp == userIdentity && h.Thoigian == today).Count();
                 if (SLcauhoi >= 3)
                 {
@@ -53,17 +51,6 @@ namespace FeedbackForITStudents.Controllers
                 }
             }
             return View();
-            //var cauhoi = new CAUHOI();
-            //    cauhoi.Noidung = c.Noidung;
-            //    cauhoi.Andanh = c.Andanh;
-            //    cauhoi.Thoigian = DateTime.Now;
-            //    cauhoi.Email = HttpContext.User.Identity.GetUserName();
-            //    cauhoi.MaTKAsp = HttpContext.User.Identity.GetUserId();
-            //    model.CAUHOIs.Add(cauhoi);
-            //    model.SaveChanges();
-            //    TempData["SuccessMessage"] = "Gửi câu hỏi thành công";
-            //    return RedirectToAction("Index", "Home");
-
         }
     }
 }

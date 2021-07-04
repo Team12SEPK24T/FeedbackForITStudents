@@ -267,6 +267,8 @@
     <Content Include="assets\images\mobile.png" />
     <Content Include="assets\images\service1.png" />
     <Content Include="assets\images\service2.png" />
+    <Content Include="assets\images\student.jpg" />
+    <Content Include="assets\images\teacher.jpg" />
     <Content Include="assets\images\team1.jpg" />
     <Content Include="assets\images\team2.jpg" />
     <Content Include="assets\images\team3.jpg" />
@@ -321,7 +323,6 @@
     <Content Include="assets\webfonts\fa-solid-900.ttf" />
     <Content Include="assets\webfonts\fa-solid-900.woff" />
     <Content Include="assets\webfonts\fa-solid-900.woff2" />
-    <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Auth\Login.cshtml" />
@@ -336,6 +337,8 @@
     <Content Include="Areas\Admin\Views\Account\Create.cshtml" />
     <Content Include="Areas\Admin\Views\DuyetCauHoi\Index.cshtml" />
     <Content Include="Areas\Admin\Views\XemCauHoi\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\XemCauHoi\Reply.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

@@ -18,5 +18,28 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
             var cauhoid = model.CAUHOIDADUYETs.OrderByDescending(c => c.pin == true);
             return View(cauhoid);
         }
+        [HttpGet]
+        public ActionResult Reply(int id)
+        {
+            CAUHOIDADUYET cauhoi = model.CAUHOIDADUYETs.FirstOrDefault(a => a.MaCHD == id);
+            ViewBag.Action = "Index";
+            ViewBag.Controller = "XemCauHoi";
+            return View(cauhoi);
+        }
+        [HttpPost]
+        public ActionResult Reply(int id, TRALOI t)
+        {
+            var cauhoi = model.CAUHOIDADUYETs.FirstOrDefault(c => c.MaCHD == id);
+            var traloi = new TRALOI();
+            traloi.Noidungtraloi = t.Noidungtraloi;
+            traloi.Thoigian = DateTime.Today;
+            traloi.MaTK = (int)Session["user-id"];
+            traloi.Luottim = 0;
+            traloi.MaCHD = cauhoi.MaCHD;
+            model.TRALOIs.Add(traloi);
+            cauhoi.Rep = true;
+            model.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
