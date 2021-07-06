@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FeedbackForITStudents.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,10 +11,15 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
     [LoginVerification]
     public class AdminHomeController : Controller
     {
+        SEP24Team12Entities model = new SEP24Team12Entities();
+
         // GET: Admin/Admin
         public ActionResult Index()
         {
-            return View();
+            var cauTraLoi = model.TRALOIs.ToList();
+            var cauHoi = model.CAUHOIDADUYETs.ToList();
+
+            return View(cauTraLoi);
         }
     }
 }

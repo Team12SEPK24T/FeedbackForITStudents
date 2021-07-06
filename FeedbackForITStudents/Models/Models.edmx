@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SEP24Team12Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SEP24Team12Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -89,6 +89,7 @@
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="MaTKAsp" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="pin" Type="bit" />
+          <Property Name="Rep" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -138,7 +139,7 @@
           <Property Name="Thoigian" Type="datetime" Nullable="false" />
           <Property Name="MaTK" Type="int" Nullable="false" />
           <Property Name="Luottim" Type="int" Nullable="false" />
-          <Property Name="MaCHD" Type="int" />
+          <Property Name="MaCHD" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TRANGCHU">
           <Key>
@@ -255,6 +256,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Traloi_CHD">
+          <End Role="CAUHOIDADUYET" Type="Self.CAUHOIDADUYET" Multiplicity="1" />
+          <End Role="TRALOI" Type="Self.TRALOI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUHOIDADUYET">
+              <PropertyRef Name="MaCHD" />
+            </Principal>
+            <Dependent Role="TRALOI">
+              <PropertyRef Name="MaCHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TRANGCHUTK">
           <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="0..1" />
           <End Role="TRANGCHU" Type="Self.TRANGCHU" Multiplicity="*" />
@@ -268,20 +281,20 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SEP24Team12ModelStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="CAUHOI" EntityType="Self.CAUHOI" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="CAUHOIDADUYET" EntityType="Self.CAUHOIDADUYET" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="TAIKHOANSV" EntityType="Self.TAIKHOANSV" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="THONGBAO" EntityType="Self.THONGBAO" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="TRALOI" EntityType="Self.TRALOI" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="TRANGCHU" EntityType="Self.TRANGCHU" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAUHOI" EntityType="Self.CAUHOI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAUHOIDADUYET" EntityType="Self.CAUHOIDADUYET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAIKHOANSV" EntityType="Self.TAIKHOANSV" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THONGBAO" EntityType="Self.THONGBAO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRALOI" EntityType="Self.TRALOI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRANGCHU" EntityType="Self.TRANGCHU" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__CAUHOIDAD__MaTKA__3C34F16F" Association="Self.FK__CAUHOIDAD__MaTKA__3C34F16F">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYET" />
@@ -314,13 +327,16 @@
             <End Role="TAIKHOANSV" EntitySet="TAIKHOANSV" />
             <End Role="TRANGCHU" EntitySet="TRANGCHU" />
           </AssociationSet>
+          <AssociationSet Name="FK_Traloi_CHD" Association="Self.FK_Traloi_CHD">
+            <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYET" />
+            <End Role="TRALOI" EntitySet="TRALOI" />
+          </AssociationSet>
           <AssociationSet Name="FK_TRANGCHUTK" Association="Self.FK_TRANGCHUTK">
             <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
             <End Role="TRANGCHU" EntitySet="TRANGCHU" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SEP24Team12Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
@@ -410,6 +426,8 @@
           <Property Name="MaTKAsp" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pin" Type="Boolean" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK__CAUHOIDAD__MaTKA__3C34F16F" FromRole="CAUHOIDADUYET" ToRole="AspNetUsers" />
+          <Property Name="Rep" Type="Boolean" />
+          <NavigationProperty Name="TRALOIs" Relationship="SEP24Team12Model.FK_Traloi_CHD" FromRole="CAUHOIDADUYET" ToRole="TRALOI" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -462,8 +480,9 @@
           <Property Name="Thoigian" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MaTK" Type="Int32" Nullable="false" />
           <Property Name="Luottim" Type="Int32" Nullable="false" />
-          <Property Name="MaCHD" Type="Int32" />
+          <Property Name="MaCHD" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK__TRALOI__MaTK__0B91BA14" FromRole="TRALOI" ToRole="TAIKHOAN" />
+          <NavigationProperty Name="CAUHOIDADUYET" Relationship="SEP24Team12Model.FK_Traloi_CHD" FromRole="TRALOI" ToRole="CAUHOIDADUYET" />
         </EntityType>
         <EntityType Name="TRANGCHU">
           <Key>
@@ -616,7 +635,23 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_Traloi_CHD" Association="SEP24Team12Model.FK_Traloi_CHD">
+            <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYETs" />
+            <End Role="TRALOI" EntitySet="TRALOIs" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Traloi_CHD">
+          <End Type="SEP24Team12Model.CAUHOIDADUYET" Role="CAUHOIDADUYET" Multiplicity="1" />
+          <End Type="SEP24Team12Model.TRALOI" Role="TRALOI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUHOIDADUYET">
+              <PropertyRef Name="MaCHD" />
+            </Principal>
+            <Dependent Role="TRALOI">
+              <PropertyRef Name="MaCHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -694,6 +729,7 @@
           <EntitySetMapping Name="CAUHOIDADUYETs">
             <EntityTypeMapping TypeName="SEP24Team12Model.CAUHOIDADUYET">
               <MappingFragment StoreEntitySet="CAUHOIDADUYET">
+                <ScalarProperty Name="Rep" ColumnName="Rep" />
                 <ScalarProperty Name="MaCHD" ColumnName="MaCHD" />
                 <ScalarProperty Name="Noidung" ColumnName="Noidung" />
                 <ScalarProperty Name="Andanh" ColumnName="Andanh" />

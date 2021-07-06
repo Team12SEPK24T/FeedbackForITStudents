@@ -26,6 +26,7 @@
         <AssociationConnector Association="SEP24Team12Model.FK_TRANGCHUTK" ManuallyRouted="false" />
         <AssociationConnector Association="SEP24Team12Model.FK_SVTRANGCHU" ManuallyRouted="false" />
         <AssociationConnector Association="SEP24Team12Model.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="SEP24Team12Model.FK_Traloi_CHD" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
