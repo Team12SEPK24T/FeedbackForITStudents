@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<FeedbackForITStudents.Models.TRALOI>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Trang chủ Admin";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -42,61 +42,76 @@
             </div>
             @foreach (var item in Model)
             {
-                <div class="col-lg-9 text11-content m-auto" style="padding-top: 20px">
-                    <div class="card border-info mb-3 ">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4" style="max-width: 90px;">
-                                    <img src="~/assets/images/student.jpg" class="img-fluid rounded-start" alt="placeholder image">
-                                </div>
-                                <div class="col-md-10">
-                                    <h5 class="card-title">@item.CAUHOIDADUYET.Noidung</h5>
-                                    <figcaption class="blockquote-footer">
-                                        @item.CAUHOIDADUYET.Thoigian<strong> by </strong><cite title="Source Title">
-                                            @if (item.CAUHOIDADUYET.Andanh == true)
-                                            {
-                                                @item.CAUHOIDADUYET.Email
-                                            }
-                                            else
-                                            {
-                                                <label>Ẩn danh</label>
-                                            }
-                                        </cite>
-                                    </figcaption>
+                using (Html.BeginForm("Like", "AdminHome", new { id = item.MaCTL }))
+                {
+                    <div class="col-lg-9 text11-content m-auto" style="padding-top: 20px">
+                        <div class="card border-info mb-3 ">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4" style="max-width: 90px;">
+                                        <img src="~/assets/images/student.jpg" class="img-fluid rounded-start" alt="placeholder image">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h5 class="card-title">@item.CAUHOIDADUYET.Noidung</h5>
+                                        <figcaption class="blockquote-footer">
+                                            @item.CAUHOIDADUYET.Thoigian<strong> by </strong><cite title="Source Title">
+                                                @if (item.CAUHOIDADUYET.Andanh == true)
+                                                {
+                                                    @item.CAUHOIDADUYET.Email
+                                                }
+                                                else
+                                                {
+                                                    <label>Ẩn danh</label>
+                                                }
+                                            </cite>
+                                        </figcaption>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-9.5 offset-md-2">
-                            <div class="">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-4" style="max-width: 90px;">
-                                            <img src="~/assets/images/teacher.jpg" class="img-fluid rounded-start" alt="placeholder image">
-                                        </div>
-                                        <div class="col-md-10">
-                                            <h5 class="card-title" style="color:gray">@item.Noidungtraloi</h5>
-                                            <figcaption class="blockquote-footer">
-                                                @item.Thoigian<strong> by </strong><cite title="Source Title">
-                                                    BCN Khoa
-                                                </cite>
-                                            </figcaption>
+                            <div class="col-md-9.5 offset-md-2">
+                                <div class="">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4" style="max-width: 90px;">
+                                                <img src="~/assets/images/teacher.jpg" class="img-fluid rounded-start" alt="placeholder image">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h5 class="card-title" style="color:gray">@item.Noidungtraloi</h5>
+                                                <figcaption class="blockquote-footer">
+                                                    @item.Thoigian<strong> by </strong><cite title="Source Title">
+                                                        BCN Khoa
+                                                    </cite>
+                                                </figcaption>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-5" style="padding-bottom: 10px">
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-outline-danger">
-                                    <input name="pin" type="checkbox" value="true" />
-                                    <span class="fa  fa-heart-o"> Thích</span>
-                                </label>
+
+                            <div class="col-md-5" style="padding-bottom: 10px" id="PartialView">
+
+                                <button id="likea" name="like" type="submit" class="btn btn-outline-danger">
+                                    <i class="fa fa-heart" aria-hidden="true"></i>                             <lable style="">@item.Luottim</lable>
+                                </button>
+                                @*<button name="unlike" type="submit" class="btn btn-danger"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></button>*@
                             </div>
-                            <lable style="color:firebrick">Có @item.Luottim lượt thích.</lable>
                         </div>
                     </div>
-                </div>
+                }
             }
         </div>
     </div>
 </section>
+@section scripts{
+    <script>
+        $("#likea").click(function (){
+    $.ajax({
+    type: "Get",
+    url: "@Url.Action("Like","AdminHome")",
+    success: function (result) {
+    $("#PartialView").html(result);
+    }
+    })
+    }
+    </script>
+}

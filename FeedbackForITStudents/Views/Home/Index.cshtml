@@ -1,7 +1,15 @@
-﻿@{
+﻿@model IEnumerable<FeedbackForITStudents.Models.TRALOI>
+
+@{
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
     ViewBag.Title = "Trang chủ";
 }
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+<script src="~/assets/js/jquery-3.3.1.min.js"></script>
+
 <section id="home" class="w3l-banner py-5">
     <div class="banner-image">
 
@@ -18,14 +26,90 @@
                         Giờ anh đã tới. Bao hạnh phúc khổ đau chia sẻ cùng anh với.
                         Nói nhỏ với một mình anh thôi. Và anh sẽ nói cho cả thế giới.
                     </p>
-                    <div class="mt-md-5 mt-4 mb-lg-0 mb-4">
-                        <a class="btn button-style" href="@Url.Action("Index", "DatCauHoi")">Hỏi liền thui</a>
-                    </div>
                 </div>
                 <div class="col-md-6 mt-md-0 mt-4">
-                    <img class="img-fluid" src="assets/images/bann1.png" alt=" ">
+                    <img class="img-fluid" src="~/assets/images/bann1.png" alt=" ">
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<section class="w3l-blog-sec pt-5">
+    <div class="services-layout py-md-4 py-3">
+        <div class="container">
+            <div class="text-center mb-sm-5 mb-4">
+                <h3 class="title-big">Tất cả câu hỏi</h3>
+            </div>
+            @foreach (var item in Model)
+            {
+                using (Html.BeginForm("Like", "Home", new { id = item.MaCTL }))
+                {
+                    <div class="col-lg-9 text11-content m-auto" style="padding-top: 20px">
+                        <div class="card border-info mb-3 ">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4" style="max-width: 90px;">
+                                        <img src="~/assets/images/student.jpg" class="img-fluid rounded-start" alt="placeholder image">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h5 class="card-title">@item.CAUHOIDADUYET.Noidung</h5>
+                                        <figcaption class="blockquote-footer">
+                                            @item.CAUHOIDADUYET.Thoigian<strong> by </strong><cite title="Source Title">
+                                                @if (item.CAUHOIDADUYET.Andanh == true)
+                                                {
+                                                    @item.CAUHOIDADUYET.Email
+                                                }
+                                                else
+                                                {
+                                                    <label>Ẩn danh</label>
+                                                }
+                                            </cite>
+                                        </figcaption>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9.5 offset-md-2">
+                                <div class="">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4" style="max-width: 90px;">
+                                                <img src="~/assets/images/teacher.jpg" class="img-fluid rounded-start" alt="placeholder image">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h5 class="card-title" style="color:gray">@item.Noidungtraloi</h5>
+                                                <figcaption class="blockquote-footer">
+                                                    @item.Thoigian<strong> by </strong><cite title="Source Title">
+                                                        BCN Khoa
+                                                    </cite>
+                                                </figcaption>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5" style="padding-bottom: 10px" id="likebtn">
+
+                                <button id="likea" name="like" type="submit" class="btn btn-outline-danger">
+                                    <i class="fa fa-heart" aria-hidden="true"></i>                             <lable style="">@item.Luottim</lable>
+                                </button>
+                                @*<button name="unlike" type="submit" class="btn btn-danger"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></button>*@
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+<script>
+    $(function () {
+        $('#likea').click(function (e) {
+            $('#likebtn').load(location.href + "#likebtn");
+        });
+    });
+</script>
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+}

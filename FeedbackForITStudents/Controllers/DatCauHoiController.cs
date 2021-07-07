@@ -36,9 +36,14 @@ namespace FeedbackForITStudents.Controllers
                     return View();
                     
                 }
+                else if(String.IsNullOrWhiteSpace(c.Noidung))
+                {
+                    ModelState.AddModelError("Noidung", "Vui long nhap noi dung cau hoi");
+                    //ModelState.Clear();
+                }
                 else
                 {
-                    var cauhoi = new CAUHOI();
+                     var cauhoi = new CAUHOI();
                     cauhoi.Noidung = c.Noidung;
                     cauhoi.Andanh = c.Andanh;
                     cauhoi.Thoigian = DateTime.Today;

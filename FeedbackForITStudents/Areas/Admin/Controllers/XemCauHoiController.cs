@@ -1,4 +1,4 @@
-﻿using FeedbackForITStudents.Models;
+﻿    using FeedbackForITStudents.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,19 +27,42 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
             return View(cauhoi);
         }
         [HttpPost]
-        public ActionResult Reply(int id, TRALOI t)
+        public ActionResult Reply(int id, TRALOI reply)
         {
-            var cauhoi = model.CAUHOIDADUYETs.FirstOrDefault(c => c.MaCHD == id);
-            var traloi = new TRALOI();
-            traloi.Noidungtraloi = t.Noidungtraloi;
-            traloi.Thoigian = DateTime.Today;
-            traloi.MaTK = (int)Session["user-id"];
-            traloi.Luottim = 0;
-            traloi.MaCHD = cauhoi.MaCHD;
-            model.TRALOIs.Add(traloi);
-            cauhoi.Rep = true;
-            model.SaveChanges();
-            return RedirectToAction("Index");
+            //ValidateReply(reply);
+            if (ModelState.IsValid)
+            {
+                var cauhoi = model.CAUHOIDADUYETs.FirstOrDefault(c => c.MaCHD == id);
+                var traloi = new TRALOI();
+                if (String.IsNullOrWhiteSpace(reply.Noidungtraloi))
+                {
+                    ViewBag.Message = "Vui long nhap cau hoi";
+                    return View();
+                }
+                else
+                {
+                    traloi.Noidungtraloi = reply.Noidungtraloi;
+                    traloi.Thoigian = DateTime.Today;
+                    traloi.MaTK = (int)Session["user-id"];
+                    traloi.Luottim = 0;
+                    traloi.MaCHD = cauhoi.MaCHD;
+                    model.TRALOIs.Add(traloi);
+                    cauhoi.Rep = true;
+                    model.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            ViewBag.Action = "Index";
+            ViewBag.Controller = "XenCauHoi";
+            return View(reply);
+        }
+
+        private void ValidateReply(TRALOI reply)
+        {
+            if (String.IsNullOrWhiteSpace(reply.Noidungtraloi))
+            {
+                ModelState.AddModelError("Noidungtraloi", "Vui lòng nhập câu trả lời");
+            }
         }
     }
 }

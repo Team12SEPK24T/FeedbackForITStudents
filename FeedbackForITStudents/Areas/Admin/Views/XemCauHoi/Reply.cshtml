@@ -1,42 +1,44 @@
 ﻿@model FeedbackForITStudents.Models.CAUHOIDADUYET
 
 @{
-    ViewBag.Title = "Reply";
+    ViewBag.Title = "Trả lời câu hỏi";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 <main style="padding-top: 150px">
     <div class="container">
         <div class="row">
-                <div class="col-lg-9 text11-content m-auto">
-                    <div class="text-center mb-sm-5 mb-4">
-                        <h3 class="title-big" style="color:midnightblue">Trả lời câu hỏi</h3>
+            <div class="col-lg-9 text11-content m-auto">
+                <div class="text-center mb-sm-5 mb-4">
+                    <h3 class="title-big" style="color:midnightblue">Trả lời câu hỏi</h3>
+                </div>
+                <div class="card ">
+                    <div class="card-header">
+                        Câu hỏi
                     </div>
-                    <div class="card ">
-                        <div class="card-header">
-                            Câu hỏi
-                        </div>
 
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4" style="max-width: 90px;">
-                                    <img src="~/assets/images/team2.jpg" class="img-fluid rounded-start" alt="placeholder image">
-                                </div>
-                                <div class="col-md-10">
-                                    <h5 class="card-title">@Model.Noidung</h5>
-                                    <figcaption class="blockquote-footer">
-                                        @Model.Thoigian <strong>by</strong><cite title="Source Title">
-                                        @if(Model.Andanh == true)
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4" style="max-width: 90px;">
+                                <img src="~/assets/images/team2.jpg" class="img-fluid rounded-start" alt="placeholder image">
+                            </div>
+                            <div class="col-md-10">
+                                <h5 class="card-title">@Model.Noidung</h5>
+                                <figcaption class="blockquote-footer">
+                                    @Model.Thoigian <strong>by</strong><cite title="Source Title">
+                                        @if (Model.Andanh == true)
                                         {
                                             @Model.Email
                                         }
-                                        else {
-                                           <label>Ẩn danh</label> 
-                                        }</cite>
-                                    </figcaption>
-                                </div>
+                                        else
+                                        {
+                                            <label>Ẩn danh</label>
+                                        }
+                                    </cite>
+                                </figcaption>
                             </div>
                         </div>
                     </div>
+                </div>
                     <div class="col-md-9.5 offset-md-1" style="padding-top: 10px">
                         <form method="post" action='@Url.Action("Reply", "Xemcauhoi")'>
                             <div class="card border-info mb-3">
@@ -54,7 +56,17 @@
                             </div>
                         </form>
                     </div>
-                </div>
             </div>
+        </div>
     </div>
 </main>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+                window.location = "/Home/Index";
+            };
+    </script>
+}
