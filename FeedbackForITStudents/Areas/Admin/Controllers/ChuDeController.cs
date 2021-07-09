@@ -9,25 +9,30 @@ using WebCanteen.Areas.Admin.Middleware;
 namespace FeedbackForITStudents.Areas.Admin.Controllers
 {
     [LoginVerification]
-    public class AdminHomeController : Controller
+    public class ChuDeController : Controller
     {
         SEP24Team12Entities model = new SEP24Team12Entities();
-        // GET: Admin/Admin
+        // GET: Admin/ChuDe
         public ActionResult Index()
         {
-            var cauhoi = model.CAUHOIDADUYETs.ToList();
-            var traloi = model.TRALOIs.OrderByDescending(t => t.MaCTL);
-            return View(traloi);
+            var chude = model.CHUDEs.ToList();
+            return View(chude);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            ViewBag.Action = "Index";
+            ViewBag.Controller = "ChuDe";
+            return View();
         }
 
         [HttpPost]
-        public ActionResult Like(int id)
+        public ActionResult Create(CHUDE c)
         {
-            TRALOI updateTim = model.TRALOIs.FirstOrDefault(u => u.MaCTL == id);
-            if (Request["like"] != null)
-            {
-                updateTim.Luottim++;
-            }
+            var chude = new CHUDE();
+            chude.TenCD = c.TenCD;
+            model.CHUDEs.Add(chude);
             model.SaveChanges();
             return RedirectToAction("Index");
         }

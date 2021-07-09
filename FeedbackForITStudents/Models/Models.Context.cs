@@ -32,6 +32,7 @@ namespace FeedbackForITStudents.Models
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<CAUHOI> CAUHOIs { get; set; }
         public virtual DbSet<CAUHOIDADUYET> CAUHOIDADUYETs { get; set; }
+        public virtual DbSet<CHUDE> CHUDEs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TAIKHOAN> TAIKHOANs { get; set; }
         public virtual DbSet<TAIKHOANSV> TAIKHOANSVs { get; set; }

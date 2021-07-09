@@ -15,7 +15,7 @@
         <div class="col-lg-12">
             <div class="grid">
                 <div class="text-center mb-sm-5 mb-4">
-                    <h3 class="title-big">Danh sách câu hỏi</h3>
+                    <h3 class="title-big">Danh sách câu hỏi chờ trả lời</h3>
                 </div>
                 <div class="item-wrapper">
                     <div class="table-responsive">
@@ -34,9 +34,9 @@
                                     <th>
                                         Tài khoản SV
                                     </th>
-                                    @*<th>
-                                            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-                                        </th>*@
+                                    <th>
+                                        Chủ đề
+                                    </th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -46,47 +46,50 @@
                                 {
                                     if (item.Rep == false)
                                     {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Noidung)
-                                            </td>
-                                            @*<td>
-                                                    @Html.DisplayFor(modelItem => item.Andanh)
-                                                </td>*@
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Thoigian)
-                                            </td>
-                                            <td>
-                                                @if (item.Andanh == true)
-                                                {
-                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-                                                }
-                                                else
-                                                {
-                                                    <label>Ẩn danh</label>
-                                                }
-                                            </td>
-                                            <td class="col-lg-2">
-                                                @*<input type="submit" value="Xóa" class="btn btn-danger" name="delete"
-        onclick="return confirm('Bạn có chắc chắn muốn xóa câu hỏi này?')" />*@
-                                                <form action="@Url.Action("Reply", "XemCauHoi", new { id = item.MaCHD })">
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Noidung)
+                                    </td>
+                                    @*<td>
+            @Html.DisplayFor(modelItem => item.Andanh)
+        </td>*@
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Thoigian)
+                                    </td>
+                                    <td>
+                                        @if (item.Andanh == true)
+                                        {
+                                            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                        }
+                                        else
+                                        {
+                                            <label>Ẩn danh</label>
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CHUDE.TenCD)
+                                    </td>
+                                    <td class="col-lg-2">
+                                        @*<input type="submit" value="Xóa" class="btn btn-danger" name="delete"
+            onclick="return confirm('Bạn có chắc chắn muốn xóa câu hỏi này?')" />*@
+                                        <form action="@Url.Action("Reply", "XemCauHoi", new { id = item.MaCHD })">
 
-                                                    <button type="submit" value="Trả lời" class="btn btn-outline-info">Trả lời</button>
-                                                </form>
+                                            <button type="submit" value="Trả lời" class="btn btn-outline-info">Trả lời</button>
+                                        </form>
 
 
-                                            </td>
-                                            <td>
-                                                @if (item.pin == true)
-                                                {
-                                                    <i class="fa fa-thumb-tack icon-color" aria-hidden="true"></i>
-                                                }
-                                                else
-                                                {
+                                    </td>
+                                    <td>
+                                        @if (item.pin == true)
+                                        {
+                                            <i class="fa fa-thumb-tack icon-color" aria-hidden="true"></i>
+                                        }
+                                        else
+                                        {
 
-                                                }
-                                            </td>
-                                        </tr>
+                                        }
+                                    </td>
+                                </tr>
                                     }
                                     else
                                     {

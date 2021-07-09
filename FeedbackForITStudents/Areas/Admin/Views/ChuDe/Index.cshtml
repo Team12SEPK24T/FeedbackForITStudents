@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FeedbackForITStudents.Models.CHUDE>
+
+@{
+    ViewBag.Title = "Chủ đề";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main style="padding-top: 150px">
+        <div class="container">
+            <div class="col-lg-6 offset-md-3 ">
+                <div class="grid">
+                    <div class="text-center mb-sm-5 mb-4">
+                        <h3 class="title-big">Danh sách chủ đề</h3>
+                    </div>
+                    <a href="@Url.Action("Create", "ChuDe")" style="float: right; margin-right: 40px; padding-bottom: 20px">
+                        <button type="button" class="btn btn-primary">Thêm chủ đề</button>
+                    </a>
+
+                    <div class="item-wrapper">
+                        <div class="table-responsive">
+                            <table class="table" id="cate-table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Tên chủ đề
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.TenCD.Trim()
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</main>
