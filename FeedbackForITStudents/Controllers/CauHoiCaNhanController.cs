@@ -12,14 +12,20 @@ namespace FeedbackForITStudents.Controllers
     public class CauHoiCaNhanController : Controller
     {
         SEP24Team12Entities model = new SEP24Team12Entities();
-        // GET: CauHoiCaNhan
-        //private List<TRALOI> getTraLoi()
-        //{
-        //    var listTraloi = model.TRALOIs;
-        //    //var listIdFood = getIdFoodInTodayMenu();
-        //}
+        [HttpGet]
         public ActionResult Index()
         {
+            var userIdentity = User.Identity.GetUserId();
+            var allCauhoi = model.CAUHOIDADUYETs.ToList();
+            foreach (var item in allCauhoi)
+            {
+                if(userIdentity == item.MaTKAsp)
+                {
+                    var cauhoi = model.TRALOIs.Where(c => c.CAUHOIDADUYET.MaTKAsp == userIdentity).ToList();
+                    var canhand = cauhoi.OrderByDescending(d => d.MaCTL);
+                    return View(canhand);
+                }
+            }
             return View();
         }
     }

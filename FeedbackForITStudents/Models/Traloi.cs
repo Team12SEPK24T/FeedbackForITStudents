@@ -14,6 +14,12 @@ namespace FeedbackForITStudents.Models
     
     public partial class TRALOI
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TRALOI()
+        {
+            this.THONGBAOs = new HashSet<THONGBAO>();
+        }
+    
         public int MaCTL { get; set; }
         public string Noidungtraloi { get; set; }
         public System.DateTime Thoigian { get; set; }
@@ -23,5 +29,7 @@ namespace FeedbackForITStudents.Models
     
         public virtual CAUHOIDADUYET CAUHOIDADUYET { get; set; }
         public virtual TAIKHOAN TAIKHOAN { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<THONGBAO> THONGBAOs { get; set; }
     }
 }

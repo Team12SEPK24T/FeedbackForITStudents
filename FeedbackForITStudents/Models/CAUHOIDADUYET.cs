@@ -17,6 +17,7 @@ namespace FeedbackForITStudents.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CAUHOIDADUYET()
         {
+            this.THONGBAOs = new HashSet<THONGBAO>();
             this.TRALOIs = new HashSet<TRALOI>();
         }
     
@@ -32,6 +33,8 @@ namespace FeedbackForITStudents.Models
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual CHUDE CHUDE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<THONGBAO> THONGBAOs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRALOI> TRALOIs { get; set; }
     }

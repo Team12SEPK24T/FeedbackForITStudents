@@ -136,8 +136,11 @@
           <Key>
             <PropertyRef Name="MaTB" />
           </Key>
-          <Property Name="MaTB" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="thoigian" Type="date" />
+          <Property Name="MaTB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaCHD" Type="int" Nullable="false" />
+          <Property Name="MaCTL" Type="int" Nullable="false" />
+          <Property Name="Thoigian" Type="datetime" Nullable="false" />
+          <Property Name="NoidungTB" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="TRALOI">
           <Key>
@@ -194,6 +197,30 @@
             </Principal>
             <Dependent Role="CAUHOIDADUYET">
               <PropertyRef Name="MaCD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__THONGBAO__MaCHD__0880433F">
+          <End Role="CAUHOIDADUYET" Type="Self.CAUHOIDADUYET" Multiplicity="1" />
+          <End Role="THONGBAO" Type="Self.THONGBAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUHOIDADUYET">
+              <PropertyRef Name="MaCHD" />
+            </Principal>
+            <Dependent Role="THONGBAO">
+              <PropertyRef Name="MaCHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__THONGBAO__MaCTL__09746778">
+          <End Role="TRALOI" Type="Self.TRALOI" Multiplicity="1" />
+          <End Role="THONGBAO" Type="Self.THONGBAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRALOI">
+              <PropertyRef Name="MaCTL" />
+            </Principal>
+            <Dependent Role="THONGBAO">
+              <PropertyRef Name="MaCTL" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -341,6 +368,14 @@
             <End Role="CHUDE" EntitySet="CHUDE" />
             <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYET" />
           </AssociationSet>
+          <AssociationSet Name="FK__THONGBAO__MaCHD__0880433F" Association="Self.FK__THONGBAO__MaCHD__0880433F">
+            <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYET" />
+            <End Role="THONGBAO" EntitySet="THONGBAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__THONGBAO__MaCTL__09746778" Association="Self.FK__THONGBAO__MaCTL__09746778">
+            <End Role="TRALOI" EntitySet="TRALOI" />
+            <End Role="THONGBAO" EntitySet="THONGBAO" />
+          </AssociationSet>
           <AssociationSet Name="FK__TRALOI__MaTK__0B91BA14" Association="Self.FK__TRALOI__MaTK__0B91BA14">
             <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
             <End Role="TRALOI" EntitySet="TRALOI" />
@@ -421,6 +456,10 @@
             <End Role="CHUDE" EntitySet="CHUDEs" />
             <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYETs" />
           </AssociationSet>
+          <AssociationSet Name="FK__THONGBAO__MaCHD__0880433F" Association="SEP24Team12Model.FK__THONGBAO__MaCHD__0880433F">
+            <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYETs" />
+            <End Role="THONGBAO" EntitySet="THONGBAOs" />
+          </AssociationSet>
           <AssociationSet Name="FK_Traloi_CHD" Association="SEP24Team12Model.FK_Traloi_CHD">
             <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYETs" />
             <End Role="TRALOI" EntitySet="TRALOIs" />
@@ -436,6 +475,10 @@
           <AssociationSet Name="FK_SVTRANGCHU" Association="SEP24Team12Model.FK_SVTRANGCHU">
             <End Role="TAIKHOANSV" EntitySet="TAIKHOANSVs" />
             <End Role="TRANGCHU" EntitySet="TRANGCHUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__THONGBAO__MaCTL__09746778" Association="SEP24Team12Model.FK__THONGBAO__MaCTL__09746778">
+            <End Role="TRALOI" EntitySet="TRALOIs" />
+            <End Role="THONGBAO" EntitySet="THONGBAOs" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="SEP24Team12Model.AspNetUserRoles">
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
@@ -533,6 +576,7 @@
           <Property Name="MaCD" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team12Model.FK__CAUHOIDAD__MaTKA__3C34F16F" FromRole="CAUHOIDADUYET" ToRole="AspNetUser" />
           <NavigationProperty Name="CHUDE" Relationship="SEP24Team12Model.FK__CAUHOIDADU__MaCD__76619304" FromRole="CAUHOIDADUYET" ToRole="CHUDE" />
+          <NavigationProperty Name="THONGBAOs" Relationship="SEP24Team12Model.FK__THONGBAO__MaCHD__0880433F" FromRole="CAUHOIDADUYET" ToRole="THONGBAO" />
           <NavigationProperty Name="TRALOIs" Relationship="SEP24Team12Model.FK_Traloi_CHD" FromRole="CAUHOIDADUYET" ToRole="TRALOI" />
         </EntityType>
         <EntityType Name="CHUDE">
@@ -583,8 +627,13 @@
           <Key>
             <PropertyRef Name="MaTB" />
           </Key>
-          <Property Name="MaTB" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="thoigian" Type="DateTime" Precision="0" />
+          <Property Name="MaTB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaCHD" Type="Int32" Nullable="false" />
+          <Property Name="MaCTL" Type="Int32" Nullable="false" />
+          <Property Name="Thoigian" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NoidungTB" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CAUHOIDADUYET" Relationship="SEP24Team12Model.FK__THONGBAO__MaCHD__0880433F" FromRole="THONGBAO" ToRole="CAUHOIDADUYET" />
+          <NavigationProperty Name="TRALOI" Relationship="SEP24Team12Model.FK__THONGBAO__MaCTL__09746778" FromRole="THONGBAO" ToRole="TRALOI" />
         </EntityType>
         <EntityType Name="TRALOI">
           <Key>
@@ -598,6 +647,7 @@
           <Property Name="MaCHD" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CAUHOIDADUYET" Relationship="SEP24Team12Model.FK_Traloi_CHD" FromRole="TRALOI" ToRole="CAUHOIDADUYET" />
           <NavigationProperty Name="TAIKHOAN" Relationship="SEP24Team12Model.FK__TRALOI__MaTK__0B91BA14" FromRole="TRALOI" ToRole="TAIKHOAN" />
+          <NavigationProperty Name="THONGBAOs" Relationship="SEP24Team12Model.FK__THONGBAO__MaCTL__09746778" FromRole="TRALOI" ToRole="THONGBAO" />
         </EntityType>
         <EntityType Name="TRANGCHU">
           <Key>
@@ -688,6 +738,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__THONGBAO__MaCHD__0880433F">
+          <End Type="SEP24Team12Model.CAUHOIDADUYET" Role="CAUHOIDADUYET" Multiplicity="1" />
+          <End Type="SEP24Team12Model.THONGBAO" Role="THONGBAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUHOIDADUYET">
+              <PropertyRef Name="MaCHD" />
+            </Principal>
+            <Dependent Role="THONGBAO">
+              <PropertyRef Name="MaCHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Traloi_CHD">
           <End Type="SEP24Team12Model.CAUHOIDADUYET" Role="CAUHOIDADUYET" Multiplicity="1" />
           <End Type="SEP24Team12Model.TRALOI" Role="TRALOI" Multiplicity="*" />
@@ -733,6 +795,18 @@
             </Principal>
             <Dependent Role="TRANGCHU">
               <PropertyRef Name="EMAIL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__THONGBAO__MaCTL__09746778">
+          <End Type="SEP24Team12Model.TRALOI" Role="TRALOI" Multiplicity="1" />
+          <End Type="SEP24Team12Model.THONGBAO" Role="THONGBAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRALOI">
+              <PropertyRef Name="MaCTL" />
+            </Principal>
+            <Dependent Role="THONGBAO">
+              <PropertyRef Name="MaCTL" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -876,7 +950,10 @@
           <EntitySetMapping Name="THONGBAOs">
             <EntityTypeMapping TypeName="SEP24Team12Model.THONGBAO">
               <MappingFragment StoreEntitySet="THONGBAO">
-                <ScalarProperty Name="thoigian" ColumnName="thoigian" />
+                <ScalarProperty Name="NoidungTB" ColumnName="NoidungTB" />
+                <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
+                <ScalarProperty Name="MaCTL" ColumnName="MaCTL" />
+                <ScalarProperty Name="MaCHD" ColumnName="MaCHD" />
                 <ScalarProperty Name="MaTB" ColumnName="MaTB" />
               </MappingFragment>
             </EntityTypeMapping>

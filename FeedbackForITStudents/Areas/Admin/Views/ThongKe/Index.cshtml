@@ -1,0 +1,54 @@
+﻿@model IEnumerable<FeedbackForITStudents.Models.CHUDE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main style="padding-top: 150px">
+    <div class="container">
+        <div class="col-lg-6 offset-md-3 ">
+            <div class="grid">
+                <div class="text-center mb-sm-5 mb-4">
+                    <h3 class="title-big">Thống kê số lượng câu hỏi</h3>
+                </div>
+                <div class="item-wrapper">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="cate-table">
+                            <thead class="thead-light" style="font-family: Arial">
+                                <tr>
+                                    <th>
+                                        Tên chủ đề
+                                    </th>
+                                    <th>
+                                        Số lượng
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr style="color:black">
+                                        <td>
+                                            @item.TenCD.Trim()
+                                        </td>
+                                        <td style="color:black">
+                                            @item.CAUHOIDADUYETs.Count(a => a.MaCD == item.MaCD)
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="font-weight-bold" style="font-family: Arial,Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">
+                    Tổng số câu hỏi: @Model.Sum(i => i.CAUHOIDADUYETs.Count())
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>

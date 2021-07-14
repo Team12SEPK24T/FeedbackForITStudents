@@ -53,7 +53,7 @@ namespace FeedbackForITStudents.Controllers
                         var cauhoi = new CAUHOI();
                         cauhoi.Noidung = c.Noidung;
                         cauhoi.Andanh = c.Andanh;
-                        cauhoi.Thoigian = DateTime.Today;
+                        cauhoi.Thoigian = DateTime.Today.Date;
                         cauhoi.Email = HttpContext.User.Identity.GetUserName();
                         cauhoi.MaTKAsp = HttpContext.User.Identity.GetUserId();
                         cauhoi.MaCD = c.MaCD;

@@ -54,7 +54,7 @@ Author URL: http://w3layouts.com
                             </li>*@
                         <li class="nav-item">
                             @*<a href="@Url.Action("Index", "CauHoiCaNhan", new {id = User.Identity.GetUserName()})">*@
-                            <a class="nav-link" href="@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "CauHoiCaNhan")</a>
+                            <a class="nav-link" href="@Url.Action("Index", "CauHoiCaNhan")">Hello! @User.Identity.GetUserName()</a>
                         </li>
                         <!-- search button -->
                         <!-- //search button -->

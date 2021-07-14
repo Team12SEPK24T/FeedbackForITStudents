@@ -54,7 +54,7 @@
                                     <div class="col-md-10">
                                         <h5 class="card-title">@item.CAUHOIDADUYET.Noidung</h5>
                                         <figcaption class="blockquote-footer">
-                                            @item.CAUHOIDADUYET.Thoigian<strong> by </strong><cite title="Source Title">
+                                            @item.CAUHOIDADUYET.Thoigian.ToShortDateString()<strong> by </strong><cite title="Source Title">
                                                 @if (item.CAUHOIDADUYET.Andanh == true)
                                                 {
                                                     @item.CAUHOIDADUYET.Email
@@ -78,7 +78,7 @@
                                             <div class="col-md-10">
                                                 <h5 class="card-title" style="color:gray">@item.Noidungtraloi</h5>
                                                 <figcaption class="blockquote-footer">
-                                                    @item.Thoigian<strong> by </strong><cite title="Source Title">
+                                                    @item.Thoigian.ToShortDateString()<strong> by </strong><cite title="Source Title">
                                                         BCN Khoa
                                                     </cite>
                                                 </figcaption>

@@ -1,7 +1,9 @@
 ﻿    using FeedbackForITStudents.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebCanteen.Areas.Admin.Middleware;
@@ -13,19 +15,38 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
     {
         // GET: Admin/XemCauHoi
         SEP24Team12Entities model = new SEP24Team12Entities();
-        public ActionResult Index()
+        [HttpGet]
+        public async Task<ActionResult> Index(int? id)
         {
             var cauhoid = model.CAUHOIDADUYETs.OrderByDescending(c => c.pin == true);
+            ViewBag.ChuDe = new SelectList(model.CHUDEs, "MaCD", "TenCD");
+            var chude = model.CHUDEs.ToList();
+                if (id != null)
+                {
+                    return View(await model.CAUHOIDADUYETs.Where(x => x.MaCD == id).ToListAsync());
+                }
             return View(cauhoid);
         }
-        [HttpGet]
-        public ActionResult Reply(int id)
+
+        private List<CAUHOIDADUYET> GetCAUHOIs()
         {
-            CAUHOIDADUYET cauhoi = model.CAUHOIDADUYETs.FirstOrDefault(a => a.MaCHD == id);
-            ViewBag.Action = "Index";
-            ViewBag.Controller = "XemCauHoi";
-            return View(cauhoi);
+            var listQs = model.CAUHOIDADUYETs.OrderBy(f => f.MaCHD).ToList();
+            return listQs;
         }
+        [HttpGet]
+        public ActionResult Filter(int? id)
+        {
+            var locCauHoi = model.CAUHOIDADUYETs.Where(f => f.MaCD == id).ToList();
+            return View(locCauHoi);
+        }
+        //[HttpGet]
+        //public ActionResult Reply(int id)
+        //{
+        //    CAUHOIDADUYET cauhoi = model.CAUHOIDADUYETs.FirstOrDefault(a => a.MaCHD == id);
+        //    ViewBag.Action = "Index";
+        //    ViewBag.Controller = "XemCauHoi";
+        //    return View(cauhoi);
+        //}
         [HttpPost]
         public ActionResult Reply(int id, TRALOI reply)
         {

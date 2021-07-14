@@ -5,68 +5,75 @@
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
 }
 
-<div class="row">
-    @foreach (var question in Model)
-    {
-        <div class="media-grid">
-            <div class="media">
-                <a class="comment-img" href="#url"><img src="assets/images/team2.jpg" class="img-responsive" width="100px" alt="placeholder image"></a>
-                <div class="media-body comments-grid-right">
-                    <h5>@question.CAUHOI.Email</h5>
-                    <ul class="p-0 comment">
-                        <li class="">@question.CAUHOI.Thoigian</li>
-                        <li>
-                            <a href="#comment"><i class="fa fa-reply mr-1" aria-hidden="true"></i>Reply</a>
-                        </li>
-                    </ul>
-                    <p>
-                        @question.CAUHOI.Noidung
-                    </p>
-                    <div class="media mt-5 mb-0 px-0 pb-0 media-sub">
-                        <a class="comment-img" href="#url"><img src="assets/images/team3.jpg" class="img-responsive" width="100px" alt="placeholder image"></a>
-                        <div class="media-body comments-grid-right">
-                            <h5>@question.TAIKHOAN.Hoten</h5>
-                            <ul class="p-0 comment">
-                                <li class="">@question.Thoigian</li>
-                                <li>
-                                    <a href="#comment"><i class="fa fa-reply mr-1" aria-hidden="true"></i>Reply</a>
-                                </li>
-                            </ul>
-                            <p>
-                                @question.Noidungtraloi
-                            </p>
+<div class="inner-banner">
+    <section class="w3l-breadcrumb">
+        <div class="container">
+            <h1 class="inner-text-title font-weight-bold mb-2">Câu hỏi cá nhân</h1>
+        </div>
+    </section>
+</div>
+<section class="w3l-blog-sec pt-5">
+    <div class="services-layout py-md-4 py-3">
+        <div class="container">
+            @foreach (var item in Model)
+            {
+                using (Html.BeginForm("Index", "CauHoiCaNhan", FormMethod.Get))
+                {
+                    <div class="col-lg-9 text11-content m-auto" style="padding-top: 20px">
+                        <div class="card border-info mb-3 ">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4" style="max-width: 90px;">
+                                        <img src="~/assets/images/student.jpg" class="img-fluid rounded-start" alt="placeholder image">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h5 class="card-title">@item.CAUHOIDADUYET.Noidung</h5>
+                                        <figcaption class="blockquote-footer">
+                                            @item.CAUHOIDADUYET.Thoigian.ToShortDateString()<strong> by </strong><cite title="Source Title">
+                                                @if (item.CAUHOIDADUYET.Andanh == true)
+                                                {
+                                                    @item.CAUHOIDADUYET.Email
+                                                }
+                                                else
+                                                {
+                                                    <label>Ẩn danh</label>
+                                                }
+                                            </cite>
+                                        </figcaption>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9.5 offset-md-2">
+                                <div class="">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4" style="max-width: 90px;">
+                                                <img src="~/assets/images/teacher.jpg" class="img-fluid rounded-start" alt="placeholder image">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h5 class="card-title" style="color:gray">@item.Noidungtraloi</h5>
+                                                <figcaption class="blockquote-footer">
+                                                    @item.Thoigian.ToShortDateString()<strong> by </strong><cite title="Source Title">
+                                                        BCN Khoa
+                                                    </cite>
+                                                </figcaption>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="col-md-5" style="padding-bottom: 10px" id="PartialView">
+
+                                <button id="likea" name="like" type="submit" class="btn btn-outline-danger">
+                                    <i class="fa fa-heart" aria-hidden="true"></i>                             <lable style="">@item.Luottim</lable>
+                                </button>
+                                @*<button name="unlike" type="submit" class="btn btn-danger"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></button>*@
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                }
+            }
         </div>
-        @*<div class="col-md-4 d-flex">
-                <div class="product ftco-animate fadeInUp ftco-animated">
-                    <div class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                        <a href="@Url.Action("Details", "Food", new { id = food.ID })" class=" stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                            <img src="@Url.Content("~"+food.IMAGE_URL)" class="img-fluid" alt="@food.FOOD_NAME">
-                        </a>
-                    </div>
-                    <div class="text text-center">
-                        <span>
-                            @if (food.STATUS)
-                            {
-                                <label class="new">Còn bán</label>
-                            }
-                            else
-                            {
-                                <label class="sale">Hết bán</label>
-                            }
-                        </span>
-                        <span class="category">@food.CATEGORY.CATEGORY_NAME</span>
-                        <a href="@Url.Action("Details", "Food", new { id = food.ID })">
-                            <h2>@food.FOOD_NAME</h2>
-                        </a>
-                        <p class="mb-0"><span class="price">@food.PRICE.ToString("N0")</span> VNĐ</p>
-                    </div>
-                </div>
-            </div>*@
-    }
-</div>
-
+    </div>
+</section>

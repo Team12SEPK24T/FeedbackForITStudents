@@ -24,7 +24,7 @@
                             <div class="col-md-10">
                                 <h5 class="card-title">@Model.Noidung</h5>
                                 <figcaption class="blockquote-footer">
-                                    @Model.Thoigian <strong>by</strong><cite title="Source Title">
+                                    @Model.Thoigian.ToShortDateString() <strong>by</strong><cite title="Source Title">
                                         @if (Model.Andanh == true)
                                         {
                                             @Model.Email

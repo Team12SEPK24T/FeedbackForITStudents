@@ -14,9 +14,26 @@
     <div class="container">
         <div class="col-lg-12">
             <div class="grid">
-                <div class="text-center mb-sm-5 mb-4">
+                <div class="text-center mb-sm-5 mb-4" style="padding-bottom: 10px">
                     <h3 class="title-big">Danh sách câu hỏi chờ trả lời</h3>
                 </div>
+                <div class="form-row align-items-center">
+                    <div class="row">
+                    <label>Chủ đề</label>
+                    @using (Html.BeginForm("Index", "XemCauHoi", FormMethod.Get, new { @id = "MaCD"}))
+                    {
+                        <div class="col-11">
+
+                            @Html.DropDownList("MaCD", ViewBag.ChuDe as SelectList, null, new { onchange = "submit();" })
+                        </div>
+
+                        @*<div class="col-lg-2" style="padding-top: 15px">
+                            <input type="submit" class="btn btn-outline-primary" value="Lọc" />
+                        </div>*@
+                    }
+                        </div>
+                </div>
+
                 <div class="item-wrapper">
                     <div class="table-responsive">
                         <table class="table" id="cauhoi-table">
@@ -26,8 +43,8 @@
                                         Nội dung câu hỏi
                                     </th>
                                     @*<th>
-                                            Html.DisplayNameFor(model => model.Andanh)
-                                        </th>*@
+                                Html.DisplayNameFor(model => model.Andanh)
+                            </th>*@
                                     <th>
                                         Thời gian
                                     </th>
@@ -46,63 +63,63 @@
                                 {
                                     if (item.Rep == false)
                                     {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Noidung)
-                                    </td>
-                                    @*<td>
-            @Html.DisplayFor(modelItem => item.Andanh)
-        </td>*@
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Thoigian)
-                                    </td>
-                                    <td>
-                                        @if (item.Andanh == true)
-                                        {
-                                            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-                                        }
-                                        else
-                                        {
-                                            <label>Ẩn danh</label>
-                                        }
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.CHUDE.TenCD)
-                                    </td>
-                                    <td class="col-lg-2">
-                                        @*<input type="submit" value="Xóa" class="btn btn-danger" name="delete"
-            onclick="return confirm('Bạn có chắc chắn muốn xóa câu hỏi này?')" />*@
-                                        <form action="@Url.Action("Reply", "XemCauHoi", new { id = item.MaCHD })">
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Noidung)
+                                            </td>
+                                            @*<td>
+                                        @Html.DisplayFor(modelItem => item.Andanh)
+                                    </td>*@
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Thoigian)
+                                            </td>
+                                            <td>
+                                                @if (item.Andanh == true)
+                                                {
+                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                                }
+                                                else
+                                                {
+                                                    <label>Ẩn danh</label>
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CHUDE.TenCD)
+                                            </td>
+                                            <td class="col-lg-2">
+                                                @*<input type="submit" value="Xóa" class="btn btn-danger" name="delete"
+                                        onclick="return confirm('Bạn có chắc chắn muốn xóa câu hỏi này?')" />*@
+                                                <form action="@Url.Action("Reply", "XemCauHoi", new { id = item.MaCHD })">
 
-                                            <button type="submit" value="Trả lời" class="btn btn-outline-info">Trả lời</button>
-                                        </form>
+                                                    <button type="submit" value="Trả lời" class="btn btn-outline-info">Trả lời</button>
+                                                </form>
 
 
-                                    </td>
-                                    <td>
-                                        @if (item.pin == true)
-                                        {
-                                            <i class="fa fa-thumb-tack icon-color" aria-hidden="true"></i>
-                                        }
-                                        else
-                                        {
+                                            </td>
+                                            <td>
+                                                @if (item.pin == true)
+                                                {
+                                                    <i class="fa fa-thumb-tack icon-color" aria-hidden="true"></i>
+                                                }
+                                                else
+                                                {
 
-                                        }
-                                    </td>
-                                </tr>
+                                                }
+                                            </td>
+                                        </tr>
                                     }
                                     else
                                     {
                                     }
-                                    }
+                                }
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
 </main>
-}
+
 <script>
 $(document).on("click", "[type='checkbox']", function(e) {
         if (this.checked) {

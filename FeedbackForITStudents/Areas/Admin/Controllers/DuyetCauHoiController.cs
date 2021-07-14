@@ -35,6 +35,8 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
                 CAUHOI cauhoi = model.CAUHOIs.Find(id);
                 var cauhoid = new CAUHOIDADUYET { Noidung = cauhoi.Noidung, Andanh = cauhoi.Andanh, Thoigian = cauhoi.Thoigian, Email = cauhoi.Email, MaTKAsp = cauhoi.MaTKAsp};
                 cauhoid.pin = d.pin;
+                cauhoid.Rep = false;
+                cauhoid.MaCD = cauhoi.MaCD;
                 model.CAUHOIDADUYETs.Add(cauhoid);
                 model.CAUHOIs.Remove(cauhoi);
                 model.SaveChanges();

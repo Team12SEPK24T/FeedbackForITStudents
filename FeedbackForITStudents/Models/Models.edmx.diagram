@@ -4,31 +4,33 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4bdc5a750de445528db9528f552af62b" Name="Diagram1" ZoomLevel="53">
-        <EntityTypeShape EntityType="SEP24Team12Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SEP24Team12Model.AspNetRole" Width="1.5" PointX="0.75" PointY="6.75" />
+      <Diagram DiagramId="4bdc5a750de445528db9528f552af62b" Name="Diagram1" ZoomLevel="78">
+        <EntityTypeShape EntityType="SEP24Team12Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="SEP24Team12Model.AspNetRole" Width="1.5" PointX="0.75" PointY="9.125" />
         <EntityTypeShape EntityType="SEP24Team12Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="15.625" />
-        <EntityTypeShape EntityType="SEP24Team12Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="5.375" />
-        <EntityTypeShape EntityType="SEP24Team12Model.AspNetUser" Width="1.5" PointX="3" PointY="5.5" />
-        <EntityTypeShape EntityType="SEP24Team12Model.CAUHOI" Width="1.5" PointX="8.25" PointY="6.125" />
-        <EntityTypeShape EntityType="SEP24Team12Model.CAUHOIDADUYET" Width="1.5" PointX="5.25" PointY="7.875" />
-        <EntityTypeShape EntityType="SEP24Team12Model.CHUDE" Width="1.5" PointX="6" PointY="2.75" />
-        <EntityTypeShape EntityType="SEP24Team12Model.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SEP24Team12Model.TAIKHOAN" Width="1.5" PointX="5.25" PointY="12.25" />
-        <EntityTypeShape EntityType="SEP24Team12Model.TAIKHOANSV" Width="1.5" PointX="5.25" PointY="18.375" />
-        <EntityTypeShape EntityType="SEP24Team12Model.THONGBAO" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SEP24Team12Model.TRALOI" Width="1.5" PointX="7.5" PointY="10.25" />
-        <EntityTypeShape EntityType="SEP24Team12Model.TRANGCHU" Width="1.5" PointX="7.5" PointY="14.25" />
+        <EntityTypeShape EntityType="SEP24Team12Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="18.375" />
+        <EntityTypeShape EntityType="SEP24Team12Model.AspNetUser" Width="1.5" PointX="3" PointY="7.75" />
+        <EntityTypeShape EntityType="SEP24Team12Model.CAUHOI" Width="1.5" PointX="5.25" PointY="8.5" />
+        <EntityTypeShape EntityType="SEP24Team12Model.CAUHOIDADUYET" Width="1.5" PointX="8.25" PointY="8.125" />
+        <EntityTypeShape EntityType="SEP24Team12Model.CHUDE" Width="1.5" PointX="6" PointY="5" />
+        <EntityTypeShape EntityType="SEP24Team12Model.sysdiagram" Width="1.5" PointX="2.75" PointY="1.75" />
+        <EntityTypeShape EntityType="SEP24Team12Model.TAIKHOAN" Width="1.5" PointX="8.25" PointY="4.625" />
+        <EntityTypeShape EntityType="SEP24Team12Model.TAIKHOANSV" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="SEP24Team12Model.THONGBAO" Width="1.5" PointX="12.75" PointY="8.75" />
+        <EntityTypeShape EntityType="SEP24Team12Model.TRALOI" Width="1.5" PointX="10.5" PointY="8.5" />
+        <EntityTypeShape EntityType="SEP24Team12Model.TRANGCHU" Width="1.5" PointX="10.5" PointY="4.625" />
         <AssociationConnector Association="SEP24Team12Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="SEP24Team12Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="SEP24Team12Model.FK__CAUHOIDAD__MaTKA__3C34F16F" />
         <AssociationConnector Association="SEP24Team12Model.FK_AspNetUsers_CAUHOI" />
         <AssociationConnector Association="SEP24Team12Model.FK__CAUHOI__MaCD__756D6ECB" />
         <AssociationConnector Association="SEP24Team12Model.FK__CAUHOIDADU__MaCD__76619304" />
+        <AssociationConnector Association="SEP24Team12Model.FK__THONGBAO__MaCHD__0880433F" />
         <AssociationConnector Association="SEP24Team12Model.FK_Traloi_CHD" />
         <AssociationConnector Association="SEP24Team12Model.FK__TRALOI__MaTK__0B91BA14" />
         <AssociationConnector Association="SEP24Team12Model.FK_TRANGCHUTK" />
         <AssociationConnector Association="SEP24Team12Model.FK_SVTRANGCHU" />
+        <AssociationConnector Association="SEP24Team12Model.FK__THONGBAO__MaCTL__09746778" />
         <AssociationConnector Association="SEP24Team12Model.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
