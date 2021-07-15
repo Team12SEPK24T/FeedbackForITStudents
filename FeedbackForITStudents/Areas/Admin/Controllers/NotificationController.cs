@@ -15,9 +15,9 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
         private SEP24Team12Entities db = new SEP24Team12Entities();
 
         // GET: Admin/Notification
-        public ActionResult Index(int? id)
+        public ActionResult Index()
         {
-            var thongbao = db.THONGBAOs.ToList();
+            var thongbao = db.THONGBAOs.Include(t => t.CAUHOIDADUYET);
             return View(thongbao);
         }
 
