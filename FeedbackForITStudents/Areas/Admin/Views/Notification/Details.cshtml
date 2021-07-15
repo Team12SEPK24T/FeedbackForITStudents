@@ -1,0 +1,26 @@
+﻿@model FeedbackForITStudents.Models.THONGBAO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>THONGBAO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaCTL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaCTL)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Notification", "Details", new { id = Model.MaTB }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

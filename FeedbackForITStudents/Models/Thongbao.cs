@@ -14,7 +14,13 @@ namespace FeedbackForITStudents.Models
     
     public partial class THONGBAO
     {
-        public string MaTB { get; set; }
-        public Nullable<System.DateTime> thoigian { get; set; }
+        public int MaTB { get; set; }
+        public int MaCHD { get; set; }
+        public int MaCTL { get; set; }
+        public System.DateTime Thoigian { get; set; }
+        public string NoidungTB { get; set; }
+    
+        public virtual CAUHOIDADUYET CAUHOIDADUYET { get; set; }
+        public virtual TRALOI TRALOI { get; set; }
     }
 }

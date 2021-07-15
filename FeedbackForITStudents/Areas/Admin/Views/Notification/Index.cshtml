@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FeedbackForITStudents.Models.THONGBAO>
+
+@{
+    ViewBag.Title = "Notification";
+    //Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>THÔNG BÁO</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CAUHOIDADUYET)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaCHD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thoigian)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CAUHOIDADUYET)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaCHD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Thoigian)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.MaTB }) |
+            @Html.ActionLink("Details", "Details", new { id = item.MaTB }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.MaTB })
+        </td>*@
+    </tr>
+}
+
+</table>
