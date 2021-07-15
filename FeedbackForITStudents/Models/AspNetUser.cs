@@ -19,7 +19,10 @@ namespace FeedbackForITStudents.Models
         {
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
+<<<<<<< HEAD
             this.CAUHOIDADUYETs = new HashSet<CAUHOIDADUYET>();
+=======
+>>>>>>> 982dbae828e5bbfd5b7a1263c29820a283cc5d13
             this.CAUHOIs = new HashSet<CAUHOI>();
             this.AspNetRoles = new HashSet<AspNetRole>();
         }
@@ -42,8 +45,11 @@ namespace FeedbackForITStudents.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+<<<<<<< HEAD
         public virtual ICollection<CAUHOIDADUYET> CAUHOIDADUYETs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+=======
+>>>>>>> 982dbae828e5bbfd5b7a1263c29820a283cc5d13
         public virtual ICollection<CAUHOI> CAUHOIs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }

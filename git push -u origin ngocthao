@@ -1,0 +1,106 @@
+[33mcommit f1137b9f8db08ba4d85eb7881672a9b3c7d05b74[m[33m ([m[1;36mHEAD[m[33m)[m
+Merge: ccd6539 982dbae
+Author: 187PM14011 - Mai Ngoc Thao - K24T-PM1 <thao.187pm14011@vanlanguni.vn>
+Date:   Thu Jul 15 22:58:55 2021 +0700
+
+    add
+
+[33mcommit ccd6539532b0497196c4ef3bcf32c2a491a0a0fd[m
+Author: 187PM14011 - Mai Ngoc Thao - K24T-PM1 <thao.187pm14011@vanlanguni.vn>
+Date:   Thu Jul 15 22:32:02 2021 +0700
+
+    add notification
+
+[33mcommit e6bacc7849cbd03837680691f872375ffb6b677c[m
+Author: 187PM14011 - Mai Ngoc Thao - K24T-PM1 <thao.187pm14011@vanlanguni.vn>
+Date:   Mon Jun 21 16:03:13 2021 +0700
+
+    edit acc
+
+[33mcommit 2b947e1074034cf11c3f97cf0156e9b72af88aa3[m
+Author: 187PM14011 - Mai Ngoc Thao - K24T-PM1 <thao.187pm14011@vanlanguni.vn>
+Date:   Wed Jun 16 14:41:28 2021 +0700
+
+    test ngocthao
+
+[33mcommit 6fa47afff52a0044c17378c6649627c29ec85255[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: PhuongXD <lanphuong2899@gmail.com>
+Date:   Wed Jun 30 20:26:36 2021 +0700
+
+    fix data
+
+[33mcommit 982dbae828e5bbfd5b7a1263c29820a283cc5d13[m[33m ([m[1;31morigin/ngocthao[m[33m)[m
+Author: PhuongXD <lanphuong2899@gmail.com>
+Date:   Thu Jun 24 07:44:23 2021 +0700
+
+    fix data
+
+[33mcommit de5d3bc08fef41bb6cda507621b5978421612c59[m
+Author: PhuongXD <lanphuong2899@gmail.com>
+Date:   Mon Jun 21 22:05:28 2021 +0700
+
+    fix update account
+
+[33mcommit b0dcaa0831fa14e60eea9696caf861a11d7c18c3[m
+Author: 187PM14011 - Mai Ngoc Thao - K24T-PM1 <thao.187pm14011@vanlanguni.vn>
+Date:   Mon Jun 21 16:03:13 2021 +0700
+
+    edit acc
+
+[33mcommit 3f6ae6764abd430995a5178ba841b9a30c22f7f5[m
+Merge: 288523b 9011ceb
+Author: 187PM14011 - Mai Ngoc Thao - K24T-PM1 <thao.187pm14011@vanlanguni.vn>
+Date:   Mon Jun 21 15:57:43 2021 +0700
+
+    edit account
+
+[33mcommit 288523bc5469dfe6a9b06653bd14bc6a100235c3[m
+Author: 187PM14011 - Mai Ngoc Thao - K24T-PM1 <thao.187pm14011@vanlanguni.vn>
+Date:   Wed Jun 16 14:41:28 2021 +0700
+
+    test ngocthao
+
+[33mcommit 9011cebb5e18738b6ad5a07c5803e27df045dd70[m[33m ([m[1;32mmaster[m[33m)[m
+Merge: d677ead a838302
+Author: PhuongXD <55739353+PhuongXD@users.noreply.github.com>
+Date:   Mon Jun 14 21:40:26 2021 +0700
+
+    Merge pull request #1 from Team12SEPK24T/lanphuong
+    
+    Lanphuong
+
+[33mcommit a8383021eca4b367e491b4ef502ff6e7a9f63f00[m
+Author: LanPhuong <phuong.187pm13997@vanlanguni.vn>
+Date:   Mon Jun 14 21:16:04 2021 +0700
+
+    Add database server, create account
+
+[33mcommit 05308bcaeb56beabe4dbffb185b47b289530a314[m
+Author: LanPhuong <phuong.187pm13997@vanlanguni.vn>
+Date:   Tue Jun 8 16:00:56 2021 +0700
+
+    unit test login admin
+
+[33mcommit d677ead310a8a91781a16005012278be83a982bb[m
+Author: LanPhuong <phuong.187pm13997@vanlanguni.vn>
+Date:   Mon Jun 7 22:44:28 2021 +0700
+
+    customerlayout
+
+[33mcommit 6adfa6f074ebb670d4b0bd51b572ef8a0edb62d9[m
+Author: LanPhuong <phuong.187pm13997@vanlanguni.vn>
+Date:   Mon Jun 7 22:25:53 2021 +0700
+
+    Login, Logout admin-customer
+
+[33mcommit 07e5e25b5c1f377f2324ade519943ba26d3fc644[m
+Author: LanPhuong <phuong.187pm13997@vanlanguni.vn>
+Date:   Sun Jun 6 22:57:26 2021 +0700
+
+    Add project files.
+
+[33mcommit 348797d977393ecb1708ed8e10a7ab2a0a77f022[m
+Author: LanPhuong <phuong.187pm13997@vanlanguni.vn>
+Date:   Sun Jun 6 22:57:23 2021 +0700
+
+    Add .gitignore and .gitattributes.

@@ -14,6 +14,7 @@ namespace FeedbackForITStudents.Models
     
     public partial class TRALOI
     {
+<<<<<<< HEAD
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TRALOI()
         {
@@ -26,10 +27,21 @@ namespace FeedbackForITStudents.Models
         public int MaTK { get; set; }
         public int Luottim { get; set; }
         public int MaCHD { get; set; }
+=======
+        public int MaCTL { get; set; }
+        public string Noidungtraloi { get; set; }
+        public int MaCH { get; set; }
+        public System.DateTime Thoigian { get; set; }
+        public int MaTK { get; set; }
+        public int Luottim { get; set; }
+>>>>>>> 982dbae828e5bbfd5b7a1263c29820a283cc5d13
     
         public virtual CAUHOIDADUYET CAUHOIDADUYET { get; set; }
         public virtual TAIKHOAN TAIKHOAN { get; set; }
+<<<<<<< HEAD
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<THONGBAO> THONGBAOs { get; set; }
+=======
+>>>>>>> 982dbae828e5bbfd5b7a1263c29820a283cc5d13
     }
 }

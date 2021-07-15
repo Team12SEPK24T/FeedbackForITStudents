@@ -202,12 +202,15 @@
     <Compile Include="Models\CAUHOI.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Models\CAUHOIDADUYET.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CHUDE.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+=======
+>>>>>>> 982dbae828e5bbfd5b7a1263c29820a283cc5d13
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>

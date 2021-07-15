@@ -14,16 +14,33 @@ namespace FeedbackForITStudents.Models
     
     public partial class CAUHOI
     {
+<<<<<<< HEAD
+=======
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CAUHOI()
+        {
+            this.TRALOIs = new HashSet<TRALOI>();
+        }
+    
+>>>>>>> 982dbae828e5bbfd5b7a1263c29820a283cc5d13
         public int MaCH { get; set; }
         public string Noidung { get; set; }
         public bool Andanh { get; set; }
         public System.DateTime Thoigian { get; set; }
         public string Email { get; set; }
         public string MaTKAsp { get; set; }
+<<<<<<< HEAD
         public bool pin { get; set; }
         public Nullable<int> MaCD { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual CHUDE CHUDE { get; set; }
+=======
+    
+        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual TAIKHOANSV TAIKHOANSV { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TRALOI> TRALOIs { get; set; }
+>>>>>>> 982dbae828e5bbfd5b7a1263c29820a283cc5d13
     }
 }

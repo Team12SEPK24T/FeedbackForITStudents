@@ -42,7 +42,7 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
+                                    <tr  onclick="window.open('@Url.Action("Edit","Account", new {id = item.MaTK})','_blank')" style="cursor: pointer">
                                         <td>
                                             @item.Email.Trim()
                                         </td>
@@ -65,30 +65,26 @@
                                             }
                                         </td>
                                         <td>
-                                            <form action="@Url.Action("Edit", "Account", new { id = item.MaTK })" style="display:inline" target="_blank">
-                                                    <button type="submit" class="btn action-btn btn-like btn-outline-danger btn-rounded"
-                                                            data-toggle="tooltip" data-placement="top"
-                                                            title="Cập nhật tài khoản">
-                                                        <i class="mdi mdi-lead-pencil"></i>
-                                                    </button>
-                                                </form>
-                                            @*@if (item.Trangthai)
+                                            @if (item.Trangthai)
                                             {
-                                                <button onclick="Deactive(this, @item.MaTK)" class="btn action-btn btn-outline-primary btn-rounded"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Ngưng hoạt động tài khoản">
-                                                    <i class="mdi mdi-account-off"></i>
-                                                </button>
+                                                
+                <button onclick="Deactive(this, @item.MaTK)" class="btn action-btn btn-outline-primary btn-rounded"
+                        data-toggle="tooltip" data-placement="top"
+                        title="Ngưng hoạt động tài khoản">
+                    <i class="mdi mdi-account-off"></i>
+                </button>
+            }
+            else
+            {
+                <button onclick="Active(this, @item.MaTK)" class="btn action-btn btn-outline-danger btn-rounded"
+                        data-toggle="tooltip" data-placement="top"
+                        title="Khởi động tài khoản">
+                    <i class="mdi mdi-account-plus"></i>
+                </button>
+            
                                             }
-                                            else
-                                            {
-                                                <button onclick="Active(this, @item.MaTK)" class="btn action-btn btn-outline-danger btn-rounded"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Khởi động tài khoản">
-                                                    <i class="mdi mdi-account-plus"></i>
-                                                </button>
-                                            }*@
-                                        </td>
+                                        </td>                                               
+                                      
                                     </tr>
                                 }
                             </tbody>
@@ -99,3 +95,69 @@
         </div>
     </div>
 </main>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        function Deactive(button, id) {
+            //Determine the reference of the Row using the Button.
+            var row = $(button).closest("TR");
+            var name = $("TD", row).eq(2).html();
+            if (confirm("Bạn có chắc chắn muốn ngưng hoạt động tài khoản " + name.trim() + "?")) {
+                //Send the JSON array to Controller using AJAX.
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Deactive", "Account")",
+                    data: JSON.stringify({ id: id }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r) {
+                        if (r.success) {
+                            alert("Ngưng hoạt động tài khoản thành công");
+                            window.location = r.url;
+                        } else {
+                            alert("Không thể ngưng hoạt động tài khoản của chính bạn");
+                        }
+                    }
+                });
+            }
+        };
+        function Active(button, id) {
+        //Determine the reference of the Row using the Button.
+        var row = $(button).closest("TR");
+        var name = $("TD", row).eq(2).html();
+        if (confirm("Bạn có chắc chắn muốn khởi động tài khoản " + name.trim() + "?")) {
+            //Send the JSON array to Controller using AJAX.
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Active", "Account")",
+                data: JSON.stringify({ id: id }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    if (r.success) {
+
+                        alert("Khởi động tài khoản thành công");
+                        window.location = r.url;
+                    } else {
+                    }
+                }
+            });
+        }
+    };
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#inlineFormInputGroup").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#cate-table tbody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+        $(document).ready(function () {
+            $(".form-add").css("height", (quote_height + 300) + "px");
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+}

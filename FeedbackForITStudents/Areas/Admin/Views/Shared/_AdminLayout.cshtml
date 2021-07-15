@@ -79,6 +79,7 @@ Author URL: http://w3layouts.com
                             </li>
                             @if (Session["user-role"] != null)
                             {
+<<<<<<< HEAD
                                 if ((int)Session["user-role"] <= 2)
                                 {
                                     <li class="nav-item">
@@ -148,6 +149,50 @@ Author URL: http://w3layouts.com
                                         </div><!-- media -->
                                     </div><!-- az-notification-list -->*@
                                     <div class="dropdown-footer"><a href="@Url.Action("Index", "Notification")">View All Notifications</a></div>
+=======
+                                <li class="nav-item">
+                                    <a class="nav-link" href="about.html">Xem Câu hỏi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="services.html">Duyệt câu hỏi</a>
+
+                                </li>
+                            }
+
+                            if ((int)Session["user-role"] == 0)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index", "Account")">Tài khoản |</a>
+                                </li>
+                            }
+                        }
+                        <li class="grid">
+                            <a class="nav-link" href="@Url.Action("Edit", "Account", new { id = @Session["user-id"]})">Xin chào, @Session["user-fullname"] |</a>
+                        </li>
+                        <!-- search button -->
+                        @*<div class="search-right ml-lg-3">
+                                <form action="#search" method="GET" class="search-box position-relative">
+                                    <button type="submit" class="btn search-btn">
+                                        <i class="fa fa-search"
+                                           aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>*@
+
+                        <!-- //search button -->
+                    </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+>>>>>>> 982dbae828e5bbfd5b7a1263c29820a283cc5d13
                                 </div>
                             </div>
                         </ul>
@@ -600,3 +645,4 @@ Author URL: http://w3layouts.com
 </body>
 
 </html>
+@RenderSection("scripts", required: false)
