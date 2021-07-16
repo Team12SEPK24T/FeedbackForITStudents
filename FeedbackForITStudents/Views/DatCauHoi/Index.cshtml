@@ -30,7 +30,7 @@
                         </div>
                         <div class="col-md-10 showcase_content_area">
                             @*@Html.DropDownList("MaCD", new SelectList(ViewBag.Chude, "MaCD", "TenCD"), new { @class = "custom-select" })*@
-                            @Html.DropDownList("MaCD", (IEnumerable<SelectListItem>)ViewBag.ChuDe, null, new { @class ="form-control" })
+                            @Html.DropDownList("MaCD", (IEnumerable<SelectListItem>)ViewBag.ChuDe, null, new { @class = "form-control" })
 
                             @Html.ValidationMessageFor(model => model.MaCD, "", new { @class = "text-danger" })
                         </div>
@@ -41,7 +41,7 @@
 
                     </div>
                     <div class="custom-control custom-switch" style="float:left">
-                        <input type="checkbox" data-toggle="switch" class="custom-control-input" name="Andanh" id="customSwitch1" value="false">
+                        <input type="checkbox" data-toggle="switch" class="custom-control-input" name="Andanh" id="customSwitch1" value="true">
                         <label class="custom-control-label" for="customSwitch1">Hỏi ẩn danh</label>
                     </div>
                 </form>
@@ -62,6 +62,10 @@
             };
     </script>
 }
+<link href="bootstrap.css" rel="stylesheet">
+<link href="bootstrap-switch.css" rel="stylesheet">
+<script src="jquery.js"></script>
+<script src="bootstrap-switch.js"></script>
 <script>
     $("#Andanh").bootstrapSwitch();
 </script>

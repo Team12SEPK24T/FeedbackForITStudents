@@ -39,14 +39,14 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
             var locCauHoi = model.CAUHOIDADUYETs.Where(f => f.MaCD == id).ToList();
             return View(locCauHoi);
         }
-        //[HttpGet]
-        //public ActionResult Reply(int id)
-        //{
-        //    CAUHOIDADUYET cauhoi = model.CAUHOIDADUYETs.FirstOrDefault(a => a.MaCHD == id);
-        //    ViewBag.Action = "Index";
-        //    ViewBag.Controller = "XemCauHoi";
-        //    return View(cauhoi);
-        //}
+        [HttpGet]
+        public ActionResult Reply(int id)
+        {
+            CAUHOIDADUYET cauhoi = model.CAUHOIDADUYETs.FirstOrDefault(a => a.MaCHD == id);
+            ViewBag.Action = "Index";
+            ViewBag.Controller = "XemCauHoi";
+            return View(cauhoi);
+        }
         [HttpPost]
         public ActionResult Reply(int id, TRALOI reply)
         {
