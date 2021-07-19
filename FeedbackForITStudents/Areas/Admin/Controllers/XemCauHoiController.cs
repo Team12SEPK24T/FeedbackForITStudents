@@ -28,16 +28,15 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
             return View(cauhoid);
         }
 
-        private List<CAUHOIDADUYET> GetCAUHOIs()
-        {
-            var listQs = model.CAUHOIDADUYETs.OrderBy(f => f.MaCHD).ToList();
-            return listQs;
-        }
         [HttpGet]
-        public ActionResult Filter(int? id)
+        public ActionResult Filter(int id)
         {
             var locCauHoi = model.CAUHOIDADUYETs.Where(f => f.MaCD == id).ToList();
-            return View(locCauHoi);
+            var cauhoid = locCauHoi.OrderByDescending(c => c.pin == true);
+            //var cauhoid = model.CAUHOIDADUYETs.OrderByDescending(c => c.MaCD == id);
+            ViewBag.Action = "Index";
+            ViewBag.Controller = "XemCauHoi";
+            return View(cauhoid);
         }
         [HttpGet]
         public ActionResult Reply(int id)

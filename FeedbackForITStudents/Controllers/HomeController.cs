@@ -14,7 +14,7 @@ namespace FeedbackForITStudents.Controllers
         public ActionResult Index()
         {
             var cauhoi = model.CAUHOIDADUYETs.ToList();
-            var traloi = model.TRALOIs.ToList();
+            var traloi = model.TRALOIs.OrderByDescending(t => t.MaCTL);
             return View(traloi);
         }
 
@@ -27,7 +27,7 @@ namespace FeedbackForITStudents.Controllers
                 updateTim.Luottim++;
             }
             model.SaveChanges();
-            return View(t);
+            return RedirectToAction("Index");
         }
 
         [Authorize]

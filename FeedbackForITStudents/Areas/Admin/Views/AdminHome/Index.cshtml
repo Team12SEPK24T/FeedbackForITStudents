@@ -104,14 +104,7 @@
 </section>
 @section scripts{
     <script>
-        $("#likea").click(function (){
-    $.ajax({
-    type: "Get",
-    url: "@Url.Action("Like","AdminHome")",
-    success: function (result) {
-    $("#PartialView").html(result);
-    }
-    })
+        $('#likea').load('/AdminHome/Like');
     }
     </script>
 }

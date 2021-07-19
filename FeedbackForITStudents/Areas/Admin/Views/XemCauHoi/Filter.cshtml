@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<FeedbackForITStudents.Models.CAUHOIDADUYET>
 
 @{
-    ViewBag.Title = "Xem câu hỏi";
+    ViewBag.Title = "Filter";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 <script src="~/assets/js/jquery-3.3.1.min.js"></script>
-
 
 
 <main style="padding-top: 150px">
@@ -17,22 +17,22 @@
                 <div class="text-center mb-sm-5 mb-4" style="padding-bottom: 10px">
                     <h3 class="title-big">Danh sách câu hỏi chờ trả lời</h3>
                 </div>
-                <div class="form-row align-items-center">
-                    <div class="row">
-                        <label>Chủ đề</label>
-                        <form action="@Url.Action("Filter", "XemCauHoi", new { id = "" })">
+                @*<div class="form-row align-items-center">
+                        <div class="row">
+                            <label>Chủ đề</label>
+                            @using (Html.BeginForm("Filter", "XemCauHoi", FormMethod.Get, new { @id = "MaCD" }))
+                            {
+                                <div class="col-11">
 
-                            <div class="col-11">
+                                    @Html.DropDownList("MaCD", ViewBag.ChuDe as SelectList, null, new { onchange = "submit();" })
+                                </div>
 
-                                @Html.DropDownList("id", ViewBag.ChuDe as SelectList, "--Chọn chủ đề--", new { onchange = "submit();" })
-                            </div>
-                          </form>
-                            @*<div class="col-lg-2" style="padding-top: 15px">
-            <input type="submit" class="btn btn-outline-primary" value="Lọc" />
-        </div>*@
-                           
-</div>
-                </div>
+                                @*<div class="col-lg-2" style="padding-top: 15px">
+                                        <input type="submit" class="btn btn-outline-primary" value="Lọc" />
+                                    </div>
+                            }
+                        </div>
+                    </div>*@
 
                 <div class="item-wrapper">
                     <div class="table-responsive">
@@ -43,8 +43,8 @@
                                         Nội dung câu hỏi
                                     </th>
                                     @*<th>
-                                Html.DisplayNameFor(model => model.Andanh)
-                            </th>*@
+                                            Html.DisplayNameFor(model => model.Andanh)
+                                        </th>*@
                                     <th>
                                         Thời gian
                                     </th>
@@ -68,8 +68,8 @@
                                                 @Html.DisplayFor(modelItem => item.Noidung)
                                             </td>
                                             @*<td>
-                                        @Html.DisplayFor(modelItem => item.Andanh)
-                                    </td>*@
+                                                    @Html.DisplayFor(modelItem => item.Andanh)
+                                                </td>*@
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.Thoigian)
                                             </td>
@@ -88,7 +88,7 @@
                                             </td>
                                             <td class="col-lg-2">
                                                 @*<input type="submit" value="Xóa" class="btn btn-danger" name="delete"
-                                        onclick="return confirm('Bạn có chắc chắn muốn xóa câu hỏi này?')" />*@
+                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa câu hỏi này?')" />*@
                                                 <form action="@Url.Action("Reply", "XemCauHoi", new { id = item.MaCHD })">
 
                                                     <button type="submit" value="Trả lời" class="btn btn-outline-info">Trả lời</button>
@@ -117,14 +117,5 @@
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
 </main>
-
-<script>
-$(document).on("click", "[type='checkbox']", function(e) {
-        if (this.checked) {
-            $(this).attr("value", "true");
-        } else {
-            $(this).attr("value","false");}
-    });
-</script>
