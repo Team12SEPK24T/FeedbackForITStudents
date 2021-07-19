@@ -41,17 +41,24 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult UpdateStatus(int id, bool trangthai, TAIKHOAN updateStatus)
+        public ActionResult UpdateStatus(int id, TAIKHOAN updateStatus)
         {
-            var account = model.TAIKHOANs.FirstOrDefault(f => f.MaTK == id);
-            if (account != null)
+            if (Request["Inactive"] != null)
             {
-                account.Trangthai = updateStatus.Trangthai;
-                model.SaveChanges();
-                return Json(true);
-            }
-            return Json(false);
-        }
 
+                var taikhoan = model.TAIKHOANs.FirstOrDefault(f => f.MaTK == id);
+                taikhoan.Trangthai = false;
+                model.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else if (Request["Active"] != null)
+            {
+                var taikhoan = model.TAIKHOANs.FirstOrDefault(f => f.MaTK == id);
+                taikhoan.Trangthai = true;
+                model.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }
