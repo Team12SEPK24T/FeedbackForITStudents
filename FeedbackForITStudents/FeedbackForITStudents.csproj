@@ -269,6 +269,7 @@
     <Content Include="assets\images\home-ab.png" />
     <Content Include="assets\images\home1.jpg" />
     <Content Include="assets\images\image.jpg" />
+    <Content Include="assets\images\logoit.jpg" />
     <Content Include="assets\images\mobile.png" />
     <Content Include="assets\images\service1.png" />
     <Content Include="assets\images\service2.png" />
@@ -280,6 +281,7 @@
     <Content Include="assets\images\testi1.jpg" />
     <Content Include="assets\images\testi2.jpg" />
     <Content Include="assets\images\testi3.jpg" />
+    <Content Include="assets\images\logo.jpg" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\counter.js" />
     <Content Include="assets\js\jquery-3.3.1.min.js" />

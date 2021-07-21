@@ -71,7 +71,7 @@
                                         @Html.DisplayFor(modelItem => item.Andanh)
                                     </td>*@
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Thoigian)
+                                                @item.Thoigian.ToString("dd/MM/yyyy")
                                             </td>
                                             <td>
                                                 @if (item.Andanh == false)

@@ -22,9 +22,9 @@
                         Feedback For <span class="typed-text"></span><span class="cursor">&nbsp</span>
                     </h3>
                     <p>
-                        Và buồn làm gì em ơi. Đừng tự làm mệt mình vì câu truyện không đáng nói.
-                        Giờ anh đã tới. Bao hạnh phúc khổ đau chia sẻ cùng anh với.
-                        Nói nhỏ với một mình anh thôi. Và anh sẽ nói cho cả thế giới.
+                        Khoa Công nghệ Thông tin thành lập vào năm 1995;
+                        Năm 2001, Khoa tham gia vào hệ thống đào tạo kỹ sư công nghệ thông tin theo chuẩn Nhật Bản.
+                        Từ năm 2008 đến 2018, Khoa triển khai đào tạo ngành Kỹ thuật Phần mềm theo chương trình do Carnegie Mellon University (đại học số 1 của Mỹ về kỹ thuật phần mềm) chuyển giao.
                     </p>
                 </div>
                 <div class="col-md-6 mt-md-0 mt-4">
@@ -45,7 +45,7 @@
             {
                 using (Html.BeginForm("Like", "Home", new { id = item.MaCTL }))
                 {
-                    <div class="col-lg-9 text11-content m-auto" style="padding-top: 20px">
+                    <div class="col-lg-12 text11-content m-auto" style="padding-top: 20px">
                         <div class="card border-info mb-3 ">
                             <div class="card-body">
                                 <div class="row">
@@ -55,7 +55,7 @@
                                     <div class="col-md-10">
                                         <h5 class="card-title">@item.CAUHOIDADUYET.Noidung</h5>
                                         <figcaption class="blockquote-footer">
-                                            @item.CAUHOIDADUYET.Thoigian<strong> by </strong><cite title="Source Title">
+                                            @item.CAUHOIDADUYET.Thoigian.ToShortDateString()<strong> by </strong><cite title="Source Title">
                                                 @if (item.CAUHOIDADUYET.Andanh == true)
                                                 {
                                                     @item.CAUHOIDADUYET.Email
@@ -79,7 +79,7 @@
                                             <div class="col-md-10">
                                                 <h5 class="card-title" style="color:gray">@item.Noidungtraloi</h5>
                                                 <figcaption class="blockquote-footer">
-                                                    @item.Thoigian<strong> by </strong><cite title="Source Title">
+                                                    @item.Thoigian.ToShortDateString()<strong> by </strong><cite title="Source Title">
                                                         BCN Khoa
                                                     </cite>
                                                 </figcaption>

@@ -47,45 +47,47 @@
                                 {
                                     using (Html.BeginForm("Browse", "DuyetCauHoi", new { id = item.MaCH }))
                                     {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Noidung)
-                                            </td>
-                                            @*<td>
-                                        @Html.DisplayFor(modelItem => item.Andanh)
-                                    </td>*@
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Thoigian)
-                                            </td>
-                                            <td>
-                                                @if (item.Andanh == false)
-                                                {
-                                                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-                                                }
-                                                else
-                                                {
-                                                    <label>Ẩn danh</label>
-                                                }
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.CHUDE.TenCD)
-                                            </td>
-                                            <td class="col-lg-3">
+                                <tr>
+                                    <td style="width:700px">
+                                        @Html.DisplayFor(modelItem => item.Noidung)
+                                    </td>
+                                    @*<td>
+            @Html.DisplayFor(modelItem => item.Andanh)
+        </td>*@
+                                    <td>
+                                        @item.Thoigian.ToString("dd/MM/yyyy")
+                                        @*@Html.DisplayFor(modelItem => item.Thoigian)*@
 
-                                                <div class="btn-group" data-toggle="buttons">
-                                                    <label class="btn btn-outline-primary">
-                                                        <input name="pin" type="checkbox" value="true" />
-                                                        <input type="hidden" value="false" name="pin" />
-                                                        <span class="fa fa-thumb-tack"></span>
-                                                    </label>
-                                                </div>
-                                                <input type="submit" value="Xóa" class="btn btn-primary" name="delete"
-                                                       onclick="return confirm('Bạn có chắc chắn muốn xóa câu hỏi này?')" />
-                                                <input type="submit" value="Duyệt" class="btn btn-outline-info" name="duyet" />
+                                    </td>
+                                    <td>
+                                        @if (item.Andanh == false)
+                                        {
+                                            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                        }
+                                        else
+                                        {
+                                            <label>Ẩn danh</label>
+                                        }
+                                    </td>
+                                    <td style="width:200px">
+                                        @Html.DisplayFor(modelItem => item.CHUDE.TenCD)
+                                    </td>
+                                    <td class="col-lg-3">
+
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-outline-primary">
+                                                <input name="pin" type="checkbox" value="true" />
+                                                <input type="hidden" value="false" name="pin" />
+                                                <span class="fa fa-thumb-tack"></span>
+                                            </label>
+                                        </div>
+                                        <input type="submit" value="Xóa" class="btn btn-primary" name="delete"
+                                               onclick="return confirm('Bạn có chắc chắn muốn xóa câu hỏi này?')" />
+                                        <input type="submit" value="Duyệt" class="btn btn-outline-info" name="duyet" />
 
 
-                                            </td>
-                                        </tr>
+                                    </td>
+                                </tr>
                                     }
                                 }
                             </tbody>

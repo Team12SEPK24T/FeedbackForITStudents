@@ -28,5 +28,18 @@ namespace FeedbackForITStudents.Controllers
             }
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Like(int id, TRALOI t)
+        {
+            TRALOI updateTim = model.TRALOIs.FirstOrDefault(u => u.MaCTL == id);
+            if (Request["like"] != null)
+            {
+                updateTim.Luottim++;
+            }
+            model.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }
