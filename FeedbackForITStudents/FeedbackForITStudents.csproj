@@ -305,7 +305,11 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\logo.png" />
     <Content Include="images\image.svg" />
+    <Content Include="images\logoday.png" />
+    <Content Include="images\vanlang.jpg" />
+    <Content Include="images\vlu.jpg" />
     <Content Include="Models\Models.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Models.edmx</DependentUpon>

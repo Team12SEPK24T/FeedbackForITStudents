@@ -8,6 +8,7 @@ Author URL: http://w3layouts.com
 
 <head>
     <!-- Required meta tags -->
+    <link rel="shortcut icon" type="image/ico" href="~/images/logoday.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewBag.Title</title>
@@ -43,18 +44,18 @@ Author URL: http://w3layouts.com
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav ml-lg-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="@Url.Action("Index", "Home")">Trang chủ</a>
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="@Url.Action("Index", "Home")">Trang chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index", "DatCauHoi")">Đặt câu hỏi</a>
+                            <a class="nav-link" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="@Url.Action("Index", "DatCauHoi")">Đặt câu hỏi</a>
                         </li>
                         @*<li class="nav-item">
                                 <a class="nav-link" href="services.html">Services</a>
                             </li>*@
                         <li class="nav-item">
                             @*<a href="@Url.Action("Index", "CauHoiCaNhan", new {id = User.Identity.GetUserName()})">*@
-                            <a class="nav-link" href="@Url.Action("Index", "CauHoiCaNhan")">Hello! @User.Identity.GetUserName()</a>
+                            <a class="nav-link" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="@Url.Action("Index", "CauHoiCaNhan")">Hello! @User.Identity.GetUserName()</a>
                         </li>
                         <!-- search button -->
                         <!-- //search button -->
@@ -62,7 +63,7 @@ Author URL: http://w3layouts.com
                 </div>
                 <!-- //search button -->
                 <!-- toggle switch for light and dark theme -->
-                <div class="cont-ser-position">
+                @*<div class="cont-ser-position">
                     <nav class="navigation">
                         <div class="theme-switch-wrapper">
                             <label class="theme-switch" for="checkbox">
@@ -74,7 +75,7 @@ Author URL: http://w3layouts.com
                             </label>
                         </div>
                     </nav>
-                </div>
+                </div>*@
                 <div class="search-right ml-lg-3">
                     <a class="btn btn-primary" href="/Account/Login">Logout</a>
                 </div>
@@ -124,7 +125,7 @@ Author URL: http://w3layouts.com
                 <div class="row footer-p">
                     <div class="col-lg-8 mt-lg-0 mt-4 pr-lg-5">
                         <div class="d-sm-flex align-items-center top-footer-content mb-5">
-                            <a class="logo d-flex align-items-center" href="index.html">
+                            <a class="logo d-flex align-items-center" href="@Url.Action("Index", "Home")">
                                 <img src="~/assets/images/logo.jpg" alt="IMG-LOGO" style="height:50px; width: 50px"></span>VanLang<span>University</span>
                             </a>
                             <p class="top-p ml-sm-4 pl-sm-4 mt-sm-0 mt-2">

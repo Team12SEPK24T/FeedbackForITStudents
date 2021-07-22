@@ -14,6 +14,7 @@ Author URL: http://w3layouts.com
 <html lang="en">
 
 <head>
+    <link rel="shortcut icon" type="image/ico" href="~/images/logoday.png">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,21 +52,21 @@ Author URL: http://w3layouts.com
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav ml-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index","AdminHome")">Trang chủ <span class="sr-only">(current)</a>
+                            <a class="nav-link" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="@Url.Action("Index","AdminHome")">Trang chủ <span class="sr-only">(current)</a>
                         </li>
                         @if (Session["user-role"] != null)
                         {
                             if ((int)Session["user-role"] <= 2)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", "XemCauHoi")">Trả lời Câu hỏi</a>
+                                    <a class="nav-link" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="@Url.Action("Index", "XemCauHoi")">Trả lời câu hỏi</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", "DuyetCauHoi")">Duyệt câu hỏi</a>
+                                    <a class="nav-link" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="@Url.Action("Index", "DuyetCauHoi")">Duyệt câu hỏi</a>
 
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", "ThongKe")">Thống kê</a>
+                                    <a class="nav-link" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="@Url.Action("Index", "ThongKe")">Thống kê</a>
 
                                 </li>
                             }
@@ -73,12 +74,12 @@ Author URL: http://w3layouts.com
                             if ((int)Session["user-role"] == 0)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", "Account")">Tài khoản |</a>
+                                    <a class="nav-link" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="@Url.Action("Index", "Account")">Tài khoản |</a>
                                 </li>
                             }
                         }
                         <li class="grid">
-                            <a class="nav-link" href="contact.html">Hi, @Session["user-fullname"] |</a>
+                            <a class="nav-link" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="contact.html">Hi, @Session["user-fullname"]</a>
                         </li>
                         <!-- search button -->
                         @*<div class="search-right ml-lg-3">
@@ -95,19 +96,6 @@ Author URL: http://w3layouts.com
                 </div>
                 <!-- //search button -->
                 <!-- toggle switch for light and dark theme -->
-                <div class="cont-ser-position">
-                    <nav class="navigation">
-                        <div class="theme-switch-wrapper">
-                            <label class="theme-switch" for="checkbox">
-                                <input type="checkbox" id="checkbox">
-                                <div class="mode-container">
-                                    <i class="gg-sun"></i>
-                                    <i class="gg-moon"></i>
-                                </div>
-                            </label>
-                        </div>
-                    </nav>
-                </div>
                 <div class="search-right ml-lg-3">
 
                     <a class="btn btn-primary" href="/Admin/Auth/Logout">Logout</a>
