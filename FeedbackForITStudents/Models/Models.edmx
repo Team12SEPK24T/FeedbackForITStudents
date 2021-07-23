@@ -814,7 +814,7 @@
           <End Type="SEP24Team12Model.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="SEP24Team12Model.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

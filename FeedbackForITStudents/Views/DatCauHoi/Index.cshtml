@@ -1,0 +1,72 @@
+﻿@model FeedbackForITStudents.Models.CAUHOI
+
+@{
+    ViewBag.Title = "Đặt câu hỏi";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">*@
+
+@using (Html.BeginForm("Index", "DatCauHoi", FormMethod.Post, new { enctype = "multipart/form-data", id = "form-update", @class = "form-add" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">Đặt câu hỏi</h1>
+            </div>
+        </section>
+    </div>
+    <div class="mx-auto pt-lg-4 pt-md-5 pt-4" style="max-width:1000px">
+        <div class="row contact-block">
+            <div class="col-md-12 contact-right mt-md-0 mt-4">
+                <form action="@Url.Action("CauHoi", "DatCauHoi")" method="post">
+                    <div class="input-grids">
+                    </div>
+                    <div class="row showcase_row_area">
+                        <div class="col-md-2 " style="color: black">
+                            <label for="inputType1">Chủ đề câu hỏi</label>
+                        </div>
+                        <div class="col-md-10 showcase_content_area">
+                            @*@Html.DropDownList("MaCD", new SelectList(ViewBag.Chude, "MaCD", "TenCD"), new { @class = "custom-select" })*@
+                            @Html.DropDownList("MaCD", (IEnumerable<SelectListItem>)ViewBag.ChuDe, null, new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.MaCD, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-input" style="padding-top: 20px">
+                        @Html.TextAreaFor(model => model.Noidung, new { required = "required", placeholder = "Vui lòng nhập câu hỏi ở đây", htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Noidung, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="custom-control custom-switch" style="float:left">
+                        <input type="checkbox" data-toggle="switch" class="custom-control-input" name="Andanh" id="customSwitch1" value="true">
+                        <label class="custom-control-label" for="customSwitch1">Hỏi ẩn danh</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn button-style " id="sending" style="float:right" value="Gửi câu hỏi"></input>
+        </div>
+    </div>
+
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+                window.location = "/Home/Index";
+            };
+    </script>
+}
+<link href="bootstrap.css" rel="stylesheet">
+<link href="bootstrap-switch.css" rel="stylesheet">
+<script src="jquery.js"></script>
+<script src="bootstrap-switch.js"></script>
+<script>
+    $("#Andanh").bootstrapSwitch();
+</script>
+

@@ -1,0 +1,120 @@
+﻿@model IEnumerable<FeedbackForITStudents.Models.TAIKHOAN>
+
+@{
+    ViewBag.Title = "Quản lý tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/Scripts/jquery.btnswitch.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.1.1.slim.min.js"></script>
+<script src="~/Scripts/jquery.btnswitch.js"></script>
+
+
+
+<main style="padding-top: 150px">
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="grid">
+                <div class="text-center mb-sm-5 mb-4">
+                    <h3 class="title-big">Danh sách tài khoản</h3>
+                </div>
+                <a href="@Url.Action("Create", "Account")" style="float: right; margin-right: 40px; padding-bottom: 20px">
+                    <button type="button" class="btn btn-primary">Thêm tài khoản</button>
+                </a>
+
+                <div class="item-wrapper">
+                    <div class="table-responsive">
+                        <table class="table" id="cate-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Password
+                                    </th>
+                                    <th>
+                                        Họ tên
+                                    </th>
+                                    <th>
+                                        Quyền
+                                    </th>
+                                    <th>
+                                        Trạng thái
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    using (Html.BeginForm("UpdateStatus", "Account", new { id = item.MaTK }))
+                                    {
+                                    <tr>
+                                        <td>
+                                            @item.Email.Trim()
+                                        </td>
+                                        <td>
+                                            @item.Password.Trim()
+                                        </td>
+                                        <td>
+                                            @item.Hoten.Trim()
+                                        </td>
+
+                                        <td>@(item.Quyen == 0 ? "Quản trị" : item.Quyen == 1 ? "BCN Khoa" : "Trợ lý")</td>
+                                        <td>
+                                            @if (item.Trangthai)
+                                            {
+                                                <label class="badge badge-success">Hoạt động</label>
+                                            }
+                                            else
+                                            {
+                                                <label class="badge badge-danger">Ngừng hoạt động</label>
+                                            }
+
+                                        </td>
+                                        <td>
+                                            <input type="submit" value="Ngừng hoạt động" class="btn btn-primary" name="Inactive"
+                                                   onclick="return confirm('Bạn có chắc chắn muốn ngưng hoạt động tài khoàn này?')" />
+                                            <input type="submit" value="Hoạt động" class="btn btn-outline-info" name="Active" onclick="return confirm('Bạn có chắc chắn muốn khởi động lại tài khoản này?')" />
+
+                                            @*@if (item.Trangthai)
+        {
+            <button class="btn action-btn btn-outline-primary btn-rounded" name="Inactive" type="submit"
+                    data-toggle="tooltip" data-placement="top"
+                    title="Ngưng hoạt động tài khoản">
+                <i class="mdi mdi-account-off"></i>
+            </button>
+        }
+        else
+        {
+            <button name="Active" type="submit"
+                    data-toggle="tooltip" data-placement="top"
+                    title="Khởi động tài khoản">
+                <i class="mdi mdi-account-plus"></i>
+            </button>
+        }*@
+
+                                        </td>
+
+                                        <td>
+
+                                            @*<select onchange="active_inactive_user(this, @item.MaTK)" class="custom-select" >
+                                                                                        <option value="">Chọn</option>
+                                                    <option value="0">Ngưng hoạt động</option>
+                                                    <option value="1">Hoạt động</option>
+                                                </select>*@
+
+                                        </td>
+                                    </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+}
