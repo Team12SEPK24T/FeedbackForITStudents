@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SEP24Team12Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SEP24Team12Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -77,6 +77,7 @@
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="MaTKAsp" Type="nvarchar" MaxLength="128" />
           <Property Name="pin" Type="bit" Nullable="false" />
+          <Property Name="MaCD" Type="int" />
         </EntityType>
         <EntityType Name="CAUHOIDADUYET">
           <Key>
@@ -89,6 +90,15 @@
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="MaTKAsp" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="pin" Type="bit" />
+          <Property Name="Rep" Type="bit" />
+          <Property Name="MaCD" Type="int" />
+        </EntityType>
+        <EntityType Name="CHUDE">
+          <Key>
+            <PropertyRef Name="MaCD" />
+          </Key>
+          <Property Name="MaCD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenCD" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -126,8 +136,11 @@
           <Key>
             <PropertyRef Name="MaTB" />
           </Key>
-          <Property Name="MaTB" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="thoigian" Type="date" />
+          <Property Name="MaTB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaCHD" Type="int" Nullable="false" />
+          <Property Name="MaCTL" Type="int" Nullable="false" />
+          <Property Name="Thoigian" Type="datetime" Nullable="false" />
+          <Property Name="NoidungTB" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="TRALOI">
           <Key>
@@ -138,7 +151,7 @@
           <Property Name="Thoigian" Type="datetime" Nullable="false" />
           <Property Name="MaTK" Type="int" Nullable="false" />
           <Property Name="Luottim" Type="int" Nullable="false" />
-          <Property Name="MaCHD" Type="int" />
+          <Property Name="MaCHD" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TRANGCHU">
           <Key>
@@ -151,6 +164,18 @@
           <Property Name="MaCTL" Type="varchar" MaxLength="10" />
           <Property Name="EMAIL" Type="varchar" MaxLength="100" />
         </EntityType>
+        <Association Name="FK__CAUHOI__MaCD__756D6ECB">
+          <End Role="CHUDE" Type="Self.CHUDE" Multiplicity="0..1" />
+          <End Role="CAUHOI" Type="Self.CAUHOI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUDE">
+              <PropertyRef Name="MaCD" />
+            </Principal>
+            <Dependent Role="CAUHOI">
+              <PropertyRef Name="MaCD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__CAUHOIDAD__MaTKA__3C34F16F">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="CAUHOIDADUYET" Type="Self.CAUHOIDADUYET" Multiplicity="*" />
@@ -160,6 +185,42 @@
             </Principal>
             <Dependent Role="CAUHOIDADUYET">
               <PropertyRef Name="MaTKAsp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CAUHOIDADU__MaCD__76619304">
+          <End Role="CHUDE" Type="Self.CHUDE" Multiplicity="0..1" />
+          <End Role="CAUHOIDADUYET" Type="Self.CAUHOIDADUYET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUDE">
+              <PropertyRef Name="MaCD" />
+            </Principal>
+            <Dependent Role="CAUHOIDADUYET">
+              <PropertyRef Name="MaCD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__THONGBAO__MaCHD__0880433F">
+          <End Role="CAUHOIDADUYET" Type="Self.CAUHOIDADUYET" Multiplicity="1" />
+          <End Role="THONGBAO" Type="Self.THONGBAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUHOIDADUYET">
+              <PropertyRef Name="MaCHD" />
+            </Principal>
+            <Dependent Role="THONGBAO">
+              <PropertyRef Name="MaCHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__THONGBAO__MaCTL__09746778">
+          <End Role="TRALOI" Type="Self.TRALOI" Multiplicity="1" />
+          <End Role="THONGBAO" Type="Self.THONGBAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRALOI">
+              <PropertyRef Name="MaCTL" />
+            </Principal>
+            <Dependent Role="THONGBAO">
+              <PropertyRef Name="MaCTL" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -255,6 +316,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Traloi_CHD">
+          <End Role="CAUHOIDADUYET" Type="Self.CAUHOIDADUYET" Multiplicity="1" />
+          <End Role="TRALOI" Type="Self.TRALOI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUHOIDADUYET">
+              <PropertyRef Name="MaCHD" />
+            </Principal>
+            <Dependent Role="TRALOI">
+              <PropertyRef Name="MaCHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TRANGCHUTK">
           <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="0..1" />
           <End Role="TRANGCHU" Type="Self.TRANGCHU" Multiplicity="*" />
@@ -276,15 +349,32 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CAUHOI" EntityType="Self.CAUHOI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CAUHOIDADUYET" EntityType="Self.CAUHOIDADUYET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHUDE" EntityType="Self.CHUDE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TAIKHOANSV" EntityType="Self.TAIKHOANSV" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THONGBAO" EntityType="Self.THONGBAO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRALOI" EntityType="Self.TRALOI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRANGCHU" EntityType="Self.TRANGCHU" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CAUHOI__MaCD__756D6ECB" Association="Self.FK__CAUHOI__MaCD__756D6ECB">
+            <End Role="CHUDE" EntitySet="CHUDE" />
+            <End Role="CAUHOI" EntitySet="CAUHOI" />
+          </AssociationSet>
           <AssociationSet Name="FK__CAUHOIDAD__MaTKA__3C34F16F" Association="Self.FK__CAUHOIDAD__MaTKA__3C34F16F">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYET" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CAUHOIDADU__MaCD__76619304" Association="Self.FK__CAUHOIDADU__MaCD__76619304">
+            <End Role="CHUDE" EntitySet="CHUDE" />
+            <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYET" />
+          </AssociationSet>
+          <AssociationSet Name="FK__THONGBAO__MaCHD__0880433F" Association="Self.FK__THONGBAO__MaCHD__0880433F">
+            <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYET" />
+            <End Role="THONGBAO" EntitySet="THONGBAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__THONGBAO__MaCTL__09746778" Association="Self.FK__THONGBAO__MaCTL__09746778">
+            <End Role="TRALOI" EntitySet="TRALOI" />
+            <End Role="THONGBAO" EntitySet="THONGBAO" />
           </AssociationSet>
           <AssociationSet Name="FK__TRALOI__MaTK__0B91BA14" Association="Self.FK__TRALOI__MaTK__0B91BA14">
             <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
@@ -314,43 +404,114 @@
             <End Role="TAIKHOANSV" EntitySet="TAIKHOANSV" />
             <End Role="TRANGCHU" EntitySet="TRANGCHU" />
           </AssociationSet>
+          <AssociationSet Name="FK_Traloi_CHD" Association="Self.FK_Traloi_CHD">
+            <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYET" />
+            <End Role="TRALOI" EntitySet="TRALOI" />
+          </AssociationSet>
           <AssociationSet Name="FK_TRANGCHUTK" Association="Self.FK_TRANGCHUTK">
             <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
             <End Role="TRANGCHU" EntitySet="TRANGCHU" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SEP24Team12Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SEP24Team12Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="SEP24Team12Model.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="SEP24Team12Model.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="SEP24Team12Model.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="SEP24Team12Model.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="SEP24Team12Model.AspNetUser" />
+          <EntitySet Name="CAUHOIs" EntityType="SEP24Team12Model.CAUHOI" />
+          <EntitySet Name="CAUHOIDADUYETs" EntityType="SEP24Team12Model.CAUHOIDADUYET" />
+          <EntitySet Name="CHUDEs" EntityType="SEP24Team12Model.CHUDE" />
+          <EntitySet Name="sysdiagrams" EntityType="SEP24Team12Model.sysdiagram" />
+          <EntitySet Name="TAIKHOANs" EntityType="SEP24Team12Model.TAIKHOAN" />
+          <EntitySet Name="TAIKHOANSVs" EntityType="SEP24Team12Model.TAIKHOANSV" />
+          <EntitySet Name="THONGBAOs" EntityType="SEP24Team12Model.THONGBAO" />
+          <EntitySet Name="TRALOIs" EntityType="SEP24Team12Model.TRALOI" />
+          <EntitySet Name="TRANGCHUs" EntityType="SEP24Team12Model.TRANGCHU" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="SEP24Team12Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="SEP24Team12Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CAUHOIDAD__MaTKA__3C34F16F" Association="SEP24Team12Model.FK__CAUHOIDAD__MaTKA__3C34F16F">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_CAUHOI" Association="SEP24Team12Model.FK_AspNetUsers_CAUHOI">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="CAUHOI" EntitySet="CAUHOIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CAUHOI__MaCD__756D6ECB" Association="SEP24Team12Model.FK__CAUHOI__MaCD__756D6ECB">
+            <End Role="CHUDE" EntitySet="CHUDEs" />
+            <End Role="CAUHOI" EntitySet="CAUHOIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CAUHOIDADU__MaCD__76619304" Association="SEP24Team12Model.FK__CAUHOIDADU__MaCD__76619304">
+            <End Role="CHUDE" EntitySet="CHUDEs" />
+            <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYETs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__THONGBAO__MaCHD__0880433F" Association="SEP24Team12Model.FK__THONGBAO__MaCHD__0880433F">
+            <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYETs" />
+            <End Role="THONGBAO" EntitySet="THONGBAOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Traloi_CHD" Association="SEP24Team12Model.FK_Traloi_CHD">
+            <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYETs" />
+            <End Role="TRALOI" EntitySet="TRALOIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TRALOI__MaTK__0B91BA14" Association="SEP24Team12Model.FK__TRALOI__MaTK__0B91BA14">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
+            <End Role="TRALOI" EntitySet="TRALOIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRANGCHUTK" Association="SEP24Team12Model.FK_TRANGCHUTK">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
+            <End Role="TRANGCHU" EntitySet="TRANGCHUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SVTRANGCHU" Association="SEP24Team12Model.FK_SVTRANGCHU">
+            <End Role="TAIKHOANSV" EntitySet="TAIKHOANSVs" />
+            <End Role="TRANGCHU" EntitySet="TRANGCHUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__THONGBAO__MaCTL__09746778" Association="SEP24Team12Model.FK__THONGBAO__MaCTL__09746778">
+            <End Role="TRALOI" EntitySet="TRALOIs" />
+            <End Role="THONGBAO" EntitySet="THONGBAOs" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="SEP24Team12Model.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
             <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="SEP24Team12Model.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser" Relationship="SEP24Team12Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
           <Key>
@@ -358,16 +519,16 @@
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="SEP24Team12Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -378,44 +539,60 @@
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="CAUHOIDADUYETs" Relationship="Self.FK__CAUHOIDAD__MaTKA__3C34F16F" FromRole="AspNetUsers" ToRole="CAUHOIDADUYET" />
-          <NavigationProperty Name="CAUHOIs" Relationship="Self.FK_AspNetUsers_CAUHOI" FromRole="AspNetUsers" ToRole="CAUHOI" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="SEP24Team12Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="SEP24Team12Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="CAUHOIDADUYETs" Relationship="SEP24Team12Model.FK__CAUHOIDAD__MaTKA__3C34F16F" FromRole="AspNetUser" ToRole="CAUHOIDADUYET" />
+          <NavigationProperty Name="CAUHOIs" Relationship="SEP24Team12Model.FK_AspNetUsers_CAUHOI" FromRole="AspNetUser" ToRole="CAUHOI" />
+          <NavigationProperty Name="AspNetRoles" Relationship="SEP24Team12Model.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
         <EntityType Name="CAUHOI">
           <Key>
             <PropertyRef Name="MaCH" />
           </Key>
           <Property Name="MaCH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Noidung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Noidung" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Andanh" Type="Boolean" Nullable="false" />
           <Property Name="Thoigian" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="MaTKAsp" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="pin" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AspNetUsers_CAUHOI" FromRole="CAUHOI" ToRole="AspNetUsers" />
+          <Property Name="MaCD" Type="Int32" />
+          <NavigationProperty Name="AspNetUser" Relationship="SEP24Team12Model.FK_AspNetUsers_CAUHOI" FromRole="CAUHOI" ToRole="AspNetUser" />
+          <NavigationProperty Name="CHUDE" Relationship="SEP24Team12Model.FK__CAUHOI__MaCD__756D6ECB" FromRole="CAUHOI" ToRole="CHUDE" />
         </EntityType>
         <EntityType Name="CAUHOIDADUYET">
           <Key>
             <PropertyRef Name="MaCHD" />
           </Key>
           <Property Name="MaCHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Noidung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Noidung" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Andanh" Type="Boolean" Nullable="false" />
           <Property Name="Thoigian" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="MaTKAsp" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MaTKAsp" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="pin" Type="Boolean" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__CAUHOIDAD__MaTKA__3C34F16F" FromRole="CAUHOIDADUYET" ToRole="AspNetUsers" />
+          <Property Name="Rep" Type="Boolean" />
+          <Property Name="MaCD" Type="Int32" />
+          <NavigationProperty Name="AspNetUser" Relationship="SEP24Team12Model.FK__CAUHOIDAD__MaTKA__3C34F16F" FromRole="CAUHOIDADUYET" ToRole="AspNetUser" />
+          <NavigationProperty Name="CHUDE" Relationship="SEP24Team12Model.FK__CAUHOIDADU__MaCD__76619304" FromRole="CAUHOIDADUYET" ToRole="CHUDE" />
+          <NavigationProperty Name="THONGBAOs" Relationship="SEP24Team12Model.FK__THONGBAO__MaCHD__0880433F" FromRole="CAUHOIDADUYET" ToRole="THONGBAO" />
+          <NavigationProperty Name="TRALOIs" Relationship="SEP24Team12Model.FK_Traloi_CHD" FromRole="CAUHOIDADUYET" ToRole="TRALOI" />
+        </EntityType>
+        <EntityType Name="CHUDE">
+          <Key>
+            <PropertyRef Name="MaCD" />
+          </Key>
+          <Property Name="MaCD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenCD" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CAUHOIs" Relationship="SEP24Team12Model.FK__CAUHOI__MaCD__756D6ECB" FromRole="CHUDE" ToRole="CAUHOI" />
+          <NavigationProperty Name="CAUHOIDADUYETs" Relationship="SEP24Team12Model.FK__CAUHOIDADU__MaCD__76619304" FromRole="CHUDE" ToRole="CAUHOIDADUYET" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -426,91 +603,98 @@
             <PropertyRef Name="MaTK" />
           </Key>
           <Property Name="MaTK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Hoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Hoten" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Quyen" Type="Int32" Nullable="false" />
           <Property Name="Trangthai" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="TRALOIs" Relationship="Self.FK__TRALOI__MaTK__0B91BA14" FromRole="TAIKHOAN" ToRole="TRALOI" />
-          <NavigationProperty Name="TRANGCHUs" Relationship="Self.FK_TRANGCHUTK" FromRole="TAIKHOAN" ToRole="TRANGCHU" />
+          <NavigationProperty Name="TRALOIs" Relationship="SEP24Team12Model.FK__TRALOI__MaTK__0B91BA14" FromRole="TAIKHOAN" ToRole="TRALOI" />
+          <NavigationProperty Name="TRANGCHUs" Relationship="SEP24Team12Model.FK_TRANGCHUTK" FromRole="TAIKHOAN" ToRole="TRANGCHU" />
         </EntityType>
         <EntityType Name="TAIKHOANSV">
           <Key>
             <PropertyRef Name="Email" />
           </Key>
-          <Property Name="MaSV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Hoten" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaSV" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Hoten" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Lop" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Khoa" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TRANGCHUs" Relationship="Self.FK_SVTRANGCHU" FromRole="TAIKHOANSV" ToRole="TRANGCHU" />
+          <NavigationProperty Name="TRANGCHUs" Relationship="SEP24Team12Model.FK_SVTRANGCHU" FromRole="TAIKHOANSV" ToRole="TRANGCHU" />
         </EntityType>
         <EntityType Name="THONGBAO">
           <Key>
             <PropertyRef Name="MaTB" />
           </Key>
-          <Property Name="MaTB" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="thoigian" Type="DateTime" Precision="0" />
+          <Property Name="MaTB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaCHD" Type="Int32" Nullable="false" />
+          <Property Name="MaCTL" Type="Int32" Nullable="false" />
+          <Property Name="Thoigian" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NoidungTB" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CAUHOIDADUYET" Relationship="SEP24Team12Model.FK__THONGBAO__MaCHD__0880433F" FromRole="THONGBAO" ToRole="CAUHOIDADUYET" />
+          <NavigationProperty Name="TRALOI" Relationship="SEP24Team12Model.FK__THONGBAO__MaCTL__09746778" FromRole="THONGBAO" ToRole="TRALOI" />
         </EntityType>
         <EntityType Name="TRALOI">
           <Key>
             <PropertyRef Name="MaCTL" />
           </Key>
           <Property Name="MaCTL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Noidungtraloi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Noidungtraloi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Thoigian" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MaTK" Type="Int32" Nullable="false" />
           <Property Name="Luottim" Type="Int32" Nullable="false" />
-          <Property Name="MaCHD" Type="Int32" />
-          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK__TRALOI__MaTK__0B91BA14" FromRole="TRALOI" ToRole="TAIKHOAN" />
+          <Property Name="MaCHD" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CAUHOIDADUYET" Relationship="SEP24Team12Model.FK_Traloi_CHD" FromRole="TRALOI" ToRole="CAUHOIDADUYET" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="SEP24Team12Model.FK__TRALOI__MaTK__0B91BA14" FromRole="TRALOI" ToRole="TAIKHOAN" />
+          <NavigationProperty Name="THONGBAOs" Relationship="SEP24Team12Model.FK__THONGBAO__MaCTL__09746778" FromRole="TRALOI" ToRole="THONGBAO" />
         </EntityType>
         <EntityType Name="TRANGCHU">
           <Key>
             <PropertyRef Name="MaTC" />
           </Key>
-          <Property Name="MaTC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaTC" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="MaTK" Type="Int32" />
           <Property Name="MaCH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Thatim" Type="Boolean" />
           <Property Name="MaCTL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK_TRANGCHUTK" FromRole="TRANGCHU" ToRole="TAIKHOAN" />
-          <NavigationProperty Name="TAIKHOANSV" Relationship="Self.FK_SVTRANGCHU" FromRole="TRANGCHU" ToRole="TAIKHOANSV" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="SEP24Team12Model.FK_TRANGCHUTK" FromRole="TRANGCHU" ToRole="TAIKHOAN" />
+          <NavigationProperty Name="TAIKHOANSV" Relationship="SEP24Team12Model.FK_SVTRANGCHU" FromRole="TRANGCHU" ToRole="TAIKHOANSV" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Type="SEP24Team12Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <End Type="SEP24Team12Model.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserClaims">
+            <Dependent Role="AspNetUserClaim">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Type="SEP24Team12Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <End Type="SEP24Team12Model.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserLogins">
+            <Dependent Role="AspNetUserLogin">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__CAUHOIDAD__MaTKA__3C34F16F">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="CAUHOIDADUYET" Type="Self.CAUHOIDADUYET" Multiplicity="*" />
+          <End Type="SEP24Team12Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="SEP24Team12Model.CAUHOIDADUYET" Role="CAUHOIDADUYET" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CAUHOIDADUYET">
@@ -519,10 +703,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AspNetUsers_CAUHOI">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
-          <End Role="CAUHOI" Type="Self.CAUHOI" Multiplicity="*" />
+          <End Type="SEP24Team12Model.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="SEP24Team12Model.CAUHOI" Role="CAUHOI" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CAUHOI">
@@ -530,9 +714,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__CAUHOI__MaCD__756D6ECB">
+          <End Type="SEP24Team12Model.CHUDE" Role="CHUDE" Multiplicity="0..1" />
+          <End Type="SEP24Team12Model.CAUHOI" Role="CAUHOI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUDE">
+              <PropertyRef Name="MaCD" />
+            </Principal>
+            <Dependent Role="CAUHOI">
+              <PropertyRef Name="MaCD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CAUHOIDADU__MaCD__76619304">
+          <End Type="SEP24Team12Model.CHUDE" Role="CHUDE" Multiplicity="0..1" />
+          <End Type="SEP24Team12Model.CAUHOIDADUYET" Role="CAUHOIDADUYET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUDE">
+              <PropertyRef Name="MaCD" />
+            </Principal>
+            <Dependent Role="CAUHOIDADUYET">
+              <PropertyRef Name="MaCD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__THONGBAO__MaCHD__0880433F">
+          <End Type="SEP24Team12Model.CAUHOIDADUYET" Role="CAUHOIDADUYET" Multiplicity="1" />
+          <End Type="SEP24Team12Model.THONGBAO" Role="THONGBAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUHOIDADUYET">
+              <PropertyRef Name="MaCHD" />
+            </Principal>
+            <Dependent Role="THONGBAO">
+              <PropertyRef Name="MaCHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Traloi_CHD">
+          <End Type="SEP24Team12Model.CAUHOIDADUYET" Role="CAUHOIDADUYET" Multiplicity="1" />
+          <End Type="SEP24Team12Model.TRALOI" Role="TRALOI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAUHOIDADUYET">
+              <PropertyRef Name="MaCHD" />
+            </Principal>
+            <Dependent Role="TRALOI">
+              <PropertyRef Name="MaCHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__TRALOI__MaTK__0B91BA14">
-          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="1" />
-          <End Role="TRALOI" Type="Self.TRALOI" Multiplicity="*" />
+          <End Type="SEP24Team12Model.TAIKHOAN" Role="TAIKHOAN" Multiplicity="1" />
+          <End Type="SEP24Team12Model.TRALOI" Role="TRALOI" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TAIKHOAN">
               <PropertyRef Name="MaTK" />
@@ -543,8 +775,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TRANGCHUTK">
-          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="0..1" />
-          <End Role="TRANGCHU" Type="Self.TRANGCHU" Multiplicity="*" />
+          <End Type="SEP24Team12Model.TAIKHOAN" Role="TAIKHOAN" Multiplicity="0..1" />
+          <End Type="SEP24Team12Model.TRANGCHU" Role="TRANGCHU" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TAIKHOAN">
               <PropertyRef Name="MaTK" />
@@ -555,8 +787,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SVTRANGCHU">
-          <End Role="TAIKHOANSV" Type="Self.TAIKHOANSV" Multiplicity="0..1" />
-          <End Role="TRANGCHU" Type="Self.TRANGCHU" Multiplicity="*" />
+          <End Type="SEP24Team12Model.TAIKHOANSV" Role="TAIKHOANSV" Multiplicity="0..1" />
+          <End Type="SEP24Team12Model.TRANGCHU" Role="TRANGCHU" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TAIKHOANSV">
               <PropertyRef Name="Email" />
@@ -566,57 +798,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        <Association Name="FK__THONGBAO__MaCTL__09746778">
+          <End Type="SEP24Team12Model.TRALOI" Role="TRALOI" Multiplicity="1" />
+          <End Type="SEP24Team12Model.THONGBAO" Role="THONGBAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRALOI">
+              <PropertyRef Name="MaCTL" />
+            </Principal>
+            <Dependent Role="THONGBAO">
+              <PropertyRef Name="MaCTL" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SEP24Team12Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="CAUHOIs" EntityType="Self.CAUHOI" />
-          <EntitySet Name="CAUHOIDADUYETs" EntityType="Self.CAUHOIDADUYET" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="TAIKHOANs" EntityType="Self.TAIKHOAN" />
-          <EntitySet Name="TAIKHOANSVs" EntityType="Self.TAIKHOANSV" />
-          <EntitySet Name="THONGBAOs" EntityType="Self.THONGBAO" />
-          <EntitySet Name="TRALOIs" EntityType="Self.TRALOI" />
-          <EntitySet Name="TRANGCHUs" EntityType="Self.TRANGCHU" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CAUHOIDAD__MaTKA__3C34F16F" Association="Self.FK__CAUHOIDAD__MaTKA__3C34F16F">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="CAUHOIDADUYET" EntitySet="CAUHOIDADUYETs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AspNetUsers_CAUHOI" Association="Self.FK_AspNetUsers_CAUHOI">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="CAUHOI" EntitySet="CAUHOIs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TRALOI__MaTK__0B91BA14" Association="Self.FK__TRALOI__MaTK__0B91BA14">
-            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
-            <End Role="TRALOI" EntitySet="TRALOIs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TRANGCHUTK" Association="Self.FK_TRANGCHUTK">
-            <End Role="TAIKHOAN" EntitySet="TAIKHOANs" />
-            <End Role="TRANGCHU" EntitySet="TRANGCHUs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SVTRANGCHU" Association="Self.FK_SVTRANGCHU">
-            <End Role="TAIKHOANSV" EntitySet="TAIKHOANSVs" />
-            <End Role="TRANGCHU" EntitySet="TRANGCHUs" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-        </EntityContainer>
+        <Association Name="AspNetUserRoles">
+          <End Type="SEP24Team12Model.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="SEP24Team12Model.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -626,157 +823,171 @@
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="SEP24Team12Model.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="SEP24Team12Model.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
             <EntityTypeMapping TypeName="SEP24Team12Model.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
                 <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
             <EntityTypeMapping TypeName="SEP24Team12Model.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="SEP24Team12Model.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CAUHOIs">
             <EntityTypeMapping TypeName="SEP24Team12Model.CAUHOI">
               <MappingFragment StoreEntitySet="CAUHOI">
-                <ScalarProperty Name="MaCH" ColumnName="MaCH" />
-                <ScalarProperty Name="Noidung" ColumnName="Noidung" />
-                <ScalarProperty Name="Andanh" ColumnName="Andanh" />
-                <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="MaTKAsp" ColumnName="MaTKAsp" />
+                <ScalarProperty Name="MaCD" ColumnName="MaCD" />
                 <ScalarProperty Name="pin" ColumnName="pin" />
+                <ScalarProperty Name="MaTKAsp" ColumnName="MaTKAsp" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
+                <ScalarProperty Name="Andanh" ColumnName="Andanh" />
+                <ScalarProperty Name="Noidung" ColumnName="Noidung" />
+                <ScalarProperty Name="MaCH" ColumnName="MaCH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CAUHOIDADUYETs">
             <EntityTypeMapping TypeName="SEP24Team12Model.CAUHOIDADUYET">
               <MappingFragment StoreEntitySet="CAUHOIDADUYET">
-                <ScalarProperty Name="MaCHD" ColumnName="MaCHD" />
-                <ScalarProperty Name="Noidung" ColumnName="Noidung" />
-                <ScalarProperty Name="Andanh" ColumnName="Andanh" />
-                <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="MaTKAsp" ColumnName="MaTKAsp" />
+                <ScalarProperty Name="MaCD" ColumnName="MaCD" />
+                <ScalarProperty Name="Rep" ColumnName="Rep" />
                 <ScalarProperty Name="pin" ColumnName="pin" />
+                <ScalarProperty Name="MaTKAsp" ColumnName="MaTKAsp" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
+                <ScalarProperty Name="Andanh" ColumnName="Andanh" />
+                <ScalarProperty Name="Noidung" ColumnName="Noidung" />
+                <ScalarProperty Name="MaCHD" ColumnName="MaCHD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHUDEs">
+            <EntityTypeMapping TypeName="SEP24Team12Model.CHUDE">
+              <MappingFragment StoreEntitySet="CHUDE">
+                <ScalarProperty Name="TenCD" ColumnName="TenCD" />
+                <ScalarProperty Name="MaCD" ColumnName="MaCD" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="SEP24Team12Model.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TAIKHOANs">
             <EntityTypeMapping TypeName="SEP24Team12Model.TAIKHOAN">
               <MappingFragment StoreEntitySet="TAIKHOAN">
-                <ScalarProperty Name="MaTK" ColumnName="MaTK" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Hoten" ColumnName="Hoten" />
-                <ScalarProperty Name="Quyen" ColumnName="Quyen" />
                 <ScalarProperty Name="Trangthai" ColumnName="Trangthai" />
+                <ScalarProperty Name="Quyen" ColumnName="Quyen" />
+                <ScalarProperty Name="Hoten" ColumnName="Hoten" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MaTK" ColumnName="MaTK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TAIKHOANSVs">
             <EntityTypeMapping TypeName="SEP24Team12Model.TAIKHOANSV">
               <MappingFragment StoreEntitySet="TAIKHOANSV">
-                <ScalarProperty Name="MaSV" ColumnName="MaSV" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Hoten" ColumnName="Hoten" />
-                <ScalarProperty Name="Lop" ColumnName="Lop" />
                 <ScalarProperty Name="Khoa" ColumnName="Khoa" />
+                <ScalarProperty Name="Lop" ColumnName="Lop" />
+                <ScalarProperty Name="Hoten" ColumnName="Hoten" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MaSV" ColumnName="MaSV" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="THONGBAOs">
             <EntityTypeMapping TypeName="SEP24Team12Model.THONGBAO">
               <MappingFragment StoreEntitySet="THONGBAO">
+                <ScalarProperty Name="NoidungTB" ColumnName="NoidungTB" />
+                <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
+                <ScalarProperty Name="MaCTL" ColumnName="MaCTL" />
+                <ScalarProperty Name="MaCHD" ColumnName="MaCHD" />
                 <ScalarProperty Name="MaTB" ColumnName="MaTB" />
-                <ScalarProperty Name="thoigian" ColumnName="thoigian" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TRALOIs">
             <EntityTypeMapping TypeName="SEP24Team12Model.TRALOI">
               <MappingFragment StoreEntitySet="TRALOI">
-                <ScalarProperty Name="MaCTL" ColumnName="MaCTL" />
-                <ScalarProperty Name="Noidungtraloi" ColumnName="Noidungtraloi" />
-                <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
-                <ScalarProperty Name="MaTK" ColumnName="MaTK" />
-                <ScalarProperty Name="Luottim" ColumnName="Luottim" />
                 <ScalarProperty Name="MaCHD" ColumnName="MaCHD" />
+                <ScalarProperty Name="Luottim" ColumnName="Luottim" />
+                <ScalarProperty Name="MaTK" ColumnName="MaTK" />
+                <ScalarProperty Name="Thoigian" ColumnName="Thoigian" />
+                <ScalarProperty Name="Noidungtraloi" ColumnName="Noidungtraloi" />
+                <ScalarProperty Name="MaCTL" ColumnName="MaCTL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TRANGCHUs">
             <EntityTypeMapping TypeName="SEP24Team12Model.TRANGCHU">
               <MappingFragment StoreEntitySet="TRANGCHU">
-                <ScalarProperty Name="MaTC" ColumnName="MaTC" />
-                <ScalarProperty Name="MaTK" ColumnName="MaTK" />
-                <ScalarProperty Name="MaCH" ColumnName="MaCH" />
-                <ScalarProperty Name="Thatim" ColumnName="Thatim" />
-                <ScalarProperty Name="MaCTL" ColumnName="MaCTL" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="MaCTL" ColumnName="MaCTL" />
+                <ScalarProperty Name="Thatim" ColumnName="Thatim" />
+                <ScalarProperty Name="MaCH" ColumnName="MaCH" />
+                <ScalarProperty Name="MaTK" ColumnName="MaTK" />
+                <ScalarProperty Name="MaTC" ColumnName="MaTC" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="SEP24Team12Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
+            <EndProperty Name="AspNetUser">
               <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
