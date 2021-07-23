@@ -40,6 +40,28 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
                 return RedirectToAction("Index");
         }
 
+        public ActionResult Edit(int id)
+        {
+            var account = model.TAIKHOANs.FirstOrDefault(f => f.MaTK == id);
+            ViewBag.Action = "Index";
+            ViewBag.Controller = "Account";
+            return View(account);
+
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, TAIKHOAN editTaikhoan)
+        {
+            var account = model.TAIKHOANs.FirstOrDefault(f => f.MaTK == id);
+            account.Hoten = editTaikhoan.Hoten.Trim();
+            account.Password = editTaikhoan.Password.Trim();
+            model.SaveChanges();
+
+            //ViewBag.Action = "Index";
+            ViewBag.Message = "Cap nhat tai khoan thanh cong";
+            return View(editTaikhoan);
+        }
+
         [HttpPost]
         public ActionResult UpdateStatus(int id, TAIKHOAN updateStatus)
         {

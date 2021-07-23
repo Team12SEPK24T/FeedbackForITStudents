@@ -79,7 +79,7 @@ Author URL: http://w3layouts.com
                             }
                         }
                         <li class="grid">
-                            <a class="nav-link" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="contact.html">Hi, @Session["user-fullname"]</a>
+                            <a class="nav-link" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="@Url.Action("Edit", "Account", new { id = @Session["user-id"]})">Hi, @Session["user-fullname"]</a>
                         </li>
                         <!-- search button -->
                         @*<div class="search-right ml-lg-3">
