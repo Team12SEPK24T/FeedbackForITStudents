@@ -11,14 +11,12 @@ namespace FeedbackForITStudents.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class CAUHOI
     {
         public int MaCH { get; set; }
         public string Noidung { get; set; }
         public bool Andanh { get; set; }
-        [DisplayFormat(DataFormatString = "{0:mm/dd/yyyy}")]
         public System.DateTime Thoigian { get; set; }
         public string Email { get; set; }
         public string MaTKAsp { get; set; }
