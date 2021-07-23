@@ -21,7 +21,9 @@ namespace FeedbackForITStudents.Models
         public string Email { get; set; }
         public string MaTKAsp { get; set; }
         public bool pin { get; set; }
+        public Nullable<int> MaCD { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual CHUDE CHUDE { get; set; }
     }
 }

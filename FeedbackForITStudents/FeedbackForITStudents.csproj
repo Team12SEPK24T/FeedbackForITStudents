@@ -201,6 +201,9 @@
     <Compile Include="Models\CAUHOIDADUYET.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CHUDE.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>

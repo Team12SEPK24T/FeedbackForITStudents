@@ -14,6 +14,13 @@ namespace FeedbackForITStudents.Models
     
     public partial class CAUHOIDADUYET
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CAUHOIDADUYET()
+        {
+            this.THONGBAOs = new HashSet<THONGBAO>();
+            this.TRALOIs = new HashSet<TRALOI>();
+        }
+    
         public int MaCHD { get; set; }
         public string Noidung { get; set; }
         public bool Andanh { get; set; }
@@ -21,7 +28,14 @@ namespace FeedbackForITStudents.Models
         public string Email { get; set; }
         public string MaTKAsp { get; set; }
         public Nullable<bool> pin { get; set; }
+        public Nullable<bool> Rep { get; set; }
+        public Nullable<int> MaCD { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual CHUDE CHUDE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<THONGBAO> THONGBAOs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TRALOI> TRALOIs { get; set; }
     }
 }
