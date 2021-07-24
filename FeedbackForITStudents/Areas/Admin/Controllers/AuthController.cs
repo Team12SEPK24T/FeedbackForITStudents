@@ -27,6 +27,7 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
             {
                 if(user.Trangthai == false)
                 {
+                    ViewBag.Message = "Your account does not have permission to login!";
                     return View();
                 }
                 if (user.Password.Equals(password))

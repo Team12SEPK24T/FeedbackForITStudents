@@ -23,7 +23,14 @@ namespace FeedbackForITStudents.Controllers
                 {
                     var cauhoi = model.TRALOIs.Where(c => c.CAUHOIDADUYET.MaTKAsp == userIdentity).ToList();
                     var canhand = cauhoi.OrderByDescending(d => d.MaCTL);
+                    ViewBag.Count = cauhoi.Count();
                     return View(canhand);
+                }
+                else
+                {
+                    var cauhoi = model.TRALOIs.Where(c => c.CAUHOIDADUYET.MaTKAsp == userIdentity).ToList();
+                    ViewBag.Count = cauhoi.Count();
+                    return View(cauhoi);
                 }
             }
             return View();

@@ -341,10 +341,10 @@ legend {
   white-space: normal;
 }
 
-@media (max-width: 1200px) {
-  legend {
-    font-size: calc(1.275rem + 0.3vw);
-  }
+@media (min-width: 301px ) and (max-width: 1200px) {
+    legend {
+        font-size: calc(1.275rem + 0.3vw);
+    }
 }
 
 progress {

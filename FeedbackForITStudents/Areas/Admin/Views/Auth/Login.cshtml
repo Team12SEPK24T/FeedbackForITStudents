@@ -32,7 +32,7 @@
             <div class="w3l-form-info">
                 <div class="w3l_form">
                     <div class="">
-                        <img src="~/images/vlu.jpg" alt="" style="height:560px; width: 700px"/>
+                        <img src="~/images/vlu.jpg" alt="" style="height:560px; width: 700px" />
                     </div>
                 </div>
                 <div class="w3_info">
@@ -54,12 +54,11 @@
                         {
                             <p style="color: red"> Incorrect Password</p>
                         }
-                        
+
                         <button class="btn btn-primary btn-block" type="submit">Sign In</button>
                     </form>
                     <div class="social-login">
-                        <section id="socialLoginForm">
-                        </section>
+                        <section id="socialLoginForm"></section>
                         @*@Html.ActionLink("Home", "Index", "Home")*@
                         <!--<a href="#google">
                             <div class="google">
@@ -75,8 +74,7 @@
         <!-- footer -->
         <div class="footer">
             <p>
-                &copy; 2020 Play Sign In form. All Rights Reserved | Design by <a href="https://w3layouts.com/"
-                                                                                  target="blank">W3layouts</a>
+                &copy; 2021 Feedback For IT Students. All Rights Reserved | Design by <a>Team 12</a>
             </p>
         </div>
         <!-- footer -->
@@ -84,3 +82,12 @@
 </body>
 
 </html>
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+                window.location = "/Admin/Auth/Login";
+            };
+    </script>
+}

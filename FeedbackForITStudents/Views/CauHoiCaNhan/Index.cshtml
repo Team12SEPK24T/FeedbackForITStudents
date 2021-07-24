@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<FeedbackForITStudents.Models.TRALOI>
 
 @{
-    ViewBag.Title = "Cá nhân";
+    ViewBag.Title = "Câu hỏi cá nhân";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
 }
 
@@ -15,6 +15,9 @@
 <section class="w3l-blog-sec pt-5">
     <div class="services-layout py-md-4 py-3">
         <div class="container">
+            <div>
+                Bạn có @ViewBag.Count câu hỏi đã được trả lời
+            </div>
             @foreach (var item in Model)
             {
                 using (Html.BeginForm("Index", "CauHoiCaNhan", FormMethod.Get))

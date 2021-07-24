@@ -31,6 +31,7 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Filter(int id)
         {
+            ViewBag.ChuDe = new SelectList(model.CHUDEs, "MaCD", "TenCD");
             var locCauHoi = model.CAUHOIDADUYETs.Where(f => f.MaCD == id).ToList();
             var cauhoid = locCauHoi.OrderByDescending(c => c.pin == true);
             //var cauhoid = model.CAUHOIDADUYETs.OrderByDescending(c => c.MaCD == id);

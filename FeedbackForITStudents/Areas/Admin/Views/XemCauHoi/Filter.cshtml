@@ -17,22 +17,19 @@
                 <div class="text-center mb-sm-5 mb-4" style="padding-bottom: 10px">
                     <h3 class="title-big">Danh sách câu hỏi chờ trả lời</h3>
                 </div>
-                @*<div class="form-row align-items-center">
-                        <div class="row">
-                            <label>Chủ đề</label>
-                            @using (Html.BeginForm("Filter", "XemCauHoi", FormMethod.Get, new { @id = "MaCD" }))
-                            {
-                                <div class="col-11">
+                <div class="form-row align-items-center">
+                    <div class="row">
+                        <label>Chủ đề</label>
+                        <form action="@Url.Action("Filter", "XemCauHoi", new { id = "" })">
 
-                                    @Html.DropDownList("MaCD", ViewBag.ChuDe as SelectList, null, new { onchange = "submit();" })
-                                </div>
+                            <div class="col-11">
 
-                                @*<div class="col-lg-2" style="padding-top: 15px">
-                                        <input type="submit" class="btn btn-outline-primary" value="Lọc" />
-                                    </div>
-                            }
-                        </div>
-                    </div>*@
+                                @Html.DropDownList("id", ViewBag.ChuDe as SelectList, null, new { onchange = "submit();" })
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
 
                 <div class="item-wrapper">
                     <div class="table-responsive">
@@ -71,7 +68,7 @@
                                                     @Html.DisplayFor(modelItem => item.Andanh)
                                                 </td>*@
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Thoigian)
+                                                @item.Thoigian.ToString("dd/MM/yyyy")
                                             </td>
                                             <td>
                                                 @if (item.Andanh == false)
