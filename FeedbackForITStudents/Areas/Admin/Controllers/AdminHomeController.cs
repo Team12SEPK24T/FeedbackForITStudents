@@ -16,6 +16,7 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var cauhoi = model.CAUHOIDADUYETs.ToList();
+            var chude = model.CHUDEs.ToList();
             var traloi = model.TRALOIs.OrderByDescending(t => t.MaCTL);
             return View(traloi);
         }
