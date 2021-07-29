@@ -32,10 +32,7 @@ namespace FeedbackForITStudents.Controllers
             var userIdentity = User.Identity.GetUserId();
                 var allCauhoi = model.CAUHOIs.ToList();
                 var today = DateTime.Now.Date;
-            if (ModelState.IsValid)
-            {
-                foreach (var item in allCauhoi)
-                {
+            
                     var SLcauhoi = model.CAUHOIs.Where(h => h.MaTKAsp == userIdentity && h.Thoigian == today).Count();
                     if (SLcauhoi >= 3)
                     {
@@ -62,9 +59,6 @@ namespace FeedbackForITStudents.Controllers
                         ViewBag.Message = "Gui cau hoi thanh cong";
                         return View();
                     }
-                }
-            }
-            //ViewBag.Chude = model.CHUDEs.OrderByDescending(x => x.MaCD).ToList();
             ViewBag.Action = "Index";
             ViewBag.Controller = "DatCauHoi";
             return View(c);
