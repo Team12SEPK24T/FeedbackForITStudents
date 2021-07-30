@@ -34,7 +34,8 @@ namespace FeedbackForITStudents.Controllers
                 var today = DateTime.Now.Date;
             
                     var SLcauhoi = model.CAUHOIs.Where(h => h.MaTKAsp == userIdentity && h.Thoigian == today).Count();
-                    if (SLcauhoi >= 3)
+                    var SLcauhoiduyet = model.CAUHOIDADUYETs.Where(d => d.MaTKAsp == userIdentity && d.Thoigian == today).Count();
+                    if (SLcauhoi + SLcauhoiduyet >= 3)
                     {
                         ViewBag.Message = "Ban da het luot dat cau hoi trong hom nay! Vi ban chi dat duoc toi da 3 cau hoi moi ngay.";
                         return View();
