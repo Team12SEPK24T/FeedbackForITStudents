@@ -15,18 +15,8 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
         // GET: Admin/ThongKe
         public ActionResult Index()
         {
-            var month = DateTime.Now.Month;
-            var allCauhoi = model.CAUHOIDADUYETs.ToList();
-            foreach (var item in allCauhoi)
-            {
-                //var thongke = model.CAUHOIDADUYETs.Where(t => t.Thoigian.Month == month).Count();
-                if (item.Thoigian.Month == month)
-                {
-                    var chude = model.CHUDEs.ToList() ;
-                    return View(chude);
-                }
-            }
-            return View();
+            var chude = model.CHUDEs.ToList() ;
+            return View(chude);
         }
     }
 }
