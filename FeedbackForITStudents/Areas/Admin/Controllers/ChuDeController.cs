@@ -30,11 +30,15 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(CHUDE c)
         {
-            var chude = new CHUDE();
-            chude.TenCD = c.TenCD;
-            model.CHUDEs.Add(chude);
-            model.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                var chude = new CHUDE();
+                chude.TenCD = c.TenCD;
+                model.CHUDEs.Add(chude);
+                model.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(c);
         }
     }
 }

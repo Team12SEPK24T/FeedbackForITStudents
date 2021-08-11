@@ -26,7 +26,7 @@
                                             <label for="inputType1">Tên chủ đề</label>
                                         </div>
                                         <div class="col-md-9 showcase_content_area">
-                                            @Html.EditorFor(model => model.TenCD, new { htmlAttributes = new { @class = "form-control", @id = "inputType1", @required = true, @minLength = 0, @maxLength = "50" } })
+                                            @Html.EditorFor(model => model.TenCD, new { htmlAttributes = new { @class = "form-control", @id = "inputType1", @required = true, @minLength = 2, @maxLength = "50" } })
                                             @Html.ValidationMessageFor(model => model.TenCD, "", new { @class = "text-danger" })
                                         </div>
                                     </div>

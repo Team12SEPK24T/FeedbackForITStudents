@@ -28,16 +28,28 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
 
         [HttpPost] 
         public ActionResult Create(TAIKHOAN a)
-        {         
-                var account = new TAIKHOAN();
-                account.Email = a.Email;
-                account.Hoten = a.Hoten;
-                account.Password = a.Password;
-                account.Trangthai = true;
-                account.Quyen = a.Quyen; 
-                model.TAIKHOANs.Add(account);
-                model.SaveChanges();
-                return RedirectToAction("Index");
+        {
+            if (ModelState.IsValid)
+            {
+                var isEmailAlreadyExists = model.TAIKHOANs.Any(x => x.Email == a.Email);
+                if (isEmailAlreadyExists)
+                {
+                    ModelState.AddModelError("Email", "User with this email already exists");
+                }
+                else
+                {
+                    var account = new TAIKHOAN();
+                    account.Email = a.Email;
+                    account.Hoten = a.Hoten;
+                    account.Password = a.Password;
+                    account.Trangthai = true;
+                    account.Quyen = a.Quyen;
+                    model.TAIKHOANs.Add(account);
+                    model.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(a);
         }
 
         public ActionResult Edit(int id)
@@ -52,13 +64,17 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(int id, TAIKHOAN editTaikhoan)
         {
-            var account = model.TAIKHOANs.FirstOrDefault(f => f.MaTK == id);
-            account.Hoten = editTaikhoan.Hoten.Trim();
-            account.Password = editTaikhoan.Password.Trim();
-            model.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                var account = model.TAIKHOANs.FirstOrDefault(f => f.MaTK == id);
+                account.Hoten = editTaikhoan.Hoten.Trim();
+                account.Password = editTaikhoan.Password.Trim();
+                model.SaveChanges();
 
-            //ViewBag.Action = "Index";
-            ViewBag.Message = "Cap nhat tai khoan thanh cong";
+                //ViewBag.Action = "Index";
+                ViewBag.Message = "Cap nhat tai khoan thanh cong";
+                return View(editTaikhoan);
+            }
             return View(editTaikhoan);
         }
 

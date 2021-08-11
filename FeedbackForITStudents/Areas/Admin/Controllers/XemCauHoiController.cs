@@ -55,13 +55,6 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
             {
                 var cauhoi = model.CAUHOIDADUYETs.FirstOrDefault(c => c.MaCHD == id);
                 var traloi = new TRALOI();
-                if (String.IsNullOrWhiteSpace(reply.Noidungtraloi))
-                {
-                    ViewBag.Message = "Vui long nhap cau hoi";
-                    return View();
-                }
-                else
-                {
                     traloi.Noidungtraloi = reply.Noidungtraloi;
                     traloi.Thoigian = DateTime.Today;
                     traloi.MaTK = (int)Session["user-id"];
@@ -71,19 +64,11 @@ namespace FeedbackForITStudents.Areas.Admin.Controllers
                     cauhoi.Rep = true;
                     model.SaveChanges();
                     return RedirectToAction("Index");
-                }
             }
             ViewBag.Action = "Index";
             ViewBag.Controller = "XenCauHoi";
             return View(reply);
         }
 
-        private void ValidateReply(TRALOI reply)
-        {
-            if (String.IsNullOrWhiteSpace(reply.Noidungtraloi))
-            {
-                ModelState.AddModelError("Noidungtraloi", "Vui lòng nhập câu trả lời");
-            }
-        }
     }
 }

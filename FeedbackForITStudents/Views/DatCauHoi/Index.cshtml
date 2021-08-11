@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="form-input" style="padding-top: 20px">
-                        @Html.TextAreaFor(model => model.Noidung, new { required = "required", placeholder = "Vui lòng nhập câu hỏi ở đây", htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextAreaFor(model => model.Noidung, new { required = "required", minlength = "30", placeholder = "Vui lòng nhập câu hỏi ở đây" ,htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Noidung, "", new { @class = "text-danger" })
 
                     </div>

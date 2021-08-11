@@ -26,7 +26,8 @@
                                             <label for="inputType1">Email</label>
                                         </div>
                                         <div class="col-md-9 showcase_content_area">
-                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "inputType1", @required = true, @minLength = 0, @maxLength = "50" } })
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "inputType1", @required = true, @minLength = 0, @maxLength = "50",
+                                           placeholder = "name@vlu.edu.vn", @type = "email"} })
                                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -36,7 +37,7 @@
                                             <label for="inputType1">Họ tên</label>
                                         </div>
                                         <div class="col-md-9 showcase_content_area">
-                                            @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control", @id = "inputType1", @required = true, @minLength = 0, @maxLength = "50" } })
+                                            @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control", @id = "inputType1", @required = true, @minLength = 2, @maxLength = "50" } })
                                             @Html.ValidationMessageFor(model => model.Hoten, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -46,7 +47,7 @@
                                             <label for="inputType1">Mật khẩu</label>
                                         </div>
                                         <div class="col-md-9 showcase_content_area">
-                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @id = "inputType4", @type = "password", @required = true, @minLength = 0, @maxLength = "50" } })
+                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @id = "inputType4", @type = "password", @required = true, @minLength = 6, @maxLength = "50" } })
                                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -58,7 +59,6 @@
                                         <div class="col-md-9 showcase_content_area">
                                             <select name="TRANGTHAI" class="custom-select">
                                                 <option value="1">Hoạt động</option>
-                                                <option value="0">Ngừng hoạt động</option>
                                             </select>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
                                             <select name="Quyen" class="custom-select">
                                                 <option value="0">Quản trị</option>
                                                 <option value="1">BCN Khoa</option>
-                                                <option value="2">Quản lý</option>
+                                                <option value="2">Trợ lý</option>
                                             </select>
                                         </div>
                                     </div>
